@@ -108,96 +108,140 @@ export default function ContactSection({ settings }: ContactSectionProps) {
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="touch-target group block bg-gradient-to-br from-emerald-900 via-emerald-800 to-emerald-950 text-white rounded-3xl p-5 sm:p-7 shadow-lg shadow-emerald-950/10 hover:shadow-xl transition-all duration-300 relative overflow-hidden"
+              className="touch-target group block bg-gradient-to-br from-emerald-900 via-emerald-800 to-emerald-950 text-white rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-lg shadow-emerald-950/15 hover:shadow-xl transition-all duration-300 relative overflow-hidden"
             >
-              <div className="flex items-start justify-between">
-                <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-white/10 flex items-center justify-center text-emerald-300 border border-white/15">
-                  <Phone className="w-5 h-5 sm:w-6 sm:h-6" />
+              {/* Subtle radial glow */}
+              <div className="absolute top-0 right-0 -mr-10 -mt-10 w-44 h-44 bg-emerald-400/10 rounded-full blur-2xl pointer-events-none" />
+
+              <div className="flex items-center justify-between gap-3 mb-4 relative z-10">
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-white/10 flex items-center justify-center text-emerald-300 border border-white/20 shadow-inner shrink-0 group-hover:scale-105 transition-transform">
+                    <Phone className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-300" />
+                  </div>
+                  <div className="min-w-0">
+                    <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-emerald-300 block leading-tight">
+                      Hotline WhatsApp 24 Jam
+                    </span>
+                    <span className="text-[11px] text-emerald-100/75 truncate block mt-0.5">
+                      Respon Cepat Aspirasi Mahasiswa
+                    </span>
+                  </div>
                 </div>
-                <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider bg-white/15 px-2.5 py-1 rounded-full text-emerald-200 flex items-center gap-1">
-                  Respon Cepat <ArrowUpRight className="w-3 h-3" />
+
+                <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider bg-white/15 px-3 py-1.5 rounded-full text-emerald-200 border border-white/20 flex items-center gap-1 group-hover:bg-white/25 transition-colors shrink-0">
+                  <span>Chat WA</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </span>
               </div>
 
-              <div className="mt-5 sm:mt-6">
-                <span className="text-[11px] sm:text-xs uppercase font-bold tracking-widest text-emerald-300/90 block mb-1">
-                  Hotline WhatsApp 24 Jam
-                </span>
-                <p className="text-lg sm:text-2xl font-bold font-mono tracking-tight text-white">
+              <div className="relative z-10 pt-3 border-t border-white/10">
+                <p className="text-xl sm:text-2xl font-bold font-mono tracking-tight text-white group-hover:text-emerald-200 transition-colors">
                   {settings.whatsapp || '+62 812-3456-7890'}
                 </p>
-                <p className="text-xs text-emerald-100/80 mt-1">
-                  Pusat pengaduan darurat dan klarifikasi jadwal konsultasi tatap muka.
+                <p className="text-xs text-emerald-100/80 mt-1.5 leading-relaxed">
+                  Pusat penyampaian aspirasi, layanan advokasi kampus, dan konsultasi terbuka mahasiswa bersama BEM FH.
                 </p>
               </div>
             </a>
 
-            {/* Instagram & Email in 2 columns */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Instagram & Email List Cards */}
+            <div className="space-y-3">
               <a
                 href={igUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="touch-target group block bg-white rounded-3xl p-5 border border-slate-200/80 shadow-2xs hover:shadow-md transition-all"
+                className="touch-target group flex items-center justify-between p-4 sm:p-5 bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 shadow-2xs hover:shadow-md hover:border-pink-300 transition-all duration-200"
               >
-                <div className="w-10 h-10 rounded-xl bg-pink-50 text-pink-600 border border-pink-100 flex items-center justify-center mb-3">
-                  <InstagramIcon className="w-5 h-5" />
+                <div className="flex items-center gap-3.5 min-w-0 flex-1">
+                  <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-pink-50 to-rose-100/70 text-pink-600 border border-pink-200/60 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-2xs">
+                    <InstagramIcon className="w-5 h-5 sm:w-6 sm:h-6" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-400 block leading-tight mb-0.5">
+                      Instagram Resmi
+                    </span>
+                    <p className="text-sm sm:text-base font-bold text-slate-900 group-hover:text-pink-600 transition-colors truncate">
+                      @{cleanIgHandle || 'bemfh.official'}
+                    </p>
+                    <span className="text-[11px] text-slate-500 block truncate mt-0.5">
+                      Kabar kegiatan, rilis pers &amp; visual hukum
+                    </span>
+                  </div>
                 </div>
-                <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400 block">
-                  Instagram
-                </span>
-                <p className="text-sm font-bold text-slate-900 truncate">
-                  @{cleanIgHandle || 'organisasihukum'}
-                </p>
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-center text-slate-400 group-hover:bg-pink-50 group-hover:text-pink-600 group-hover:border-pink-200 transition-all shrink-0 ml-3">
+                  <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </div>
               </a>
 
               <a
                 href={`mailto:${settings.email}`}
-                className="touch-target group block bg-white rounded-3xl p-5 border border-slate-200/80 shadow-2xs hover:shadow-md transition-all"
+                className="touch-target group flex items-center justify-between p-4 sm:p-5 bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 shadow-2xs hover:shadow-md hover:border-blue-300 transition-all duration-200"
               >
-                <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 border border-blue-100 flex items-center justify-center mb-3">
-                  <Mail className="w-5 h-5" />
+                <div className="flex items-center gap-3.5 min-w-0 flex-1">
+                  <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-100/70 text-blue-600 border border-blue-200/60 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-2xs">
+                    <Mail className="w-5 h-5 sm:w-6 sm:h-6" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-400 block leading-tight mb-0.5">
+                      Email Resmi Sekretariat
+                    </span>
+                    <p className="text-sm sm:text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors truncate">
+                      {settings.email || 'aspirasi@bemfh-organisasi.id'}
+                    </p>
+                    <span className="text-[11px] text-slate-500 block truncate mt-0.5">
+                      Korespondensi resmi, proposal kerjasama &amp; audiensi
+                    </span>
+                  </div>
                 </div>
-                <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400 block">
-                  Email Resmi
-                </span>
-                <p className="text-sm font-bold text-slate-900 truncate">
-                  {settings.email || 'kontak@organisasi.org'}
-                </p>
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-center text-slate-400 group-hover:bg-blue-50 group-hover:text-blue-600 group-hover:border-blue-200 transition-all shrink-0 ml-3">
+                  <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </div>
               </a>
             </div>
 
             {/* Secretariat Address Card */}
-            <div className="bg-white rounded-3xl p-5 sm:p-7 border border-slate-200/80 shadow-2xs">
-              <div className="flex items-start gap-3 sm:gap-4">
-                <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-rose-50 text-maroon-800 border border-rose-100 flex items-center justify-center shrink-0">
-                  <MapPin className="w-5 h-5" />
+            <div className="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-7 border border-slate-200/90 shadow-2xs">
+              <div className="flex items-start gap-3.5 sm:gap-4">
+                <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-rose-50 to-rose-100/70 text-maroon-800 border border-rose-200/70 flex items-center justify-center shrink-0 shadow-2xs">
+                  <MapPin className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
-                <div className="flex-1">
-                  <span className="text-xs uppercase font-bold tracking-wider text-maroon-800 block mb-1">
-                    Kantor Sekretariat
-                  </span>
-                  <p className="text-xs sm:text-sm font-semibold text-slate-900 leading-snug">
-                    {settings.alamat}
-                  </p>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-maroon-800 bg-rose-50 border border-rose-200/70 px-2.5 py-0.5 rounded-full inline-block">
+                      Kantor Sekretariat
+                    </span>
+                    <span className="text-[10px] text-slate-400 font-medium hidden xs:inline">
+                      Sekretariat &amp; Rumah Aspirasi
+                    </span>
+                  </div>
+
+                  <h4 className="text-sm sm:text-base font-bold text-slate-900 leading-snug">
+                    {settings.alamat || 'Gedung Student Center Lt. 2, Fakultas Hukum, Kampus Universitas'}
+                  </h4>
 
                   {settings.jam_operasional && (
-                    <div className="flex items-center gap-1.5 text-xs text-slate-500 mt-2.5 sm:mt-3 pt-2.5 sm:pt-3 border-t border-slate-100">
-                      <Clock className="w-3.5 h-3.5 text-maroon-700 shrink-0" />
-                      <span>{settings.jam_operasional}</span>
+                    <div className="flex items-center gap-2 text-xs text-slate-600 mt-3 pt-3 border-t border-slate-100">
+                      <div className="w-6 h-6 rounded-lg bg-slate-100 flex items-center justify-center text-maroon-800 shrink-0">
+                        <Clock className="w-3.5 h-3.5" />
+                      </div>
+                      <span className="text-[11px] sm:text-xs text-slate-600 leading-tight">
+                        {settings.jam_operasional}
+                      </span>
                     </div>
                   )}
 
                   {settings.maps_url && (
-                    <a
-                      href={settings.maps_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="touch-target inline-flex items-center gap-1 text-xs font-bold text-maroon-800 hover:underline mt-2 sm:mt-3"
-                    >
-                      <span>Buka Petunjuk Arah Google Maps</span>
-                      <ArrowUpRight className="w-3.5 h-3.5" />
-                    </a>
+                    <div className="mt-3.5 pt-3 border-t border-slate-100/80">
+                      <a
+                        href={settings.maps_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="touch-target inline-flex items-center gap-1.5 text-xs font-bold text-maroon-800 hover:text-maroon-950 transition-colors group"
+                      >
+                        <span>Buka Petunjuk Arah di Google Maps</span>
+                        <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      </a>
+                    </div>
                   )}
                 </div>
               </div>
@@ -213,20 +257,20 @@ export default function ContactSection({ settings }: ContactSectionProps) {
                   <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
                 <h3 className="text-lg sm:text-2xl font-bold text-slate-900">
-                  Formulir Konsultasi Kasus
+                  Formulir Aspirasi &amp; Aduan Mahasiswa
                 </h3>
               </div>
               <p className="text-xs sm:text-sm text-slate-500 mb-6 sm:mb-8">
-                Jelaskan pokok permasalahan Anda. Tim advokat piket kami akan menelaah dan segera menghubungi nomor Anda.
+                Sampaikan aspirasi, aduan kesejahteraan/UKT, atau ide program kerja Anda. Pengurus BEM FH akan menelaah dan segera merespon.
               </p>
 
               {success && (
                 <div className="mb-6 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900 flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
                   <div>
-                    <h4 className="font-bold text-sm">Permohonan Berhasil Terkirim</h4>
+                    <h4 className="font-bold text-sm">Aspirasi Berhasil Terkirim</h4>
                     <p className="text-xs text-emerald-800 mt-0.5 leading-relaxed">
-                      Terima kasih. Permohonan Anda telah tercatat dan akan segera diproses oleh tim advokat kami.
+                      Terima kasih. Pesan dan aspirasi Anda telah tercatat dan akan segera ditindaklanjuti oleh pengurus BEM FH.
                     </p>
                   </div>
                 </div>
@@ -344,12 +388,12 @@ export default function ContactSection({ settings }: ContactSectionProps) {
                     ) : (
                       <>
                         <Send className="w-4 h-4 text-amber-300" />
-                        <span>Kirim Permohonan Konsultasi</span>
+                        <span>Kirim Aspirasi / Aduan Sekarang</span>
                       </>
                     )}
                   </button>
                   <p className="text-[11px] text-slate-400 text-center mt-3">
-                    Kerahasiaan data Anda terlindungi sesuai asas kerahasiaan advokat dan bantuan hukum.
+                    Identitas dan kerahasiaan aduan mahasiswa terjamin aman dan terlindungi oleh organisasi.
                   </p>
                 </div>
               </form>
