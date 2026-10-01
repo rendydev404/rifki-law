@@ -44,33 +44,34 @@ export default function Navbar({ settings }: NavbarProps) {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-white/90 backdrop-blur-lg border-b border-slate-200/70 shadow-xs py-3'
-          : 'bg-white/70 backdrop-blur-md border-b border-slate-200/40 py-4'
+          ? 'bg-white/95 backdrop-blur-lg border-b border-slate-200/80 shadow-xs py-2 sm:py-3'
+          : 'bg-white/85 backdrop-blur-md border-b border-slate-200/50 py-2.5 sm:py-4'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between gap-2 sm:gap-4">
           
           {/* Logo & Brand Identity */}
-          <Link href="#beranda" className="flex items-center gap-3.5 group">
+          <Link href="#beranda" className="flex items-center gap-2.5 sm:gap-3.5 group min-w-0 flex-1 sm:flex-initial">
             {settings.logo_url ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={settings.logo_url}
                 alt={settings.org_name}
-                className="w-10 h-10 object-contain rounded-xl border border-rose-100 p-0.5 group-hover:scale-105 transition-transform"
+                className="w-9 h-9 sm:w-10 sm:h-10 object-contain rounded-xl border border-rose-100 p-0.5 group-hover:scale-105 transition-transform shrink-0"
               />
             ) : (
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-maroon-800 to-maroon-950 flex items-center justify-center text-amber-300 shadow-sm border border-amber-400/20 group-hover:scale-105 transition-transform">
-                <Scale className="w-5 h-5" />
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-maroon-800 to-maroon-950 flex items-center justify-center text-amber-300 shadow-sm border border-amber-400/20 group-hover:scale-105 transition-transform shrink-0">
+                <Scale className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
             )}
-            <div className="flex flex-col">
-              <span className="font-bold text-slate-900 tracking-tight text-sm sm:text-base leading-snug group-hover:text-maroon-800 transition-colors">
+            <div className="flex flex-col min-w-0 pr-1">
+              <span className="font-bold text-slate-900 tracking-tight text-xs sm:text-base leading-tight group-hover:text-maroon-800 transition-colors line-clamp-1 sm:line-clamp-none max-w-[210px] xs:max-w-[260px] sm:max-w-none">
                 {settings.org_name}
               </span>
-              <span className="text-[11px] text-maroon-800/80 font-semibold tracking-wide flex items-center gap-1">
-                <ShieldCheck className="w-3.5 h-3.5 text-amber-600 inline" /> Lembaga Advokasi & Bantuan Hukum
+              <span className="text-[10px] sm:text-[11px] text-maroon-800/80 font-medium tracking-wide flex items-center gap-1">
+                <ShieldCheck className="w-3 h-3 text-amber-600 shrink-0 inline" /> 
+                <span className="truncate">Lembaga Advokasi & Bantuan Hukum</span>
               </span>
             </div>
           </Link>
@@ -108,13 +109,14 @@ export default function Navbar({ settings }: NavbarProps) {
             </Link>
           </div>
 
-          {/* Mobile Right Quick Action & Hamburger */}
-          <div className="flex items-center gap-2 lg:hidden">
+          {/* Mobile Right Action: Hamburger Only on Small Screens */}
+          <div className="flex items-center gap-2 lg:hidden shrink-0">
             <a
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="touch-target px-3.5 py-1.5 bg-maroon-800 text-white rounded-full text-xs font-bold flex items-center gap-1.5 shadow-xs"
+              aria-label="Konsultasi WhatsApp"
+              className="touch-target hidden sm:inline-flex px-3.5 py-1.5 bg-maroon-800 text-white rounded-full text-xs font-bold items-center gap-1.5 shadow-xs"
             >
               <Phone className="w-3.5 h-3.5 text-amber-300" />
               <span>Konsultasi</span>
@@ -124,7 +126,7 @@ export default function Navbar({ settings }: NavbarProps) {
               onClick={() => setIsOpen(!isOpen)}
               type="button"
               aria-label="Buka menu navigasi"
-              className="touch-target w-10 h-10 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center justify-center transition-colors"
+              className="touch-target w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 flex items-center justify-center transition-colors"
             >
               {isOpen ? <X className="w-5 h-5 text-maroon-800" /> : <Menu className="w-5 h-5" />}
             </button>

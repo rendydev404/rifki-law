@@ -81,24 +81,24 @@ export default function ContactSection({ settings }: ContactSectionProps) {
   };
 
   return (
-    <section id="kontak" className="py-20 sm:py-28 bg-[#faf9f8] relative border-t border-slate-200/70">
+    <section id="kontak" className="py-14 sm:py-24 bg-[#faf9f8] relative border-t border-slate-200/70">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <ScrollReveal animation="up" className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-rose-50 text-maroon-800 text-xs font-semibold uppercase tracking-wider mb-3 border border-rose-200/80">
+        <ScrollReveal animation="up" className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-rose-50 text-maroon-800 text-xs font-semibold uppercase tracking-wider mb-2 sm:mb-3 border border-rose-200/80">
             <Phone className="w-3.5 h-3.5" /> Kontak & Sekretariat
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
             Hubungi Posko Bantuan Hukum
           </h2>
-          <div className="w-16 h-1 bg-maroon-800 mx-auto mt-4 mb-4 rounded-full" />
-          <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+          <div className="w-16 h-1 bg-maroon-800 mx-auto mt-3 sm:mt-4 mb-3 sm:mb-4 rounded-full" />
+          <p className="text-slate-600 text-xs sm:text-base leading-relaxed">
             Konsultasikan persoalan hukum Anda secara aman, rahasia, dan tanpa pungutan biaya bagi warga yang membutuhkan pendampingan.
           </p>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-start">
           
           {/* Left Column: Official Contact Channels */}
           <ScrollReveal animation="left" delay={100} className="lg:col-span-5 space-y-4">
@@ -108,22 +108,22 @@ export default function ContactSection({ settings }: ContactSectionProps) {
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="touch-target group block bg-gradient-to-br from-emerald-900 via-emerald-800 to-emerald-950 text-white rounded-3xl p-6 sm:p-7 shadow-lg shadow-emerald-950/10 hover:shadow-xl transition-all duration-300 relative overflow-hidden"
+              className="touch-target group block bg-gradient-to-br from-emerald-900 via-emerald-800 to-emerald-950 text-white rounded-3xl p-5 sm:p-7 shadow-lg shadow-emerald-950/10 hover:shadow-xl transition-all duration-300 relative overflow-hidden"
             >
               <div className="flex items-start justify-between">
-                <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-emerald-300 border border-white/15">
-                  <Phone className="w-6 h-6" />
+                <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-white/10 flex items-center justify-center text-emerald-300 border border-white/15">
+                  <Phone className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
-                <span className="text-[11px] font-bold uppercase tracking-wider bg-white/15 px-3 py-1 rounded-full text-emerald-200 flex items-center gap-1">
+                <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider bg-white/15 px-2.5 py-1 rounded-full text-emerald-200 flex items-center gap-1">
                   Respon Cepat <ArrowUpRight className="w-3 h-3" />
                 </span>
               </div>
 
-              <div className="mt-6">
-                <span className="text-xs uppercase font-bold tracking-widest text-emerald-300/90 block mb-1">
+              <div className="mt-5 sm:mt-6">
+                <span className="text-[11px] sm:text-xs uppercase font-bold tracking-widest text-emerald-300/90 block mb-1">
                   Hotline WhatsApp 24 Jam
                 </span>
-                <p className="text-xl sm:text-2xl font-bold font-mono tracking-tight text-white">
+                <p className="text-lg sm:text-2xl font-bold font-mono tracking-tight text-white">
                   {settings.whatsapp || '+62 812-3456-7890'}
                 </p>
                 <p className="text-xs text-emerald-100/80 mt-1">
@@ -168,21 +168,21 @@ export default function ContactSection({ settings }: ContactSectionProps) {
             </div>
 
             {/* Secretariat Address Card */}
-            <div className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-2xs">
-              <div className="flex items-start gap-4">
-                <div className="w-11 h-11 rounded-2xl bg-rose-50 text-maroon-800 border border-rose-100 flex items-center justify-center shrink-0">
+            <div className="bg-white rounded-3xl p-5 sm:p-7 border border-slate-200/80 shadow-2xs">
+              <div className="flex items-start gap-3 sm:gap-4">
+                <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-rose-50 text-maroon-800 border border-rose-100 flex items-center justify-center shrink-0">
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div className="flex-1">
                   <span className="text-xs uppercase font-bold tracking-wider text-maroon-800 block mb-1">
                     Kantor Sekretariat
                   </span>
-                  <p className="text-sm font-semibold text-slate-900 leading-snug">
+                  <p className="text-xs sm:text-sm font-semibold text-slate-900 leading-snug">
                     {settings.alamat}
                   </p>
 
                   {settings.jam_operasional && (
-                    <div className="flex items-center gap-1.5 text-xs text-slate-500 mt-3 pt-3 border-t border-slate-100">
+                    <div className="flex items-center gap-1.5 text-xs text-slate-500 mt-2.5 sm:mt-3 pt-2.5 sm:pt-3 border-t border-slate-100">
                       <Clock className="w-3.5 h-3.5 text-maroon-700 shrink-0" />
                       <span>{settings.jam_operasional}</span>
                     </div>
@@ -193,7 +193,7 @@ export default function ContactSection({ settings }: ContactSectionProps) {
                       href={settings.maps_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="touch-target inline-flex items-center gap-1 text-xs font-bold text-maroon-800 hover:underline mt-3"
+                      className="touch-target inline-flex items-center gap-1 text-xs font-bold text-maroon-800 hover:underline mt-2 sm:mt-3"
                     >
                       <span>Buka Petunjuk Arah Google Maps</span>
                       <ArrowUpRight className="w-3.5 h-3.5" />
@@ -207,16 +207,16 @@ export default function ContactSection({ settings }: ContactSectionProps) {
 
           {/* Right Column: Clean Online Consultation Form */}
           <ScrollReveal animation="right" delay={140} className="lg:col-span-7">
-            <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/80 shadow-md">
-              <div className="flex items-center gap-2.5 mb-2">
-                <div className="w-9 h-9 rounded-xl bg-rose-50 text-maroon-800 flex items-center justify-center font-bold">
-                  <MessageSquare className="w-5 h-5" />
+            <div className="bg-white rounded-3xl p-5 sm:p-10 border border-slate-200/80 shadow-md">
+              <div className="flex items-center gap-2 sm:gap-2.5 mb-1.5 sm:mb-2">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-rose-50 text-maroon-800 flex items-center justify-center font-bold">
+                  <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-slate-900">
+                <h3 className="text-lg sm:text-2xl font-bold text-slate-900">
                   Formulir Konsultasi Kasus
                 </h3>
               </div>
-              <p className="text-xs sm:text-sm text-slate-500 mb-8">
+              <p className="text-xs sm:text-sm text-slate-500 mb-6 sm:mb-8">
                 Jelaskan pokok permasalahan Anda. Tim advokat piket kami akan menelaah dan segera menghubungi nomor Anda.
               </p>
 
