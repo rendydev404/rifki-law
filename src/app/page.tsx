@@ -11,6 +11,7 @@ import MobileQuickBar from '@/components/MobileQuickBar';
 import SmoothScroll from '@/components/SmoothScroll';
 
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export default async function HomePage() {
   const data = await getOrganizationData();

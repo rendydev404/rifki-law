@@ -9,15 +9,65 @@ interface NavbarProps {
   settings: SiteSettings;
 }
 
-export default function Navbar({ settings }: NavbarProps) {
+export default function Navbar({ settings: initialSettings }: NavbarProps) {
+  const [settings, setSettings] = useState<SiteSettings>(initialSettings);
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-
   const [logoError, setLogoError] = useState(false);
 
+  // Sync when prop updates
+  useEffect(() => {
+    setSettings(initialSettings);
+  }, [initialSettings]);
+
+  // Reset error when logo_url changes
   useEffect(() => {
     setLogoError(false);
   }, [settings.logo_url]);
+
+  // Reactive listener: live cross-tab storage, custom event, & focus sync
+  useEffect(() => {
+    const handleSettingsUpdate = (e: Event) => {
+      const customEvent = e as CustomEvent<Partial<SiteSettings>>;
+      if (customEvent.detail) {
+        setSettings(prev => ({ ...prev, ...customEvent.detail }));
+        setLogoError(false);
+      }
+    };
+
+    const handleStorage = (e: StorageEvent) => {
+      if (e.key === 'law_site_settings' && e.newValue) {
+        try {
+          const parsed = JSON.parse(e.newValue);
+          setSettings(prev => ({ ...prev, ...parsed }));
+          setLogoError(false);
+        } catch {}
+      }
+    };
+
+    const handleFocus = () => {
+      try {
+        const stored = localStorage.getItem('law_site_settings');
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          setSettings(prev => ({ ...prev, ...parsed }));
+        }
+      } catch {}
+    };
+
+    window.addEventListener('law_settings_updated', handleSettingsUpdate);
+    window.addEventListener('storage', handleStorage);
+    window.addEventListener('focus', handleFocus);
+
+    // Initial check
+    handleFocus();
+
+    return () => {
+      window.removeEventListener('law_settings_updated', handleSettingsUpdate);
+      window.removeEventListener('storage', handleStorage);
+      window.removeEventListener('focus', handleFocus);
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -65,11 +115,11 @@ export default function Navbar({ settings }: NavbarProps) {
                 src={settings.logo_url}
                 alt={settings.org_name}
                 onError={() => setLogoError(true)}
-                className="w-9 h-9 sm:w-10 sm:h-10 object-contain rounded-xl border border-slate-200/80 bg-white p-1 shadow-2xs group-hover:scale-105 transition-transform shrink-0"
+                className="w-10 h-10 sm:w-11 sm:h-11 object-contain rounded-xl border border-slate-200/90 bg-white p-1 shadow-2xs group-hover:scale-105 transition-transform shrink-0"
               />
             ) : (
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-maroon-800 to-maroon-950 flex items-center justify-center text-amber-300 shadow-sm border border-amber-400/20 group-hover:scale-105 transition-transform shrink-0">
-                <Scale className="w-4 h-4 sm:w-5 sm:h-5" />
+              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-maroon-800 to-maroon-950 flex items-center justify-center text-amber-300 shadow-sm border border-amber-400/20 group-hover:scale-105 transition-transform shrink-0">
+                <Scale className="w-5 h-5 sm:w-5.5 sm:h-5.5" />
               </div>
             )}
             <div className="flex flex-col min-w-0 pr-1">

@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { deleteGaleri } from '@/lib/data-service';
 
 export async function DELETE(
@@ -8,6 +9,10 @@ export async function DELETE(
   try {
     const { id } = await params;
     const galeri = await deleteGaleri(id);
+    try {
+      revalidatePath('/', 'layout');
+      revalidatePath('/');
+    } catch {}
     return NextResponse.json({ success: true, galeri });
   } catch (error) {
     console.error('API /api/galeri/[id] DELETE error:', error);

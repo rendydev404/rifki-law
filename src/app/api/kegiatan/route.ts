@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { saveKegiatan } from '@/lib/data-service';
 
 export async function POST(req: Request) {
@@ -11,6 +12,10 @@ export async function POST(req: Request) {
       ...body,
       id: body.id || 'k-' + Date.now(),
     });
+    try {
+      revalidatePath('/', 'layout');
+      revalidatePath('/');
+    } catch {}
     return NextResponse.json({ success: true, kegiatan });
   } catch (error) {
     console.error('API /api/kegiatan error:', error);

@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160">
+  <defs>
+    <linearGradient id="maroonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#701222" />
+      <stop offset="100%" stop-color="#400712" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a" />
+      <stop offset="50%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Outer Ring Shield -->
+  <circle cx="80" cy="80" r="76" fill="url(#maroonGrad)" stroke="url(#goldGrad)" stroke-width="4" filter="url(#shadow)" />
+  <circle cx="80" cy="80" r="70" fill="none" stroke="url(#goldGrad)" stroke-width="1.5" stroke-dasharray="3,2" opacity="0.7" />
+
+  <!-- Inner Crest Circle -->
+  <circle cx="80" cy="80" r="63" fill="#ffffff" fill-opacity="0.04" stroke="url(#goldGrad)" stroke-width="1" />
+
+  <!-- Laurel Wreath Leaves (Left) -->
+  <g fill="url(#goldGrad)" opacity="0.85">
+    <path d="M 40 95 C 32 85 32 70 38 58 C 42 66 44 78 40 95 Z" />
+    <path d="M 45 106 C 36 100 34 88 41 78 C 46 86 48 97 45 106 Z" />
+    <path d="M 52 115 C 43 111 41 100 48 91 C 53 98 56 107 52 115 Z" />
+  </g>
+
+  <!-- Laurel Wreath Leaves (Right) -->
+  <g fill="url(#goldGrad)" opacity="0.85">
+    <path d="M 120 95 C 128 85 128 70 122 58 C 118 66 116 78 120 95 Z" />
+    <path d="M 115 106 C 124 100 126 88 119 78 C 114 86 112 97 115 106 Z" />
+    <path d="M 108 115 C 117 111 119 100 112 91 C 107 98 104 107 108 115 Z" />
+  </g>
+
+  <!-- Scale of Justice & Central Pillars -->
+  <!-- Top Beam & Pillar -->
+  <path d="M 78 36 L 82 36 L 82 108 L 78 108 Z" fill="url(#goldGrad)" />
+  <circle cx="80" cy="34" r="5" fill="url(#goldGrad)" />
+  <path d="M 46 48 L 114 48 L 114 51 L 46 51 Z" fill="url(#goldGrad)" />
+
+  <!-- Left Scale Pan & Strings -->
+  <line x1="52" y1="51" x2="40" y2="76" stroke="url(#goldGrad)" stroke-width="1.5" />
+  <line x1="52" y1="51" x2="64" y2="76" stroke="url(#goldGrad)" stroke-width="1.5" />
+  <path d="M 36 76 C 42 86 62 86 68 76 Z" fill="url(#goldGrad)" />
+
+  <!-- Right Scale Pan & Strings -->
+  <line x1="108" y1="51" x2="96" y2="76" stroke="url(#goldGrad)" stroke-width="1.5" />
+  <line x1="108" y1="51" x2="120" y2="76" stroke="url(#goldGrad)" stroke-width="1.5" />
+  <path d="M 92 76 C 98 86 118 86 124 76 Z" fill="url(#goldGrad)" />
+
+  <!-- Base / Open Book of Law (Kitab Hukum) -->
+  <g fill="url(#goldGrad)">
+    <!-- Book Left Page -->
+    <path d="M 80 112 C 72 106 58 107 50 111 L 50 125 C 58 121 72 120 80 126 Z" />
+    <!-- Book Right Page -->
+    <path d="M 80 112 C 88 106 102 107 110 111 L 110 125 C 102 121 88 120 80 126 Z" />
+    <!-- Book Spine Center -->
+    <rect x="79" y="111" width="2" height="15" fill="#400712" />
+  </g>
+
+  <!-- Stars of Excellence -->
+  <polygon points="80,20 82,24 86,24 83,26 84,30 80,27 76,30 77,26 74,24 78,24" fill="url(#goldGrad)" />
+  <polygon points="62,25 63,28 67,28 64,30 65,33 62,31 59,33 60,30 57,28 61,28" fill="url(#goldGrad)" />
+  <polygon points="98,25 99,28 103,28 100,30 101,33 98,31 95,33 96,30 93,28 97,28" fill="url(#goldGrad)" />
+
+  <!-- Bottom Ribbon text BEM FH -->
+  <path d="M 52 135 L 108 135 L 104 145 L 56 145 Z" fill="#ffffff" fill-opacity="0.12" stroke="url(#goldGrad)" stroke-width="1" />
+  <text x="80" y="142" font-family="system-ui, -apple-system, sans-serif" font-size="7.5" font-weight="900" fill="#fef08a" text-anchor="middle" letter-spacing="1.5">LEX &amp; IUSTITIA</text>
+</svg>

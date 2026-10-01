@@ -7,7 +7,7 @@ export const defaultOrganizationData: OrganizationData = {
     slogan: 'Intelektual Muda Berintegritas, Progresif Membela Keadilan & Hak Mahasiswa',
     welcome_title: 'Selamat Datang di Portal Resmi Organisasi Mahasiswa Hukum',
     welcome_subtitle: 'Wadah perjuangan aspirasi mahasiswa, kajian hukum kritis, pengembangan peradilan semu (moot court), pembinaan paralegal muda, serta pengabdian masyarakat yang berintegritas dan independen.',
-    logo_url: '',
+    logo_url: '/logo-bemfh.svg',
     hero_badge: 'Organisasi Mahasiswa Hukum Progresif & Berprestasi',
     hero_image_url: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80',
     cta_primary_label: 'Sampaikan Aspirasi Mahasiswa',

@@ -9,13 +9,59 @@ interface FooterProps {
   settings: SiteSettings;
 }
 
-export default function Footer({ settings }: FooterProps) {
+export default function Footer({ settings: initialSettings }: FooterProps) {
   const currentYear = new Date().getFullYear();
+  const [settings, setSettings] = React.useState<SiteSettings>(initialSettings);
   const [logoError, setLogoError] = React.useState(false);
+
+  React.useEffect(() => {
+    setSettings(initialSettings);
+  }, [initialSettings]);
 
   React.useEffect(() => {
     setLogoError(false);
   }, [settings.logo_url]);
+
+  React.useEffect(() => {
+    const handleSettingsUpdate = (e: Event) => {
+      const customEvent = e as CustomEvent<Partial<SiteSettings>>;
+      if (customEvent.detail) {
+        setSettings(prev => ({ ...prev, ...customEvent.detail }));
+        setLogoError(false);
+      }
+    };
+
+    const handleStorage = (e: StorageEvent) => {
+      if (e.key === 'law_site_settings' && e.newValue) {
+        try {
+          const parsed = JSON.parse(e.newValue);
+          setSettings(prev => ({ ...prev, ...parsed }));
+          setLogoError(false);
+        } catch {}
+      }
+    };
+
+    const handleFocus = () => {
+      try {
+        const stored = localStorage.getItem('law_site_settings');
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          setSettings(prev => ({ ...prev, ...parsed }));
+        }
+      } catch {}
+    };
+
+    window.addEventListener('law_settings_updated', handleSettingsUpdate);
+    window.addEventListener('storage', handleStorage);
+    window.addEventListener('focus', handleFocus);
+    handleFocus();
+
+    return () => {
+      window.removeEventListener('law_settings_updated', handleSettingsUpdate);
+      window.removeEventListener('storage', handleStorage);
+      window.removeEventListener('focus', handleFocus);
+    };
+  }, []);
 
   return (
     <footer className="bg-slate-950 text-slate-400 pt-16 pb-24 sm:pb-16 border-t border-slate-900">

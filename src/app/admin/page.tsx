@@ -133,6 +133,8 @@ export default function AdminDashboard() {
     setSaving(true);
 
     try {
+      localStorage.setItem('law_site_settings', JSON.stringify(data.settings));
+      window.dispatchEvent(new CustomEvent('law_settings_updated', { detail: data.settings }));
       const res = await fetch('/api/settings', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -628,13 +630,15 @@ export default function AdminDashboard() {
                         onClick={async () => {
                           setSaving(true);
                           try {
+                            localStorage.setItem('law_site_settings', JSON.stringify(data.settings));
+                            window.dispatchEvent(new CustomEvent('law_settings_updated', { detail: data.settings }));
                             const res = await fetch('/api/settings', {
                               method: 'POST',
                               headers: { 'Content-Type': 'application/json' },
                               body: JSON.stringify(data.settings),
                             });
                             if (!res.ok) throw new Error('Gagal');
-                            showToast('success', 'Logo & Nama Organisasi berhasil disimpan ke website!');
+                            showToast('success', 'Logo & Identitas berhasil disimpan ke website!');
                           } catch (err) {
                             showToast('error', 'Gagal menyimpan logo');
                           } finally {
@@ -680,14 +684,31 @@ export default function AdminDashboard() {
                       </div>
                     </div>
 
-                    {/* ImageUpload with isLogo */}
+                    {/* ImageUpload with isLogo and immediate auto-save */}
                     <ImageUpload
                       label="Unggah / Ganti Logo (PNG Transparan / SVG / JPG)"
                       value={data.settings.logo_url}
-                      onChange={(url) => setData({
-                        ...data,
-                        settings: { ...data.settings, logo_url: url }
-                      })}
+                      onChange={async (url) => {
+                        const newSettings = { ...data.settings, logo_url: url };
+                        setData({
+                          ...data,
+                          settings: newSettings
+                        });
+                        try {
+                          localStorage.setItem('law_site_settings', JSON.stringify(newSettings));
+                          window.dispatchEvent(new CustomEvent('law_settings_updated', { detail: newSettings }));
+                          const res = await fetch('/api/settings', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(newSettings),
+                          });
+                          if (res.ok) {
+                            showToast('success', 'Logo berhasil diperbarui dan diterapkan ke header website!');
+                          }
+                        } catch (e) {
+                          console.warn('Auto-save logo error:', e);
+                        }
+                      }}
                       isLogo={true}
                       helperText="Pilih file logo dari galeri HP atau komputer. Format PNG atau SVG transparan direkomendasikan."
                     />
@@ -697,10 +718,23 @@ export default function AdminDashboard() {
                       <div className="mt-3 flex justify-end">
                         <button
                           type="button"
-                          onClick={() => setData({
-                            ...data,
-                            settings: { ...data.settings, logo_url: '' }
-                          })}
+                          onClick={async () => {
+                            const newSettings = { ...data.settings, logo_url: '' };
+                            setData({
+                              ...data,
+                              settings: newSettings
+                            });
+                            try {
+                              localStorage.setItem('law_site_settings', JSON.stringify(newSettings));
+                              window.dispatchEvent(new CustomEvent('law_settings_updated', { detail: newSettings }));
+                              await fetch('/api/settings', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(newSettings),
+                              });
+                              showToast('success', 'Logo dihapus, kembali ke ikon timbangan default.');
+                            } catch (e) {}
+                          }}
                           className="text-xs text-rose-700 hover:text-rose-900 font-semibold underline underline-offset-2 flex items-center gap-1"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
