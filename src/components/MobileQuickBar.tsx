@@ -11,7 +11,7 @@ interface MobileQuickBarProps {
 export default function MobileQuickBar({ whatsappNumber, orgName }: MobileQuickBarProps) {
   const cleanWaNumber = whatsappNumber ? whatsappNumber.replace(/\D/g, '') : '';
   const waUrl = cleanWaNumber
-    ? `https://wa.me/${cleanWaNumber}?text=Halo%20${encodeURIComponent(orgName)},%20saya%20membutuhkan%20informasi%20bantuan%20hukum.`
+    ? `https://wa.me/${cleanWaNumber}?text=Halo%20${encodeURIComponent(orgName)},%20saya%20ingin%20menyampaikan%20aspirasi%20/%20pertanyaan%20seputar%20mahasiswa.`
     : '#kontak';
 
   return (

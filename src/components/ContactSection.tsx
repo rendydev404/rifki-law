@@ -122,7 +122,7 @@ export default function ContactSection({ settings }: ContactSectionProps) {
                     <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-emerald-300 block leading-tight">
                       Hotline WhatsApp 24 Jam
                     </span>
-                    <span className="text-[11px] text-emerald-100/75 truncate block mt-0.5">
+                    <span className="text-[11px] text-emerald-100/80 block mt-0.5 leading-snug">
                       Respon Cepat Aspirasi Mahasiswa
                     </span>
                   </div>
@@ -135,7 +135,7 @@ export default function ContactSection({ settings }: ContactSectionProps) {
               </div>
 
               <div className="relative z-10 pt-3 border-t border-white/10">
-                <p className="text-xl sm:text-2xl font-bold font-mono tracking-tight text-white group-hover:text-emerald-200 transition-colors">
+                <p className="text-xl sm:text-2xl font-bold font-mono tracking-tight text-white group-hover:text-emerald-200 transition-colors break-words">
                   {settings.whatsapp || '+62 812-3456-7890'}
                 </p>
                 <p className="text-xs text-emerald-100/80 mt-1.5 leading-relaxed">
@@ -150,50 +150,50 @@ export default function ContactSection({ settings }: ContactSectionProps) {
                 href={igUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="touch-target group flex items-center justify-between p-4 sm:p-5 bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 shadow-2xs hover:shadow-md hover:border-pink-300 transition-all duration-200"
+                className="touch-target group flex items-start sm:items-center justify-between p-4 sm:p-5 bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 shadow-2xs hover:shadow-md hover:border-pink-300 transition-all duration-200"
               >
-                <div className="flex items-center gap-3.5 min-w-0 flex-1">
-                  <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-pink-50 to-rose-100/70 text-pink-600 border border-pink-200/60 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-2xs">
+                <div className="flex items-start sm:items-center gap-3.5 min-w-0 flex-1">
+                  <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-pink-50 to-rose-100/70 text-pink-600 border border-pink-200/60 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-2xs mt-0.5 sm:mt-0">
                     <InstagramIcon className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-400 block leading-tight mb-0.5">
                       Instagram Resmi
                     </span>
-                    <p className="text-sm sm:text-base font-bold text-slate-900 group-hover:text-pink-600 transition-colors truncate">
+                    <p className="text-sm sm:text-base font-bold text-slate-900 group-hover:text-pink-600 transition-colors break-words leading-snug">
                       @{cleanIgHandle || 'bemfh.official'}
                     </p>
-                    <span className="text-[11px] text-slate-500 block truncate mt-0.5">
+                    <span className="text-[11px] text-slate-500 block leading-snug mt-0.5">
                       Kabar kegiatan, rilis pers &amp; visual hukum
                     </span>
                   </div>
                 </div>
-                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-center text-slate-400 group-hover:bg-pink-50 group-hover:text-pink-600 group-hover:border-pink-200 transition-all shrink-0 ml-3">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-center text-slate-400 group-hover:bg-pink-50 group-hover:text-pink-600 group-hover:border-pink-200 transition-all shrink-0 ml-3 self-center">
                   <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </div>
               </a>
 
               <a
                 href={`mailto:${settings.email}`}
-                className="touch-target group flex items-center justify-between p-4 sm:p-5 bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 shadow-2xs hover:shadow-md hover:border-blue-300 transition-all duration-200"
+                className="touch-target group flex items-start sm:items-center justify-between p-4 sm:p-5 bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 shadow-2xs hover:shadow-md hover:border-blue-300 transition-all duration-200"
               >
-                <div className="flex items-center gap-3.5 min-w-0 flex-1">
-                  <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-100/70 text-blue-600 border border-blue-200/60 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-2xs">
+                <div className="flex items-start sm:items-center gap-3.5 min-w-0 flex-1">
+                  <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-100/70 text-blue-600 border border-blue-200/60 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-2xs mt-0.5 sm:mt-0">
                     <Mail className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-400 block leading-tight mb-0.5">
                       Email Resmi Sekretariat
                     </span>
-                    <p className="text-sm sm:text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors truncate">
+                    <p className="text-sm sm:text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors break-all leading-snug">
                       {settings.email || 'aspirasi@bemfh-organisasi.id'}
                     </p>
-                    <span className="text-[11px] text-slate-500 block truncate mt-0.5">
+                    <span className="text-[11px] text-slate-500 block leading-snug mt-0.5">
                       Korespondensi resmi, proposal kerjasama &amp; audiensi
                     </span>
                   </div>
                 </div>
-                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-center text-slate-400 group-hover:bg-blue-50 group-hover:text-blue-600 group-hover:border-blue-200 transition-all shrink-0 ml-3">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-center text-slate-400 group-hover:bg-blue-50 group-hover:text-blue-600 group-hover:border-blue-200 transition-all shrink-0 ml-3 self-center">
                   <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </div>
               </a>
@@ -206,7 +206,7 @@ export default function ContactSection({ settings }: ContactSectionProps) {
                   <MapPin className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1.5">
+                  <div className="flex items-center gap-2 mb-1.5 flex-wrap">
                     <span className="text-[10px] font-bold uppercase tracking-wider text-maroon-800 bg-rose-50 border border-rose-200/70 px-2.5 py-0.5 rounded-full inline-block">
                       Kantor Sekretariat
                     </span>
@@ -215,7 +215,7 @@ export default function ContactSection({ settings }: ContactSectionProps) {
                     </span>
                   </div>
 
-                  <h4 className="text-sm sm:text-base font-bold text-slate-900 leading-snug">
+                  <h4 className="text-sm sm:text-base font-bold text-slate-900 leading-snug break-words">
                     {settings.alamat || 'Gedung Student Center Lt. 2, Fakultas Hukum, Kampus Universitas'}
                   </h4>
 

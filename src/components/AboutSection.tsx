@@ -67,7 +67,7 @@ export default function AboutSection({ settings, pengurus }: AboutSectionProps) 
               <div className="pt-4 sm:pt-6 mt-4 sm:mt-6 border-t border-white/10 flex items-center gap-2.5 sm:gap-3">
                 <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-amber-300 shrink-0" />
                 <span className="text-xs font-semibold text-rose-100">
-                  Lembaga Bantuan Hukum Terakreditasi
+                  Organisasi Mahasiswa Fakultas Hukum
                 </span>
               </div>
             </div>
@@ -81,7 +81,7 @@ export default function AboutSection({ settings, pengurus }: AboutSectionProps) 
               </span>
               
               <h3 className="text-xl sm:text-3xl font-extrabold text-slate-900 mb-4 sm:mb-5 leading-snug">
-                Satu Dekade Berdiri Bersama Masyarakat
+                Dedikasi Berkelanjutan Bersama Mahasiswa
               </h3>
               
               <p className="text-slate-700 text-xs sm:text-base leading-relaxed whitespace-pre-line mb-5 sm:mb-6 font-normal">
@@ -94,8 +94,8 @@ export default function AboutSection({ settings, pengurus }: AboutSectionProps) 
                     ✓
                   </div>
                   <div>
-                    <h4 className="font-bold text-xs sm:text-sm text-slate-900">Perkara Litigasi</h4>
-                    <p className="text-[10px] sm:text-[11px] text-slate-500">Pendampingan sidang peradilan</p>
+                    <h4 className="font-bold text-xs sm:text-sm text-slate-900">Advokasi Mahasiswa</h4>
+                    <p className="text-[10px] sm:text-[11px] text-slate-500">Pendampingan akademik & aspirasi</p>
                   </div>
                 </div>
 
@@ -104,8 +104,8 @@ export default function AboutSection({ settings, pengurus }: AboutSectionProps) 
                     ✓
                   </div>
                   <div>
-                    <h4 className="font-bold text-xs sm:text-sm text-slate-900">Non-Litigasi</h4>
-                    <p className="text-[10px] sm:text-[11px] text-slate-500">Mediasi damai & edukasi warga</p>
+                    <h4 className="font-bold text-xs sm:text-sm text-slate-900">Kajian & Aksi</h4>
+                    <p className="text-[10px] sm:text-[11px] text-slate-500">Kajian kritis & pengabdian sosial</p>
                   </div>
                 </div>
               </div>
@@ -182,10 +182,10 @@ export default function AboutSection({ settings, pengurus }: AboutSectionProps) 
               <Users className="w-3.5 h-3.5 text-maroon-700" /> Struktur Kepengurusan
             </div>
             <h3 className="text-xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
-              Pimpinan & Advokat Pengabdi
+              Pengurus &amp; Fungsionaris BEM FH
             </h3>
             <p className="text-slate-500 text-xs sm:text-sm mt-1 sm:mt-2">
-              Praktisi hukum berintegritas tinggi dengan komitmen penuh membela hak-hak rakyat.
+              Mahasiswa Fakultas Hukum yang berdedikasi mengabdi bagi almamater, sivitas akademika, dan masyarakat.
             </p>
           </ScrollReveal>
 
@@ -239,7 +239,7 @@ export default function AboutSection({ settings, pengurus }: AboutSectionProps) 
                       <span className="text-[11px] text-amber-300 font-semibold block uppercase tracking-wide">
                         {member.jabatan}
                       </span>
-                      <h4 className="text-base font-bold leading-tight truncate">
+                      <h4 className="text-base font-bold leading-tight break-words">
                         {member.nama} {member.gelar}
                       </h4>
                     </div>
@@ -254,16 +254,16 @@ export default function AboutSection({ settings, pengurus }: AboutSectionProps) 
                         </p>
                       ) : (
                         <p className="text-slate-400 text-xs italic">
-                          Advokat pengabdi bantuan hukum dan pendampingan masyarakat.
+                          Pengurus BEM Fakultas Hukum yang berdedikasi mengabdi dan melayani mahasiswa.
                         </p>
                       )}
                     </div>
 
                     {member.kontak_email && (
                       <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                        <span className="flex items-center gap-1.5 truncate">
+                        <span className="flex items-center gap-1.5 min-w-0">
                           <Mail className="w-3.5 h-3.5 text-maroon-700 shrink-0" />
-                          <span className="truncate">{member.kontak_email}</span>
+                          <span className="break-all">{member.kontak_email}</span>
                         </span>
                       </div>
                     )}
