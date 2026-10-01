@@ -312,7 +312,7 @@ export default function AdminDashboard() {
               <Scale className="w-7 h-7" />
             </div>
             <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900">
-              Portal Admin Organisasi Hukum
+              Portal Administrator BEM FH
             </h1>
             <p className="text-xs sm:text-sm text-slate-500 mt-1">
               Masuk untuk mengelola seluruh konten landing page
@@ -336,7 +336,7 @@ export default function AdminDashboard() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@organisasihukum.id"
+                placeholder="nama@organisasi.id"
                 className="touch-target w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-maroon-800"
               />
             </div>
@@ -353,12 +353,6 @@ export default function AdminDashboard() {
                 placeholder="••••••••••••"
                 className="touch-target w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-maroon-800"
               />
-            </div>
-
-            <div className="p-3 bg-amber-50 rounded-xl border border-amber-200 text-[11px] text-amber-900">
-              <p className="font-semibold mb-0.5">Kredensial Default Terdaftar:</p>
-              <p>Email: <span className="font-mono font-bold">admin@organisasihukum.id</span></p>
-              <p>Password: <span className="font-mono font-bold">AdminHukum2026!</span></p>
             </div>
 
             <button
