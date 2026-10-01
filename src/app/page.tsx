@@ -1,7 +1,6 @@
 import { getOrganizationData } from '@/lib/data-service';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import RecentActivitiesShowcase from '@/components/RecentActivitiesShowcase';
 import AboutSection from '@/components/AboutSection';
 import ActivitiesSection from '@/components/ActivitiesSection';
 import GallerySection from '@/components/GallerySection';
@@ -9,6 +8,7 @@ import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 import MobileQuickBar from '@/components/MobileQuickBar';
 import SmoothScroll from '@/components/SmoothScroll';
+import ThemeApplicator from '@/components/ThemeApplicator';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -18,39 +18,37 @@ export default async function HomePage() {
 
   return (
     <SmoothScroll>
+      {/* Dynamic Theme & Font Injection */}
+      <ThemeApplicator settings={data.settings} />
+
       <div className="min-h-screen bg-[#faf9f8] flex flex-col selection:bg-maroon-800 selection:text-white">
-        {/* 1. Header & Navigation */}
+        {/* Navigation Bar */}
         <Navbar settings={data.settings} />
 
-        {/* 2. Beranda: Logo, Nama, Slogan, Ucapan Selamat Datang */}
+        {/* 1. Beranda: Logo & Nama Organisasi, Ucapan Selamat Datang, Slogan */}
         <Hero
           settings={data.settings}
           recentActivities={data.kegiatan}
         />
 
-        {/* 3. Foto Kegiatan Terbaru Showcase (Clean & Breathable Visual Gallery) */}
-        <RecentActivitiesShowcase
-          activities={data.kegiatan}
-        />
-
-        {/* 4. Tentang Kami: Sejarah, Visi, Misi, Struktur Kepengurusan */}
+        {/* 2. Tentang Kami: Sejarah Organisasi, Visi & Misi, Struktur Kepengurusan */}
         <AboutSection
           settings={data.settings}
           pengurus={data.pengurus}
         />
 
-        {/* 5. Kegiatan Lapangan & Agenda Mendatang */}
+        {/* 3. Kegiatan: Daftar Kegiatan */}
         <ActivitiesSection
           kegiatan={data.kegiatan}
           whatsappNumber={data.settings.whatsapp}
         />
 
-        {/* 6. Dokumentasi Foto / Galeri Lightbox */}
+        {/* 3. Kegiatan: Dokumentasi Foto */}
         <GallerySection
           galeri={data.galeri}
         />
 
-        {/* 7. Kontak: Instagram, WhatsApp, Email, Alamat Sekretariat & Form Aduan */}
+        {/* 4. Kontak: Instagram, WhatsApp, Email, Alamat */}
         <ContactSection
           settings={data.settings}
         />

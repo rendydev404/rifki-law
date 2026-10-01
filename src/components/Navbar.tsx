@@ -79,12 +79,9 @@ export default function Navbar({ settings: initialSettings }: NavbarProps) {
 
   const navLinks = [
     { label: 'Beranda', href: '#beranda' },
-    { label: 'Tentang', href: '#tentang' },
-    { label: 'Pengurus', href: '#pengurus' },
+    { label: 'Tentang Kami', href: '#tentang' },
     { label: 'Kegiatan', href: '#kegiatan' },
-    { label: 'Agenda', href: '#agenda' },
-    { label: 'Galeri', href: '#galeri' },
-    { label: 'Aspirasi & Kontak', href: '#kontak' },
+    { label: 'Kontak', href: '#kontak' },
   ];
 
   const handleLinkClick = () => {

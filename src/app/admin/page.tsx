@@ -5,11 +5,18 @@ import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import { OrganizationData, SiteSettings, Pengurus, Kegiatan, Galeri, PesanKontak } from '@/lib/types';
 import ImageUpload from '@/components/ImageUpload';
+import ThemeApplicator from '@/components/ThemeApplicator';
+import {
+  COLOR_PRESETS,
+  BODY_FONT_OPTIONS,
+  HEADING_FONT_OPTIONS,
+  generatePalette,
+} from '@/lib/theme-utils';
 import {
   Scale, Lock, LogOut, Save, Plus, Trash2, Edit3, ExternalLink,
   CheckCircle2, AlertCircle, Loader2, Home, BookOpen, Users,
   Calendar, Camera, Phone, Mail, MessageSquare, Database, Copy, Check,
-  LayoutGrid, X, ChevronRight
+  LayoutGrid, X, ChevronRight, Palette, Type, Sparkles, RefreshCw
 } from 'lucide-react';
 
 export default function AdminDashboard() {
@@ -22,7 +29,7 @@ export default function AdminDashboard() {
 
   // Data state
   const [data, setData] = useState<OrganizationData | null>(null);
-  const [activeTab, setActiveTab] = useState<'beranda' | 'tentang' | 'pengurus' | 'kegiatan' | 'galeri' | 'kontak' | 'pesan' | 'database'>('beranda');
+  const [activeTab, setActiveTab] = useState<'beranda' | 'tema' | 'tentang' | 'pengurus' | 'kegiatan' | 'galeri' | 'kontak' | 'pesan' | 'database'>('beranda');
   const [saving, setSaving] = useState(false);
   const [toastMessage, setToastMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
@@ -32,6 +39,8 @@ export default function AdminDashboard() {
   const [editingKegiatan, setEditingKegiatan] = useState<Kegiatan | null>(null);
   const [editingGaleri, setEditingGaleri] = useState<Galeri | null>(null);
   const [copiedSql, setCopiedSql] = useState(false);
+  const [customBodyFontInput, setCustomBodyFontInput] = useState('');
+  const [customHeadingFontInput, setCustomHeadingFontInput] = useState('');
 
   // Check auth session
   useEffect(() => {
@@ -149,6 +158,25 @@ export default function AdminDashboard() {
     } finally {
       setSaving(false);
     }
+  };
+
+  const handleUpdateThemeSetting = (updates: Partial<SiteSettings>) => {
+    if (!data) return;
+    const updatedSettings: SiteSettings = { ...data.settings, ...updates };
+    setData({ ...data, settings: updatedSettings });
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('law_settings_updated', { detail: updatedSettings }));
+    }
+  };
+
+  const handleResetTheme = () => {
+    if (!confirm('Kembalikan warna primer ke Marun Hukum (#800020) dan font ke bawaan?')) return;
+    handleUpdateThemeSetting({
+      primary_color: '#800020',
+      font_family: 'Plus Jakarta Sans',
+      font_heading: 'Playfair Display',
+    });
+    showToast('success', 'Tema dikembalikan ke setelan awal!');
   };
 
   // 2. Pengurus actions
@@ -468,7 +496,18 @@ export default function AdminDashboard() {
                   : 'text-rose-200/70 hover:text-white hover:bg-maroon-900'
               }`}
             >
-              <Home className="w-3.5 h-3.5" /> Beranda & Slogan
+              <Home className="w-3.5 h-3.5" /> Beranda &amp; Slogan
+            </button>
+
+            <button
+              onClick={() => setActiveTab('tema')}
+              className={`touch-target shrink-0 px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${
+                activeTab === 'tema'
+                  ? 'bg-maroon-800 text-white shadow-xs'
+                  : 'text-rose-200/70 hover:text-white hover:bg-maroon-900'
+              }`}
+            >
+              <Palette className="w-3.5 h-3.5 text-amber-300" /> Warna &amp; Font (Tema)
             </button>
 
             <button
@@ -479,7 +518,7 @@ export default function AdminDashboard() {
                   : 'text-rose-200/70 hover:text-white hover:bg-maroon-900'
               }`}
             >
-              <BookOpen className="w-3.5 h-3.5" /> Sejarah & Visi Misi
+              <BookOpen className="w-3.5 h-3.5" /> Sejarah &amp; Visi Misi
             </button>
 
             <button
@@ -557,6 +596,7 @@ export default function AdminDashboard() {
             <span className="font-medium text-rose-200/80">Menu:</span>
             <span className="font-bold text-white uppercase tracking-wider text-[11px] truncate">
               {activeTab === 'beranda' && 'Beranda & Slogan'}
+              {activeTab === 'tema' && 'Tema: Warna & Font'}
               {activeTab === 'tentang' && 'Sejarah & Visi Misi'}
               {activeTab === 'pengurus' && 'Struktur Pengurus'}
               {activeTab === 'kegiatan' && 'Kegiatan & Agenda'}
@@ -587,7 +627,9 @@ export default function AdminDashboard() {
           </div>
         ) : (
           <div>
-            
+            {/* Live Theme Injected for Realtime Preview */}
+            <ThemeApplicator settings={data.settings} />
+
             {/* ========================================================
                 TAB 1: BERANDA & IDENTITAS
             ======================================================== */}
@@ -931,6 +973,485 @@ export default function AdminDashboard() {
                   </div>
                 </div>
               </form>
+            )}
+
+            {/* ========================================================
+                TAB: WARNA & TIPOGRAFI (TEMA)
+            ======================================================== */}
+            {activeTab === 'tema' && (
+              <div className="space-y-8">
+                {/* Header card */}
+                <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-xs">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="p-1.5 rounded-lg bg-rose-100 text-maroon-800">
+                          <Palette className="w-5 h-5" />
+                        </span>
+                        <h2 className="text-xl font-bold text-slate-900">
+                          Kustomisasi Tema, Warna &amp; Font Bebas
+                        </h2>
+                      </div>
+                      <p className="text-xs text-slate-500 max-w-2xl">
+                        Atur warna primer organisasi mahasiswa dan pilih jenis font teks utama serta font judul. Perubahan langsung aktif di seluruh website tanpa merusak struktur layout.
+                      </p>
+                    </div>
+
+                    <div className="flex items-center gap-2 shrink-0">
+                      <button
+                        type="button"
+                        onClick={handleResetTheme}
+                        className="touch-target px-3.5 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-semibold flex items-center gap-1.5 transition-colors"
+                        title="Kembalikan ke warna dan font awal"
+                      >
+                        <RefreshCw className="w-3.5 h-3.5 text-slate-400" />
+                        <span>Reset Default</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={handleSaveSettings}
+                        disabled={saving}
+                        className="touch-target px-5 py-2 bg-maroon-800 hover:bg-maroon-900 text-white rounded-xl text-xs font-bold shadow-xs flex items-center gap-2 transition-all disabled:opacity-50"
+                      >
+                        <Save className="w-4 h-4 text-amber-300" />
+                        <span>{saving ? 'Menyimpan...' : 'Simpan Tema'}</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* 1. SELEKTOR WARNA PRIMER */}
+                  <div className="mt-6">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                      <div>
+                        <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                          <span>1. Warna Primer Organisasi</span>
+                          <span className="text-[10px] font-mono font-bold bg-slate-100 text-slate-700 px-2 py-0.5 rounded-md border border-slate-200">
+                            {data.settings.primary_color || '#800020'}
+                          </span>
+                        </h3>
+                        <p className="text-xs text-slate-500">
+                          Warna ini diterapkan pada navbar, tombol CTA, aksen border, gradien hero, dan kartu penting.
+                        </p>
+                      </div>
+
+                      {/* Custom Color Picker Swatch */}
+                      <div className="flex items-center gap-2 bg-slate-50 p-2 rounded-xl border border-slate-200">
+                        <label className="flex items-center gap-2 cursor-pointer">
+                          <input
+                            type="color"
+                            value={data.settings.primary_color || '#800020'}
+                            onChange={(e) => handleUpdateThemeSetting({ primary_color: e.target.value })}
+                            className="w-8 h-8 rounded-lg cursor-pointer border-0 p-0 bg-transparent"
+                            aria-label="Pilih Warna Kustom"
+                          />
+                          <span className="text-xs font-medium text-slate-700">Pilih Warna Bebas:</span>
+                        </label>
+                        <input
+                          type="text"
+                          value={data.settings.primary_color || '#800020'}
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            if (val.startsWith('#') || val.length <= 7) {
+                              handleUpdateThemeSetting({ primary_color: val });
+                            }
+                          }}
+                          placeholder="#800020"
+                          maxLength={7}
+                          className="w-20 px-2 py-1 text-xs font-mono font-bold uppercase rounded-lg border border-slate-300 bg-white text-slate-900 focus:ring-2 focus:ring-maroon-800 focus:outline-none"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Presets Grid */}
+                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mb-6">
+                      {COLOR_PRESETS.map((preset) => {
+                        const isSelected = (data.settings.primary_color || '#800020').toLowerCase() === preset.hex.toLowerCase();
+                        return (
+                          <button
+                            key={preset.id}
+                            type="button"
+                            onClick={() => handleUpdateThemeSetting({ primary_color: preset.hex })}
+                            className={`p-3 rounded-xl border text-left transition-all relative flex flex-col justify-between ${
+                              isSelected
+                                ? 'border-slate-900 ring-2 ring-slate-900/10 shadow-sm bg-slate-50/80'
+                                : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50/50 bg-white'
+                            }`}
+                          >
+                            <div className="flex items-center justify-between mb-2">
+                              <span
+                                className="w-6 h-6 rounded-full border border-black/10 shadow-xs shrink-0"
+                                style={{ backgroundColor: preset.hex }}
+                              />
+                              {isSelected && (
+                                <span className="text-[10px] font-bold text-slate-900 bg-slate-200/80 px-1.5 py-0.5 rounded-full">
+                                  Aktif
+                                </span>
+                              )}
+                            </div>
+                            <div>
+                              <div className="text-xs font-bold text-slate-900 truncate">
+                                {preset.name}
+                              </div>
+                              <div className="text-[10px] font-mono text-slate-500 mb-1">
+                                {preset.hex}
+                              </div>
+                              <div className="text-[10px] text-slate-500 line-clamp-2 leading-relaxed">
+                                {preset.description}
+                              </div>
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    {/* Dynamic Palette Spectrum generated automatically */}
+                    <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                          <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                          <span>Spektrum 11 Tingkat Shading Otomatis (Tailwind Shades 50 - 950)</span>
+                        </span>
+                        <span className="text-[10px] text-slate-500">
+                          Dihitung proporsional secara matematis (HSL L-Scale)
+                        </span>
+                      </div>
+                      <div className="grid grid-cols-11 gap-1 h-9 rounded-lg overflow-hidden border border-slate-200">
+                        {Object.entries(generatePalette(data.settings.primary_color || '#800020')).map(([step, hex]) => (
+                          <div
+                            key={step}
+                            className="group relative flex flex-col items-center justify-end pb-1 text-[9px] font-mono cursor-pointer transition-transform hover:scale-105"
+                            style={{ backgroundColor: hex }}
+                            title={`Shade ${step}: ${hex}`}
+                          >
+                            <span className={`opacity-0 group-hover:opacity-100 transition-opacity font-bold ${
+                              parseInt(step) > 400 ? 'text-white' : 'text-slate-900'
+                            }`}>
+                              {step}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="flex justify-between text-[10px] text-slate-400 font-mono mt-1 px-1">
+                        <span>50 (Paling Terang)</span>
+                        <span>500 (Medium)</span>
+                        <span>800 (Base)</span>
+                        <span>950 (Paling Gelap)</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 2. TIPOGRAFI - FONT TEKS UTAMA (BODY) */}
+                  <div className="mt-8 pt-6 border-t border-slate-100">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                      <div>
+                        <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                          <Type className="w-4 h-4 text-maroon-800" />
+                          <span>2. Font Teks Utama &amp; Paragraf (Body Font)</span>
+                          <span className="text-[10px] font-semibold bg-rose-50 text-maroon-800 px-2 py-0.5 rounded-md border border-rose-200">
+                            {data.settings.font_family || 'Plus Jakarta Sans'}
+                          </span>
+                        </h3>
+                        <p className="text-xs text-slate-500">
+                          Digunakan untuk seluruh narasi, isi berita, biodata pengurus, form kontak, dan navigasi.
+                        </p>
+                      </div>
+
+                      {/* Custom Font Input */}
+                      <div className="flex items-center gap-2 bg-slate-50 p-2 rounded-xl border border-slate-200">
+                        <input
+                          type="text"
+                          value={customBodyFontInput}
+                          onChange={(e) => setCustomBodyFontInput(e.target.value)}
+                          placeholder="Ketik Google Font lain..."
+                          className="w-40 sm:w-48 px-2.5 py-1 text-xs rounded-lg border border-slate-300 bg-white text-slate-900 focus:ring-2 focus:ring-maroon-800 focus:outline-none"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if (customBodyFontInput.trim()) {
+                              handleUpdateThemeSetting({ font_family: customBodyFontInput.trim() });
+                              setCustomBodyFontInput('');
+                              showToast('success', `Font body diubah menjadi: ${customBodyFontInput.trim()}`);
+                            }
+                          }}
+                          className="touch-target px-2.5 py-1 bg-slate-800 hover:bg-slate-900 text-white rounded-lg text-xs font-semibold transition-colors"
+                        >
+                          Terapkan
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Presets Grid for Body Font */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+                      {BODY_FONT_OPTIONS.map((f) => {
+                        const isSelected = (data.settings.font_family || 'Plus Jakarta Sans').toLowerCase() === f.name.toLowerCase();
+                        return (
+                          <button
+                            key={f.id}
+                            type="button"
+                            onClick={() => handleUpdateThemeSetting({ font_family: f.name })}
+                            className={`p-3 rounded-xl border text-left transition-all ${
+                              isSelected
+                                ? 'border-maroon-800 ring-2 ring-maroon-800/15 bg-rose-50/40 shadow-xs'
+                                : 'border-slate-200 hover:border-slate-300 bg-white'
+                            }`}
+                          >
+                            <div className="flex items-center justify-between mb-1">
+                              <span className="text-xs font-bold text-slate-900" style={{ fontFamily: f.name }}>
+                                {f.name}
+                              </span>
+                              {isSelected && (
+                                <span className="text-[9px] font-bold text-maroon-800 bg-rose-100 px-1.5 py-0.5 rounded-full">
+                                  Aktif
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-[10px] text-slate-500 mb-2">
+                              {f.description}
+                            </p>
+                            <p
+                              className="text-xs text-slate-700 bg-slate-50 p-2 rounded-lg border border-slate-100 line-clamp-1 italic"
+                              style={{ fontFamily: f.name }}
+                            >
+                              Keadilan bagi seluruh rakyat Indonesia
+                            </p>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* 3. TIPOGRAFI - FONT JUDUL & HEADING */}
+                  <div className="mt-8 pt-6 border-t border-slate-100">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                      <div>
+                        <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                          <Type className="w-4 h-4 text-maroon-800" />
+                          <span>3. Font Judul &amp; Display (Heading Font)</span>
+                          <span className="text-[10px] font-semibold bg-rose-50 text-maroon-800 px-2 py-0.5 rounded-md border border-rose-200">
+                            {data.settings.font_heading || 'Playfair Display'}
+                          </span>
+                        </h3>
+                        <p className="text-xs text-slate-500">
+                          Digunakan untuk judul hero banner, headline seksi, nama organisasi, dan kartu apresiasi.
+                        </p>
+                      </div>
+
+                      {/* Custom Heading Font Input */}
+                      <div className="flex items-center gap-2 bg-slate-50 p-2 rounded-xl border border-slate-200">
+                        <input
+                          type="text"
+                          value={customHeadingFontInput}
+                          onChange={(e) => setCustomHeadingFontInput(e.target.value)}
+                          placeholder="Ketik Google Font judul..."
+                          className="w-40 sm:w-48 px-2.5 py-1 text-xs rounded-lg border border-slate-300 bg-white text-slate-900 focus:ring-2 focus:ring-maroon-800 focus:outline-none"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if (customHeadingFontInput.trim()) {
+                              handleUpdateThemeSetting({ font_heading: customHeadingFontInput.trim() });
+                              setCustomHeadingFontInput('');
+                              showToast('success', `Font judul diubah menjadi: ${customHeadingFontInput.trim()}`);
+                            }
+                          }}
+                          className="touch-target px-2.5 py-1 bg-slate-800 hover:bg-slate-900 text-white rounded-lg text-xs font-semibold transition-colors"
+                        >
+                          Terapkan
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Presets Grid for Heading Font */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+                      {HEADING_FONT_OPTIONS.map((f) => {
+                        const isSelected = (data.settings.font_heading || 'Playfair Display').toLowerCase() === f.name.toLowerCase();
+                        return (
+                          <button
+                            key={f.id}
+                            type="button"
+                            onClick={() => handleUpdateThemeSetting({ font_heading: f.name })}
+                            className={`p-3 rounded-xl border text-left transition-all ${
+                              isSelected
+                                ? 'border-maroon-800 ring-2 ring-maroon-800/15 bg-rose-50/40 shadow-xs'
+                                : 'border-slate-200 hover:border-slate-300 bg-white'
+                            }`}
+                          >
+                            <div className="flex items-center justify-between mb-1">
+                              <span className="text-xs font-bold text-slate-900" style={{ fontFamily: f.name }}>
+                                {f.name}
+                              </span>
+                              {isSelected && (
+                                <span className="text-[9px] font-bold text-maroon-800 bg-rose-100 px-1.5 py-0.5 rounded-full">
+                                  Aktif
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-[10px] text-slate-500 mb-2">
+                              {f.description}
+                            </p>
+                            <p
+                              className="text-xs text-slate-900 font-bold bg-slate-50 p-2 rounded-lg border border-slate-100 line-clamp-1"
+                              style={{ fontFamily: f.name }}
+                            >
+                              Fiat Justitia Ruat Caelum
+                            </p>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* 4. PRATINJAU LANGSUNG (LIVE INTERACTIVE PREVIEW) */}
+                  <div className="mt-8 pt-6 border-t border-slate-100">
+                    <div className="flex items-center justify-between mb-3">
+                      <div>
+                        <h3 className="text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                          <Sparkles className="w-4 h-4 text-amber-500" />
+                          <span>4. Pratinjau Komponen Langsung (Live Visual Preview)</span>
+                        </h3>
+                        <p className="text-xs text-slate-500">
+                          Berikut simulasi nyata bagaimana font dan warna yang Anda pilih tampil pada komponen web:
+                        </p>
+                      </div>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-full">
+                        Live Rendered
+                      </span>
+                    </div>
+
+                    <div className="p-6 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-4">
+                      {/* Mini Hero Header Card */}
+                      <div className="p-6 rounded-2xl bg-gradient-to-r from-maroon-900 via-maroon-800 to-maroon-950 text-white shadow-md relative overflow-hidden">
+                        <div className="relative z-10 max-w-xl">
+                          <span className="text-[10px] font-bold uppercase tracking-widest text-amber-300 bg-white/10 px-2.5 py-0.5 rounded-full inline-block mb-2">
+                            Simulasi Hero Beranda
+                          </span>
+                          <h4
+                            className="text-xl sm:text-2xl font-bold leading-tight mb-2 text-white"
+                            style={{ fontFamily: data.settings.font_heading || 'Playfair Display' }}
+                          >
+                            {data.settings.org_name || 'BEM Fakultas Hukum'}
+                          </h4>
+                          <p
+                            className="text-xs text-rose-100/90 leading-relaxed mb-4"
+                            style={{ fontFamily: data.settings.font_family || 'Plus Jakarta Sans' }}
+                          >
+                            {data.settings.slogan || 'Integritas, Keadilan, dan Perjuangan Mahasiswa Hukum'}
+                          </p>
+
+                          <div className="flex flex-wrap items-center gap-2">
+                            <span className="px-3.5 py-1.5 rounded-lg bg-amber-400 text-maroon-950 font-bold text-xs shadow-xs">
+                              {data.settings.cta_primary_label || 'Konsultasi Hukum'}
+                            </span>
+                            <span className="px-3.5 py-1.5 rounded-lg border border-white/30 text-white text-xs font-semibold backdrop-blur-xs">
+                              {data.settings.cta_secondary_label || 'Agenda Proker'}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Component Cards Grid */}
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        {/* Sample Card 1 */}
+                        <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-xs">
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-maroon-800 bg-rose-50 px-2 py-0.5 rounded-md inline-block mb-1">
+                            Aksen Tombol &amp; Border
+                          </span>
+                          <h5
+                            className="text-sm font-bold text-slate-900 mb-1"
+                            style={{ fontFamily: data.settings.font_heading || 'Playfair Display' }}
+                          >
+                            Seminar Nasional 2026
+                          </h5>
+                          <p
+                            className="text-xs text-slate-600 mb-3"
+                            style={{ fontFamily: data.settings.font_family || 'Plus Jakarta Sans' }}
+                          >
+                            Kajian kritis reformasi hukum dan peradilan konstitusi.
+                          </p>
+                          <button
+                            type="button"
+                            className="w-full py-1.5 rounded-lg bg-maroon-800 text-white text-xs font-bold"
+                          >
+                            Daftar Sekarang
+                          </button>
+                        </div>
+
+                        {/* Sample Card 2 */}
+                        <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-xs">
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-slate-600 bg-slate-100 px-2 py-0.5 rounded-md inline-block mb-1">
+                            Kutipan / Motto
+                          </span>
+                          <blockquote
+                            className="text-xs text-slate-800 border-l-2 border-maroon-800 pl-2.5 py-1 my-2 italic font-serif"
+                            style={{ fontFamily: data.settings.font_heading || 'Playfair Display' }}
+                          >
+                            &ldquo;Hukum tidak pernah tidur untuk mereka yang gigih memperjuangkan keadilan.&rdquo;
+                          </blockquote>
+                          <p
+                            className="text-[10px] text-slate-500"
+                            style={{ fontFamily: data.settings.font_family || 'Plus Jakarta Sans' }}
+                          >
+                            Bidang Advokasi &amp; Hak Asasi Manusia
+                          </p>
+                        </div>
+
+                        {/* Sample Card 3 */}
+                        <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-xs flex flex-col justify-between">
+                          <div>
+                            <span className="text-[10px] font-bold uppercase tracking-wider text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md inline-block mb-1">
+                              Status Keaktifan
+                            </span>
+                            <h5
+                              className="text-sm font-bold text-slate-900 mb-1"
+                              style={{ fontFamily: data.settings.font_heading || 'Playfair Display' }}
+                            >
+                              Konsultasi Terbuka
+                            </h5>
+                            <p
+                              className="text-xs text-slate-600"
+                              style={{ fontFamily: data.settings.font_family || 'Plus Jakarta Sans' }}
+                            >
+                              Layanan advokasi mahasiswa FH aktif setiap hari kerja.
+                            </p>
+                          </div>
+                          <div className="pt-3">
+                            <span className="text-xs font-bold text-maroon-800 hover:underline cursor-pointer inline-flex items-center gap-1">
+                              Pelajari Selengkapnya &rarr;
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Submit Button Footer */}
+                  <div className="mt-8 pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <p className="text-xs text-slate-500">
+                      Klik tombol simpan di kanan untuk mempublikasikan tema ke pengunjung website.
+                    </p>
+                    <div className="flex items-center gap-2 w-full sm:w-auto">
+                      <button
+                        type="button"
+                        onClick={handleResetTheme}
+                        className="touch-target flex-1 sm:flex-none px-4 py-2.5 border border-slate-300 hover:bg-slate-50 text-slate-700 rounded-xl text-sm font-semibold transition-colors"
+                      >
+                        Reset Default
+                      </button>
+                      <button
+                        type="button"
+                        onClick={handleSaveSettings}
+                        disabled={saving}
+                        className="touch-target flex-1 sm:flex-none px-6 py-2.5 bg-maroon-800 hover:bg-maroon-900 text-white rounded-xl text-sm font-bold shadow-sm flex items-center justify-center gap-2 transition-all disabled:opacity-50"
+                      >
+                        <Save className="w-4 h-4 text-amber-300" />
+                        <span>{saving ? 'Menyimpan...' : 'Simpan Perubahan Tema'}</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             )}
 
             {/* ========================================================
@@ -2338,16 +2859,16 @@ CREATE POLICY "Admin manage pesan_kontak" ON public.pesan_kontak FOR ALL TO auth
             type="button"
             onClick={() => setIsBottomSheetOpen(true)}
             className={`touch-target flex flex-col items-center justify-center py-1 px-1 rounded-xl transition-colors relative ${
-              isBottomSheetOpen || ['tentang', 'galeri', 'kontak', 'database'].includes(activeTab)
+              isBottomSheetOpen || ['tema', 'tentang', 'galeri', 'kontak', 'database'].includes(activeTab)
                 ? 'text-maroon-800 font-bold'
                 : 'text-slate-500 hover:text-slate-800 font-medium'
             }`}
           >
-            <div className={`p-1 rounded-lg ${isBottomSheetOpen || ['tentang', 'galeri', 'kontak', 'database'].includes(activeTab) ? 'bg-maroon-50 text-maroon-800' : ''}`}>
+            <div className={`p-1 rounded-lg ${isBottomSheetOpen || ['tema', 'tentang', 'galeri', 'kontak', 'database'].includes(activeTab) ? 'bg-maroon-50 text-maroon-800' : ''}`}>
               <LayoutGrid className="w-5 h-5" />
             </div>
             <span className="text-[10px] tracking-tight mt-0.5 leading-none">Lainnya</span>
-            {['tentang', 'galeri', 'kontak', 'database'].includes(activeTab) && (
+            {['tema', 'tentang', 'galeri', 'kontak', 'database'].includes(activeTab) && (
               <span className="absolute top-1.5 right-2 w-2 h-2 bg-amber-500 rounded-full" />
             )}
           </button>
@@ -2408,6 +2929,13 @@ CREATE POLICY "Admin manage pesan_kontak" ON public.pesan_kontak FOR ALL TO auth
                   desc: 'Logo, nama, ucapan selamat datang, tombol & link CTA',
                   icon: Home,
                   badge: null,
+                },
+                {
+                  id: 'tema' as const,
+                  label: 'Warna & Tipografi (Tema)',
+                  desc: 'Pilihan warna primer organisasi & puluhan font Google Fonts',
+                  icon: Palette,
+                  badge: 'Kustomisasi',
                 },
                 {
                   id: 'tentang' as const,

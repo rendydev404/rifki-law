@@ -20,6 +20,9 @@ export interface SiteSettings {
   alamat: string;
   maps_url: string;
   jam_operasional: string;
+  primary_color?: string;
+  font_family?: string;
+  font_heading?: string;
   updated_at?: string;
 }
 

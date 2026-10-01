@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans, Playfair_Display } from "next/font/google";
+import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
 
 const sansFont = Plus_Jakarta_Sans({
@@ -9,10 +9,10 @@ const sansFont = Plus_Jakarta_Sans({
   display: "swap",
 });
 
-const serifFont = Playfair_Display({
+const interFont = Inter({
   variable: "--font-serif",
   subsets: ["latin"],
-  weight: ["500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
@@ -39,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id" className={`${sansFont.variable} ${serifFont.variable} scroll-smooth`}>
+    <html lang="id" className={`${sansFont.variable} ${interFont.variable} scroll-smooth`}>
       <body className="min-h-screen flex flex-col bg-[#faf9f8] text-slate-900 antialiased font-sans selection:bg-maroon-800 selection:text-white">
         {children}
       </body>

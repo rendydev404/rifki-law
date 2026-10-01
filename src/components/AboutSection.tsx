@@ -55,7 +55,7 @@ export default function AboutSection({ settings, pengurus }: AboutSectionProps) 
                   Komitmen Perjuangan
                 </span>
                 
-                <h3 className="text-lg sm:text-2xl font-serif italic text-rose-50 leading-snug mb-3 sm:mb-4">
+                <h3 className="text-base sm:text-xl font-bold text-white leading-snug mb-3 sm:mb-4">
                   &ldquo;Keadilan tidak boleh menjadi barang mewah yang hanya bisa dibeli oleh segelintir orang.&rdquo;
                 </h3>
                 
@@ -131,7 +131,7 @@ export default function AboutSection({ settings, pengurus }: AboutSectionProps) 
                 </h3>
                 
                 <div className="relative pl-4 sm:pl-6 border-l-2 border-amber-400 py-1 my-3 sm:my-4">
-                  <p className="font-serif italic text-sm sm:text-lg text-slate-800 leading-relaxed">
+                  <p className="font-semibold text-sm sm:text-base text-slate-800 leading-relaxed">
                     &ldquo;{settings.visi}&rdquo;
                   </p>
                 </div>
@@ -160,7 +160,7 @@ export default function AboutSection({ settings, pengurus }: AboutSectionProps) 
                 <div className="space-y-3 sm:space-y-4">
                   {Array.isArray(settings.misi) && settings.misi.map((item, idx) => (
                     <div key={idx} className="flex items-start gap-3 p-3 sm:p-3.5 rounded-2xl bg-slate-50/70 border border-slate-100">
-                      <span className="font-serif font-extrabold text-maroon-800 text-sm sm:text-lg shrink-0 mt-0.5 w-6">
+                      <span className="font-bold font-mono text-maroon-800 text-sm sm:text-base shrink-0 mt-0.5 w-6">
                         0{idx + 1}
                       </span>
                       <p className="text-slate-700 text-xs sm:text-sm leading-relaxed font-medium">

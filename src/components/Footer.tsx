@@ -93,7 +93,7 @@ export default function Footer({ settings: initialSettings }: FooterProps) {
               </div>
             </div>
 
-            <p className="text-sm text-slate-400 leading-relaxed mb-4 italic font-serif text-rose-50/90">
+            <p className="text-sm text-slate-300 leading-relaxed mb-4 font-medium">
               &ldquo;{settings.slogan}&rdquo;
             </p>
 
@@ -110,37 +110,22 @@ export default function Footer({ settings: initialSettings }: FooterProps) {
             <ul className="space-y-2.5 text-xs sm:text-sm">
               <li>
                 <a href="#beranda" className="hover:text-amber-300 transition-colors">
-                  Beranda & Sambutan
+                  1. Beranda
                 </a>
               </li>
               <li>
                 <a href="#tentang" className="hover:text-amber-300 transition-colors">
-                  Sejarah, Visi & Misi
-                </a>
-              </li>
-              <li>
-                <a href="#pengurus" className="hover:text-amber-300 transition-colors">
-                  Struktur Kepengurusan
+                  2. Tentang Kami (Visi, Misi &amp; Pengurus)
                 </a>
               </li>
               <li>
                 <a href="#kegiatan" className="hover:text-amber-300 transition-colors">
-                  Daftar Kegiatan Lapangan
-                </a>
-              </li>
-              <li>
-                <a href="#agenda" className="hover:text-amber-300 transition-colors">
-                  Agenda Mendatang
-                </a>
-              </li>
-              <li>
-                <a href="#galeri" className="hover:text-amber-300 transition-colors">
-                  Dokumentasi Foto
+                  3. Kegiatan &amp; Dokumentasi Foto
                 </a>
               </li>
               <li>
                 <a href="#kontak" className="hover:text-amber-300 transition-colors">
-                  Kontak &amp; Aspirasi
+                  4. Kontak &amp; Aspirasi
                 </a>
               </li>
             </ul>

@@ -28,6 +28,9 @@ export const defaultOrganizationData: OrganizationData = {
     alamat: 'Gedung Student Center Lt. 2, Fakultas Hukum, Kampus Universitas',
     maps_url: 'https://maps.google.com/?q=Fakultas+Hukum',
     jam_operasional: 'Senin - Jumat: 09.00 - 17.00 WIB | Sekretariat Organisasi Mahasiswa',
+    primary_color: '#800020',
+    font_family: 'Plus Jakarta Sans',
+    font_heading: 'Plus Jakarta Sans',
   },
   pengurus: [
     {
