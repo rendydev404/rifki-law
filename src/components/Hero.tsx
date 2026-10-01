@@ -29,13 +29,19 @@ export default function Hero({ settings }: HeroProps) {
           {/* Left Column: Slogan, Welcome Title, Subtitle, CTA */}
           <div className="lg:col-span-7 flex flex-col items-start text-left">
             
-            {/* 1. Slogan Tag / Badge */}
+            {/* 1. Welcoming Badge & Slogan Tag */}
             <ScrollReveal animation="fade" delay={50}>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-rose-50 border border-rose-200/80 text-maroon-800 text-xs font-semibold mb-4 sm:mb-5 shadow-2xs">
-                <Scale className="w-3.5 h-3.5 text-maroon-700 shrink-0" />
-                <span className="truncate max-w-[280px] xs:max-w-md sm:max-w-xl">
-                  &ldquo;{settings.slogan}&rdquo;
-                </span>
+              <div className="flex flex-wrap items-center gap-2 mb-4 sm:mb-5">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 border border-rose-200 text-maroon-800 text-xs font-bold shadow-2xs">
+                  <span>👋</span>
+                  <span>Selamat Datang</span>
+                </div>
+                <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-slate-100 border border-slate-200/80 text-slate-700 text-xs font-medium shadow-2xs">
+                  <Scale className="w-3.5 h-3.5 text-maroon-700 shrink-0" />
+                  <span className="truncate max-w-[240px] xs:max-w-sm sm:max-w-md">
+                    &ldquo;{settings.slogan}&rdquo;
+                  </span>
+                </div>
               </div>
             </ScrollReveal>
 
@@ -128,6 +134,12 @@ export default function Hero({ settings }: HeroProps) {
                 {/* Clean dark gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-black/20 to-transparent" />
                 
+                {/* Floating Top Badge */}
+                <div className="absolute top-3.5 left-3.5 bg-white/95 backdrop-blur-md text-maroon-900 font-bold text-xs px-3 py-1.5 rounded-full shadow-sm flex items-center gap-1.5 border border-rose-100">
+                  <span>👋</span>
+                  <span>Selamat Datang</span>
+                </div>
+
                 {/* Bottom Overlay Info */}
                 <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 text-white">
                   <span className="text-[10px] uppercase font-bold tracking-wider text-amber-300 block mb-1">

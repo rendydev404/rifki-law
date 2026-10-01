@@ -134,20 +134,20 @@ export default function Footer({ settings: initialSettings }: FooterProps) {
           {/* Col 3: Contact Info */}
           <div className="lg:col-span-4">
             <h4 className="text-xs uppercase font-bold tracking-wider text-slate-200 mb-4">
-              Sekretariat &amp; Hotline
+              Kontak Resmi Organisasi
             </h4>
             <div className="space-y-3 text-xs sm:text-sm text-slate-400">
-              <div className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
-                <span className="break-words">{settings.alamat}</span>
-              </div>
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span className="break-words">{settings.whatsapp}</span>
+                <span className="break-words">WhatsApp: {settings.whatsapp}</span>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <span className="text-rose-400 text-xs font-bold shrink-0">IG</span>
+                <span className="break-words">Instagram: @{settings.instagram?.replace('@', '')}</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-blue-400 shrink-0" />
-                <span className="break-all">{settings.email}</span>
+                <span className="break-all">Email: {settings.email}</span>
               </div>
             </div>
           </div>

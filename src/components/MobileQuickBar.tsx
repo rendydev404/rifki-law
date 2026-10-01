@@ -24,7 +24,7 @@ export default function MobileQuickBar({ whatsappNumber, orgName }: MobileQuickB
           className="touch-target flex-1 bg-emerald-600 active:bg-emerald-700 text-white rounded-xl py-2 px-2.5 text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm"
         >
           <Phone className="w-3.5 h-3.5 text-emerald-100 shrink-0" />
-          <span className="truncate">WA Aspirasi</span>
+          <span className="truncate">WhatsApp</span>
         </a>
 
         <a
@@ -32,14 +32,14 @@ export default function MobileQuickBar({ whatsappNumber, orgName }: MobileQuickB
           className="touch-target flex-1 bg-maroon-800 active:bg-maroon-900 text-white rounded-xl py-2 px-2.5 text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm"
         >
           <MessageSquare className="w-3.5 h-3.5 text-amber-300 shrink-0" />
-          <span className="truncate">Kotak Aspirasi</span>
+          <span className="truncate">Kontak Kami</span>
         </a>
 
         <a
-          href="#agenda"
+          href="#kegiatan"
           className="touch-target w-10 h-10 bg-slate-100 active:bg-slate-200 text-slate-700 rounded-xl flex items-center justify-center shrink-0"
-          title="Agenda Mendatang"
-          aria-label="Lihat Agenda Mendatang"
+          title="Daftar Kegiatan"
+          aria-label="Lihat Daftar Kegiatan"
         >
           <Calendar className="w-4 h-4 text-maroon-800" />
         </a>
