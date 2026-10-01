@@ -27,21 +27,23 @@ export default function Hero({ settings }: HeroProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* Left Column: Slogan, Welcome Title, Subtitle, CTA */}
-          <div className="lg:col-span-7 flex flex-col items-start text-left">
+          <div className="lg:col-span-7 flex flex-col items-start text-left w-full">
             
             {/* 1. Welcoming Badge & Slogan Tag */}
-            <ScrollReveal animation="fade" delay={50}>
-              <div className="flex flex-wrap items-center gap-2 mb-4 sm:mb-5">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 border border-rose-200 text-maroon-800 text-xs font-bold shadow-2xs">
+            <ScrollReveal animation="fade" delay={50} className="w-full max-w-full">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:flex-wrap gap-2 sm:gap-2.5 mb-4 sm:mb-5 w-full max-w-full">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 border border-rose-200 text-maroon-800 text-xs font-bold shadow-2xs shrink-0 w-fit">
                   <span>👋</span>
                   <span>Selamat Datang</span>
                 </div>
-                <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-slate-100 border border-slate-200/80 text-slate-700 text-xs font-medium shadow-2xs">
-                  <Scale className="w-3.5 h-3.5 text-maroon-700 shrink-0" />
-                  <span className="truncate max-w-[240px] xs:max-w-sm sm:max-w-md">
-                    &ldquo;{settings.slogan}&rdquo;
-                  </span>
-                </div>
+                {settings.slogan && (
+                  <div className="inline-flex items-start sm:items-center gap-2 px-3.5 py-1.5 sm:py-1 rounded-xl sm:rounded-full bg-slate-100/90 border border-slate-200/80 text-slate-700 text-xs font-medium shadow-2xs leading-snug sm:leading-relaxed max-w-full">
+                    <Scale className="w-3.5 h-3.5 text-maroon-700 shrink-0 mt-0.5 sm:mt-0" />
+                    <span className="break-words min-w-0 flex-1">
+                      &ldquo;{settings.slogan}&rdquo;
+                    </span>
+                  </div>
+                )}
               </div>
             </ScrollReveal>
 

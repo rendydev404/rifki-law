@@ -121,10 +121,10 @@ export default function Navbar({ settings: initialSettings }: NavbarProps) {
               </div>
             )}
             <div className="flex flex-col min-w-0 pr-1">
-              <span className="font-bold text-slate-900 tracking-tight text-xs sm:text-base leading-tight group-hover:text-maroon-800 transition-colors line-clamp-1 sm:line-clamp-none max-w-[210px] xs:max-w-[260px] sm:max-w-none">
+              <span className="font-bold text-slate-900 tracking-tight text-xs sm:text-base leading-tight group-hover:text-maroon-800 transition-colors line-clamp-1 sm:line-clamp-none">
                 {settings.org_name}
               </span>
-              <span className="text-[10px] sm:text-[11px] text-maroon-800/80 font-medium tracking-wide flex items-center gap-1">
+              <span className="text-[10px] sm:text-[11px] text-maroon-800/80 font-medium tracking-wide flex items-center gap-1 min-w-0">
                 <ShieldCheck className="w-3 h-3 text-amber-600 shrink-0 inline" /> 
                 <span className="truncate">Organisasi Mahasiswa Fakultas Hukum</span>
               </span>
