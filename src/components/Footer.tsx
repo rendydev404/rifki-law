@@ -2,7 +2,8 @@
 
 import React from 'react';
 import { SiteSettings } from '@/lib/types';
-import { Scale, ShieldCheck, Heart, Phone, Mail, MapPin } from 'lucide-react';
+import { Scale, ShieldCheck, Heart, MapPin } from 'lucide-react';
+import { WhatsAppLogo, GmailLogo, InstagramLogo } from '@/components/BrandIcons';
 
 interface FooterProps {
   settings: SiteSettings;
@@ -138,15 +139,15 @@ export default function Footer({ settings: initialSettings }: FooterProps) {
             </h4>
             <div className="space-y-3 text-xs sm:text-sm text-slate-400">
               <div className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 text-emerald-400 shrink-0" />
+                <WhatsAppLogo className="w-4 h-4 shrink-0" />
                 <span className="break-words">WhatsApp: {settings.whatsapp}</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <span className="text-rose-400 text-xs font-bold shrink-0">IG</span>
+                <InstagramLogo className="w-4 h-4 shrink-0 rounded-xs" />
                 <span className="break-words">Instagram: @{settings.instagram?.replace('@', '')}</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-blue-400 shrink-0" />
+                <GmailLogo className="w-4 h-4 shrink-0 bg-white/90 rounded-xs p-0.5" />
                 <span className="break-all">Email: {settings.email}</span>
               </div>
             </div>

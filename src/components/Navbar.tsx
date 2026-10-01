@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { SiteSettings } from '@/lib/types';
 import { Menu, X, Scale, Phone, ShieldCheck, ChevronRight } from 'lucide-react';
+import { WhatsAppLogo } from '@/components/BrandIcons';
 
 interface NavbarProps {
   settings: SiteSettings;
@@ -151,7 +152,7 @@ export default function Navbar({ settings: initialSettings }: NavbarProps) {
               rel="noopener noreferrer"
               className="touch-target px-4 py-2 bg-maroon-800 hover:bg-maroon-900 text-white rounded-full text-xs font-bold shadow-xs hover:shadow-md transition-all flex items-center gap-2 group"
             >
-              <Phone className="w-3.5 h-3.5 text-amber-300 group-hover:scale-110 transition-transform" />
+              <WhatsAppLogo className="w-4 h-4 shrink-0 group-hover:scale-110 transition-transform" />
               <span>Aspirasi WA</span>
             </a>
           </div>
@@ -165,7 +166,7 @@ export default function Navbar({ settings: initialSettings }: NavbarProps) {
               aria-label="Aspirasi WhatsApp"
               className="touch-target hidden sm:inline-flex px-3.5 py-1.5 bg-maroon-800 text-white rounded-full text-xs font-bold items-center gap-1.5 shadow-xs"
             >
-              <Phone className="w-3.5 h-3.5 text-amber-300" />
+              <WhatsAppLogo className="w-4 h-4 shrink-0" />
               <span>Aspirasi</span>
             </a>
 
