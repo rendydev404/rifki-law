@@ -20,6 +20,10 @@ CREATE TABLE IF NOT EXISTS public.site_settings (
         "Menyelenggarakan penyuluhan dan literasi hukum berkelanjutan untuk meningkatkan kesadaran hak-hak konstitusional warga.",
         "Membina generasi advokat dan paralegal muda yang berintegritas tinggi serta berpihak pada kebenaran."
     ]'::jsonb,
+    cta_primary_label TEXT DEFAULT 'Ajukan Permohonan Bantuan',
+    cta_primary_url TEXT DEFAULT '',
+    cta_secondary_label TEXT DEFAULT 'Lihat Kegiatan Terbaru',
+    cta_secondary_url TEXT DEFAULT '#kegiatan',
     instagram TEXT DEFAULT 'cakrakeadilan.law',
     whatsapp TEXT DEFAULT '6281234567890',
     email TEXT DEFAULT 'kontak@cakrakeadilan.org',
@@ -28,6 +32,12 @@ CREATE TABLE IF NOT EXISTS public.site_settings (
     jam_operasional TEXT DEFAULT 'Senin - Jumat: 08.30 - 17.00 WIB',
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
+
+-- Migrasi jika tabel sudah ada sebelumnya
+ALTER TABLE public.site_settings ADD COLUMN IF NOT EXISTS cta_primary_label TEXT DEFAULT 'Ajukan Permohonan Bantuan';
+ALTER TABLE public.site_settings ADD COLUMN IF NOT EXISTS cta_primary_url TEXT DEFAULT '';
+ALTER TABLE public.site_settings ADD COLUMN IF NOT EXISTS cta_secondary_label TEXT DEFAULT 'Lihat Kegiatan Terbaru';
+ALTER TABLE public.site_settings ADD COLUMN IF NOT EXISTS cta_secondary_url TEXT DEFAULT '#kegiatan';
 
 -- 2. Tabel Struktur Kepengurusan
 CREATE TABLE IF NOT EXISTS public.pengurus (
