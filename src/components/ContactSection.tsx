@@ -83,14 +83,14 @@ export default function ContactSection({ settings }: ContactSectionProps) {
         {/* Section Header */}
         <ScrollReveal animation="up" className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 text-maroon-800 text-xs font-semibold uppercase tracking-wider mb-3 border border-rose-200/80">
-            <Phone className="w-3.5 h-3.5" /> 4. Kontak Resmi
+            <Phone className="w-3.5 h-3.5" /> {settings.kontak_badge || 'Kontak Resmi'}
           </div>
           <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
-            Hubungi Pengurus Organisasi
+            {settings.kontak_title || 'Hubungi Pengurus Organisasi'}
           </h2>
           <div className="w-16 h-1 bg-maroon-800 mx-auto mt-3 mb-4 rounded-full" />
           <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-            Terhubung langsung dengan fungsionaris organisasi mahasiswa hukum melalui kanal komunikasi resmi di bawah ini:
+            {settings.kontak_subtitle || 'Terhubung langsung dengan fungsionaris organisasi mahasiswa hukum melalui kanal komunikasi resmi di bawah ini:'}
           </p>
         </ScrollReveal>
 

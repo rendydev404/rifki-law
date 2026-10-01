@@ -41,11 +41,13 @@ export default async function HomePage() {
         <ActivitiesSection
           kegiatan={data.kegiatan}
           whatsappNumber={data.settings.whatsapp}
+          settings={data.settings}
         />
 
         {/* 3. Kegiatan: Dokumentasi Foto */}
         <GallerySection
           galeri={data.galeri}
+          settings={data.settings}
         />
 
         {/* 4. Kontak: Instagram, WhatsApp, Email, Alamat */}

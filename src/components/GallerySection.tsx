@@ -1,15 +1,16 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Galeri } from '@/lib/types';
+import { Galeri, SiteSettings } from '@/lib/types';
 import { Camera, X, Calendar, ZoomIn } from 'lucide-react';
 import ScrollReveal from '@/components/ScrollReveal';
 
 interface GallerySectionProps {
   galeri: Galeri[];
+  settings?: SiteSettings;
 }
 
-export default function GallerySection({ galeri }: GallerySectionProps) {
+export default function GallerySection({ galeri, settings }: GallerySectionProps) {
   const [selectedPhoto, setSelectedPhoto] = useState<Galeri | null>(null);
 
   return (
@@ -19,14 +20,14 @@ export default function GallerySection({ galeri }: GallerySectionProps) {
         {/* Section Header */}
         <ScrollReveal animation="up" className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 border border-rose-200/60 text-maroon-800 text-xs font-semibold uppercase tracking-wider mb-3">
-            <Camera className="w-3.5 h-3.5" /> Dokumentasi Kegiatan
+            <Camera className="w-3.5 h-3.5" /> {settings?.galeri_badge || 'Dokumentasi Kegiatan'}
           </div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Galeri Foto Aksi & Pendampingan
+            {settings?.galeri_title || 'Galeri Foto Dokumentasi'}
           </h2>
           <div className="w-16 h-1 bg-maroon-800 mx-auto mt-3 mb-4 rounded-full" />
           <p className="text-slate-600 text-sm sm:text-base">
-            Potret komitmen kami di ruang sidang peradilan, mediasi warga, serta penyuluhan hukum lapangan.
+            {settings?.galeri_subtitle || 'Potret komitmen dan dokumentasi kegiatan mahasiswa di kampus maupun masyarakat.'}
           </p>
         </ScrollReveal>
 

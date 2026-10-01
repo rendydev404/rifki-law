@@ -136,8 +136,8 @@ export default function AdminDashboard() {
   };
 
   // 1. Save Settings
-  const handleSaveSettings = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSaveSettings = async (e?: React.FormEvent | React.MouseEvent) => {
+    if (e && typeof e.preventDefault === 'function') e.preventDefault();
     if (!data) return;
     setSaving(true);
 
@@ -1469,6 +1469,63 @@ export default function AdminDashboard() {
                     </p>
                   </div>
 
+                  {/* Kustomisasi Judul Seksi Tentang Kami */}
+                  <div className="mb-6 p-4 rounded-xl bg-slate-50 border border-slate-200">
+                    <div className="flex items-center gap-2 mb-3">
+                      <Sparkles className="w-4 h-4 text-maroon-800" />
+                      <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
+                        Kustomisasi Judul & Teks Seksi Tentang Kami
+                      </h3>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                          Badge / Label Atas
+                        </label>
+                        <input
+                          type="text"
+                          value={data.settings.about_badge || ''}
+                          onChange={(e) => setData({
+                            ...data,
+                            settings: { ...data.settings, about_badge: e.target.value }
+                          })}
+                          placeholder="TENTANG KAMI"
+                          className="touch-target w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-maroon-800"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                          Judul Utama Seksi
+                        </label>
+                        <input
+                          type="text"
+                          value={data.settings.about_title || ''}
+                          onChange={(e) => setData({
+                            ...data,
+                            settings: { ...data.settings, about_title: e.target.value }
+                          })}
+                          placeholder="Sejarah, Visi & Misi Lembaga"
+                          className="touch-target w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-maroon-800"
+                        />
+                      </div>
+                      <div className="sm:col-span-2">
+                        <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                          Deskripsi / Subjudul Seksi
+                        </label>
+                        <textarea
+                          rows={2}
+                          value={data.settings.about_subtitle || ''}
+                          onChange={(e) => setData({
+                            ...data,
+                            settings: { ...data.settings, about_subtitle: e.target.value }
+                          })}
+                          placeholder="Landasan berdirinya organisasi dan tekad perjuangan untuk mewujudkan keadilan hukum yang berintegritas."
+                          className="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-maroon-800"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
                   {/* Sejarah */}
                   <div className="mb-6">
                     <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
@@ -1581,6 +1638,80 @@ export default function AdminDashboard() {
             ======================================================== */}
             {activeTab === 'pengurus' && (
               <div className="space-y-6">
+                {/* Kustomisasi Judul Seksi Pengurus */}
+                <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-xs">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <Sparkles className="w-4 h-4 text-maroon-800" />
+                        <h3 className="text-base font-bold text-slate-900">
+                          Kustomisasi Judul & Teks Seksi Pengurus
+                        </h3>
+                      </div>
+                      <p className="text-xs text-slate-500">
+                        Atur label badge atas, judul utama, dan kalimat subjudul pengurus yang tampil di halaman landing page.
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => handleSaveSettings()}
+                      disabled={saving}
+                      className="touch-target px-5 py-2 bg-maroon-800 hover:bg-maroon-900 text-white rounded-xl text-xs font-bold shadow-xs flex items-center gap-2 shrink-0 self-start sm:self-auto"
+                    >
+                      <Save className="w-3.5 h-3.5 text-amber-300" />
+                      <span>{saving ? 'Menyimpan...' : 'Simpan Judul Seksi'}</span>
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                        Badge / Label Atas
+                      </label>
+                      <input
+                        type="text"
+                        value={data.settings.pengurus_badge || ''}
+                        onChange={(e) => setData({
+                          ...data,
+                          settings: { ...data.settings, pengurus_badge: e.target.value }
+                        })}
+                        placeholder="STRUKTUR KEPENGURUSAN"
+                        className="touch-target w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-maroon-800"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                        Judul Utama Seksi
+                      </label>
+                      <input
+                        type="text"
+                        value={data.settings.pengurus_title || ''}
+                        onChange={(e) => setData({
+                          ...data,
+                          settings: { ...data.settings, pengurus_title: e.target.value }
+                        })}
+                        placeholder="Pengurus & Fungsionaris BEM FH"
+                        className="touch-target w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-maroon-800"
+                      />
+                    </div>
+                    <div className="sm:col-span-2">
+                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                        Deskripsi / Subjudul Seksi
+                      </label>
+                      <textarea
+                        rows={2}
+                        value={data.settings.pengurus_subtitle || ''}
+                        onChange={(e) => setData({
+                          ...data,
+                          settings: { ...data.settings, pengurus_subtitle: e.target.value }
+                        })}
+                        placeholder="Kader-kader terpilih yang mengemban amanah menjalankan roda organisasi demi terciptanya keadilan dan integritas civitas akademika."
+                        className="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-maroon-800"
+                      />
+                    </div>
+                  </div>
+                </div>
+
                 <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-xs">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-6">
                     <div>
@@ -1681,6 +1812,80 @@ export default function AdminDashboard() {
             ======================================================== */}
             {activeTab === 'kegiatan' && (
               <div className="space-y-6">
+                {/* Kustomisasi Judul Seksi Kegiatan */}
+                <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-xs">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <Sparkles className="w-4 h-4 text-maroon-800" />
+                        <h3 className="text-base font-bold text-slate-900">
+                          Kustomisasi Judul & Teks Seksi Kegiatan
+                        </h3>
+                      </div>
+                      <p className="text-xs text-slate-500">
+                        Atur label badge atas, judul utama, dan kalimat subjudul kegiatan yang tampil di halaman landing page.
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => handleSaveSettings()}
+                      disabled={saving}
+                      className="touch-target px-5 py-2 bg-maroon-800 hover:bg-maroon-900 text-white rounded-xl text-xs font-bold shadow-xs flex items-center gap-2 shrink-0 self-start sm:self-auto"
+                    >
+                      <Save className="w-3.5 h-3.5 text-amber-300" />
+                      <span>{saving ? 'Menyimpan...' : 'Simpan Judul Seksi'}</span>
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                        Badge / Label Atas
+                      </label>
+                      <input
+                        type="text"
+                        value={data.settings.kegiatan_badge || ''}
+                        onChange={(e) => setData({
+                          ...data,
+                          settings: { ...data.settings, kegiatan_badge: e.target.value }
+                        })}
+                        placeholder="AGENDA & PROGRAM KERJA"
+                        className="touch-target w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-maroon-800"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                        Judul Utama Seksi
+                      </label>
+                      <input
+                        type="text"
+                        value={data.settings.kegiatan_title || ''}
+                        onChange={(e) => setData({
+                          ...data,
+                          settings: { ...data.settings, kegiatan_title: e.target.value }
+                        })}
+                        placeholder="Kegiatan & Agenda Mendatang"
+                        className="touch-target w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-maroon-800"
+                      />
+                    </div>
+                    <div className="sm:col-span-2">
+                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                        Deskripsi / Subjudul Seksi
+                      </label>
+                      <textarea
+                        rows={2}
+                        value={data.settings.kegiatan_subtitle || ''}
+                        onChange={(e) => setData({
+                          ...data,
+                          settings: { ...data.settings, kegiatan_subtitle: e.target.value }
+                        })}
+                        placeholder="Rangkaian kegiatan advokasi kemahasiswaan, seminar hukum, pelatihan peradilan semu, serta pengabdian masyarakat."
+                        className="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-maroon-800"
+                      />
+                    </div>
+                  </div>
+                </div>
+
                 <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-xs">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-6">
                     <div>
@@ -1781,6 +1986,80 @@ export default function AdminDashboard() {
             ======================================================== */}
             {activeTab === 'galeri' && (
               <div className="space-y-6">
+                {/* Kustomisasi Judul Seksi Galeri */}
+                <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-xs">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-4">
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <Sparkles className="w-4 h-4 text-maroon-800" />
+                        <h3 className="text-base font-bold text-slate-900">
+                          Kustomisasi Judul & Teks Seksi Galeri
+                        </h3>
+                      </div>
+                      <p className="text-xs text-slate-500">
+                        Atur label badge atas, judul utama, dan kalimat subjudul dokumentasi foto yang tampil di halaman landing page.
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => handleSaveSettings()}
+                      disabled={saving}
+                      className="touch-target px-5 py-2 bg-maroon-800 hover:bg-maroon-900 text-white rounded-xl text-xs font-bold shadow-xs flex items-center gap-2 shrink-0 self-start sm:self-auto"
+                    >
+                      <Save className="w-3.5 h-3.5 text-amber-300" />
+                      <span>{saving ? 'Menyimpan...' : 'Simpan Judul Seksi'}</span>
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                        Badge / Label Atas
+                      </label>
+                      <input
+                        type="text"
+                        value={data.settings.galeri_badge || ''}
+                        onChange={(e) => setData({
+                          ...data,
+                          settings: { ...data.settings, galeri_badge: e.target.value }
+                        })}
+                        placeholder="DOKUMENTASI FOTO"
+                        className="touch-target w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-maroon-800"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                        Judul Utama Seksi
+                      </label>
+                      <input
+                        type="text"
+                        value={data.settings.galeri_title || ''}
+                        onChange={(e) => setData({
+                          ...data,
+                          settings: { ...data.settings, galeri_title: e.target.value }
+                        })}
+                        placeholder="Dokumentasi & Galeri Foto Kegiatan"
+                        className="touch-target w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-maroon-800"
+                      />
+                    </div>
+                    <div className="sm:col-span-2">
+                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                        Deskripsi / Subjudul Seksi
+                      </label>
+                      <textarea
+                        rows={2}
+                        value={data.settings.galeri_subtitle || ''}
+                        onChange={(e) => setData({
+                          ...data,
+                          settings: { ...data.settings, galeri_subtitle: e.target.value }
+                        })}
+                        placeholder="Dokumentasi visual rangkaian kegiatan nyata, aksi solidaritas, persidangan semu, dan pengabdian masyarakat."
+                        className="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-maroon-800"
+                      />
+                    </div>
+                  </div>
+                </div>
+
                 <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-xs">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-6">
                     <div>
@@ -1872,6 +2151,63 @@ export default function AdminDashboard() {
                     <p className="text-xs text-slate-500 mt-0.5">
                       Kelola saluran komunikasi resmi untuk aduan hukum dan korespondensi publik.
                     </p>
+                  </div>
+
+                  {/* Kustomisasi Judul Seksi Kontak */}
+                  <div className="mb-6 p-4 rounded-xl bg-slate-50 border border-slate-200">
+                    <div className="flex items-center gap-2 mb-3">
+                      <Sparkles className="w-4 h-4 text-maroon-800" />
+                      <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
+                        Kustomisasi Judul & Teks Seksi Kontak
+                      </h3>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                          Badge / Label Atas
+                        </label>
+                        <input
+                          type="text"
+                          value={data.settings.kontak_badge || ''}
+                          onChange={(e) => setData({
+                            ...data,
+                            settings: { ...data.settings, kontak_badge: e.target.value }
+                          })}
+                          placeholder="KONTAK RESMI"
+                          className="touch-target w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-maroon-800"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                          Judul Utama Seksi
+                        </label>
+                        <input
+                          type="text"
+                          value={data.settings.kontak_title || ''}
+                          onChange={(e) => setData({
+                            ...data,
+                            settings: { ...data.settings, kontak_title: e.target.value }
+                          })}
+                          placeholder="Hubungi Kami & Saluran Aduan"
+                          className="touch-target w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-maroon-800"
+                        />
+                      </div>
+                      <div className="sm:col-span-2">
+                        <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                          Deskripsi / Subjudul Seksi
+                        </label>
+                        <textarea
+                          rows={2}
+                          value={data.settings.kontak_subtitle || ''}
+                          onChange={(e) => setData({
+                            ...data,
+                            settings: { ...data.settings, kontak_subtitle: e.target.value }
+                          })}
+                          placeholder="Pintu komunikasi selalu terbuka untuk pengaduan, konsultasi kasus hukum, atau kemitraan akademik."
+                          className="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-maroon-800"
+                        />
+                      </div>
+                    </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">

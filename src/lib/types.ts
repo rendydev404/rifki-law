@@ -23,6 +23,22 @@ export interface SiteSettings {
   primary_color?: string;
   font_family?: string;
   font_heading?: string;
+  // Section Headings & Subtitles Customization
+  about_badge?: string;
+  about_title?: string;
+  about_subtitle?: string;
+  pengurus_badge?: string;
+  pengurus_title?: string;
+  pengurus_subtitle?: string;
+  kegiatan_badge?: string;
+  kegiatan_title?: string;
+  kegiatan_subtitle?: string;
+  galeri_badge?: string;
+  galeri_title?: string;
+  galeri_subtitle?: string;
+  kontak_badge?: string;
+  kontak_title?: string;
+  kontak_subtitle?: string;
   updated_at?: string;
 }
 

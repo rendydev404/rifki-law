@@ -27,14 +27,14 @@ export default function AboutSection({ settings, pengurus }: AboutSectionProps) 
         {/* Section Header */}
         <ScrollReveal animation="up" className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-rose-50 border border-rose-200/80 text-maroon-800 text-xs font-semibold uppercase tracking-wider mb-2 sm:mb-3">
-            <BookOpen className="w-3.5 h-3.5" /> Tentang Organisasi
+            <BookOpen className="w-3.5 h-3.5" /> {settings.about_badge || 'Tentang Organisasi'}
           </div>
           <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
-            Perjalanan Advokasi & Visi Keadilan
+            {settings.about_title || 'Perjalanan Advokasi & Visi Keadilan'}
           </h2>
           <div className="w-16 h-1 bg-maroon-800 mx-auto mt-3 sm:mt-4 mb-3 sm:mb-4 rounded-full" />
           <p className="text-slate-600 text-xs sm:text-base leading-relaxed">
-            Mengenal dedikasi, landasan nilai, serta susunan kepengurusan yang mengabdi bagi masyarakat pencari keadilan.
+            {settings.about_subtitle || 'Mengenal dedikasi, landasan nilai, serta susunan kepengurusan yang mengabdi bagi masyarakat dan mahasiswa.'}
           </p>
         </ScrollReveal>
 
@@ -179,13 +179,13 @@ export default function AboutSection({ settings, pengurus }: AboutSectionProps) 
         <div id="pengurus" className="pt-2 sm:pt-4">
           <ScrollReveal animation="up" className="text-center max-w-2xl mx-auto mb-6 sm:mb-10">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-slate-100 text-slate-800 text-xs font-bold uppercase tracking-wider mb-2">
-              <Users className="w-3.5 h-3.5 text-maroon-700" /> Struktur Kepengurusan
+              <Users className="w-3.5 h-3.5 text-maroon-700" /> {settings.pengurus_badge || 'Struktur Kepengurusan'}
             </div>
             <h3 className="text-xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
-              Pengurus &amp; Fungsionaris BEM FH
+              {settings.pengurus_title || 'Pengurus & Fungsionaris BEM FH'}
             </h3>
             <p className="text-slate-500 text-xs sm:text-sm mt-1 sm:mt-2">
-              Mahasiswa Fakultas Hukum yang berdedikasi mengabdi bagi almamater, sivitas akademika, dan masyarakat.
+              {settings.pengurus_subtitle || 'Mahasiswa Fakultas Hukum yang berdedikasi mengabdi bagi almamater, sivitas akademika, dan masyarakat.'}
             </p>
           </ScrollReveal>
 

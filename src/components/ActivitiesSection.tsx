@@ -1,16 +1,17 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Kegiatan } from '@/lib/types';
+import { Kegiatan, SiteSettings } from '@/lib/types';
 import { Calendar, MapPin, Clock, Tag, ExternalLink, ArrowRight, Bookmark, Sparkles } from 'lucide-react';
 import ScrollReveal from '@/components/ScrollReveal';
 
 interface ActivitiesSectionProps {
   kegiatan: Kegiatan[];
   whatsappNumber: string;
+  settings?: SiteSettings;
 }
 
-export default function ActivitiesSection({ kegiatan, whatsappNumber }: ActivitiesSectionProps) {
+export default function ActivitiesSection({ kegiatan, whatsappNumber, settings }: ActivitiesSectionProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>('Semua');
 
   const categories = ['Semua', 'Advokasi', 'Sosialisasi', 'Konsultasi', 'Edukasi', 'Pelatihan'];
@@ -31,14 +32,14 @@ export default function ActivitiesSection({ kegiatan, whatsappNumber }: Activiti
         {/* Section Header */}
         <ScrollReveal animation="up" className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-rose-50 text-maroon-800 text-xs font-semibold uppercase tracking-wider mb-2 sm:mb-3 border border-rose-200/80">
-            <Calendar className="w-3.5 h-3.5" /> Aktivitas & Agenda
+            <Calendar className="w-3.5 h-3.5" /> {settings?.kegiatan_badge || 'Aktivitas & Agenda'}
           </div>
           <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
-            Kegiatan & Jadwal Terbuka
+            {settings?.kegiatan_title || 'Kegiatan & Jadwal Terbuka'}
           </h2>
           <div className="w-16 h-1 bg-maroon-800 mx-auto mt-3 sm:mt-4 mb-3 sm:mb-4 rounded-full" />
           <p className="text-slate-600 text-xs sm:text-base leading-relaxed">
-            Ikuti agenda pendampingan hukum di lapangan, penyuluhan hak konstitusional warga, serta program pendidikan paralegal.
+            {settings?.kegiatan_subtitle || 'Ikuti agenda kegiatan kemahasiswaan, kajian hukum, serta program kerja terbaru.'}
           </p>
         </ScrollReveal>
 
