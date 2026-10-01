@@ -1,9 +1,8 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 import { SiteSettings } from '@/lib/types';
-import { Scale, ShieldCheck, Lock, Heart, Phone, Mail, MapPin } from 'lucide-react';
+import { Scale, ShieldCheck, Heart, Phone, Mail, MapPin } from 'lucide-react';
 
 interface FooterProps {
   settings: SiteSettings;
@@ -165,16 +164,6 @@ export default function Footer({ settings: initialSettings }: FooterProps) {
                 <Mail className="w-4 h-4 text-blue-400 shrink-0" />
                 <span className="break-all">{settings.email}</span>
               </div>
-            </div>
-
-            <div className="mt-5 pt-4 border-t border-slate-900 flex items-center gap-3">
-              <Link
-                href="/admin"
-                className="touch-target inline-flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 transition-colors"
-              >
-                <Lock className="w-3.5 h-3.5 text-amber-300" />
-                <span>Panel Pengurus / Admin</span>
-              </Link>
             </div>
           </div>
 

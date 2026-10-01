@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { SiteSettings } from '@/lib/types';
-import { Menu, X, Scale, Phone, ShieldCheck, Lock, ChevronRight } from 'lucide-react';
+import { Menu, X, Scale, Phone, ShieldCheck, ChevronRight } from 'lucide-react';
 
 interface NavbarProps {
   settings: SiteSettings;
@@ -157,13 +157,6 @@ export default function Navbar({ settings: initialSettings }: NavbarProps) {
               <Phone className="w-3.5 h-3.5 text-amber-300 group-hover:scale-110 transition-transform" />
               <span>Aspirasi WA</span>
             </a>
-            <Link
-              href="/admin"
-              className="p-2 text-slate-400 hover:text-maroon-800 hover:bg-rose-50/60 rounded-full transition-colors"
-              title="Portal Admin"
-            >
-              <Lock className="w-4 h-4" />
-            </Link>
           </div>
 
           {/* Mobile Right Action: Hamburger Only on Small Screens */}
@@ -216,16 +209,8 @@ export default function Navbar({ settings: initialSettings }: NavbarProps) {
                 className="touch-target w-full bg-maroon-800 text-white rounded-xl text-center font-bold text-xs shadow flex items-center justify-center gap-2 py-3"
               >
                 <Phone className="w-4 h-4 text-amber-300" />
-                WhatsApp Aspirasi & Sekretariat
+                WhatsApp Aspirasi &amp; Sekretariat
               </a>
-              <Link
-                href="/admin"
-                onClick={handleLinkClick}
-                className="touch-target w-full border border-slate-200 text-slate-700 rounded-xl text-center font-semibold text-xs hover:bg-slate-50 flex items-center justify-center gap-2 py-2.5"
-              >
-                <Lock className="w-3.5 h-3.5 text-slate-500" />
-                Portal Admin CMS
-              </Link>
             </div>
           </div>
         </div>
