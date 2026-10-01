@@ -31,6 +31,27 @@ html {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Lenis Smooth Scroll Configuration */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -39,7 +60,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Mobile Touch Optimization (Fitts's Law >= 44px) */
+/* Mobile Touch Target Rule (Fitts's Law >= 44px) */
 .touch-target {
   min-height: 44px;
   min-width: 44px;
@@ -48,7 +69,51 @@ body {
   justify-content: center;
 }
 
-/* Custom subtle scrollbar */
+/* Super Lightweight GPU-Accelerated Scroll Reveal */
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-hidden-fade {
+  opacity: 0;
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity;
+}
+
+.reveal-hidden-left {
+  opacity: 0;
+  transform: translateX(-28px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-hidden-right {
+  opacity: 0;
+  transform: translateX(28px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-visible {
+  opacity: 1 !important;
+  transform: translate(0, 0) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-hidden,
+  .reveal-hidden-fade,
+  .reveal-hidden-left,
+  .reveal-hidden-right {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Scrollbar Styling */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;

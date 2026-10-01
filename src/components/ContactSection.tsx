@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { SiteSettings } from '@/lib/types';
 import { Phone, Mail, MapPin, Clock, Send, CheckCircle2, AlertCircle, MessageSquare } from 'lucide-react';
+import ScrollReveal from '@/components/ScrollReveal';
 
 function InstagramIcon({ className = "w-6 h-6" }: { className?: string }) {
   return (
@@ -84,7 +85,7 @@ export default function ContactSection({ settings }: ContactSectionProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+        <ScrollReveal animation="up" className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-100 text-maroon-800 text-xs font-semibold uppercase tracking-wider mb-3">
             <Phone className="w-3.5 h-3.5" /> Kontak & Sekretariat
           </div>
@@ -95,12 +96,12 @@ export default function ContactSection({ settings }: ContactSectionProps) {
           <p className="text-slate-600 text-sm sm:text-base">
             Kami siap mendengar, mengkaji, dan mendampingi permasalahan hukum Anda dengan prinsip kerahasiaan dan integritas.
           </p>
-        </div>
+        </ScrollReveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           
           {/* Left Column: Official Contact Channels */}
-          <div className="lg:col-span-5 space-y-4">
+          <ScrollReveal animation="left" delay={100} className="lg:col-span-5 space-y-4">
             
             {/* WhatsApp Card */}
             <a
@@ -210,10 +211,11 @@ export default function ContactSection({ settings }: ContactSectionProps) {
               </div>
             </div>
 
-          </div>
+          </ScrollReveal>
 
           {/* Right Column: Online Consultation & Message Form */}
-          <div className="lg:col-span-7 bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm">
+          <ScrollReveal animation="right" delay={140} className="lg:col-span-7">
+            <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm">
             <div className="flex items-center gap-2 mb-2">
               <MessageSquare className="w-5 h-5 text-maroon-800" />
               <h3 className="text-lg sm:text-xl font-bold text-slate-900">
@@ -359,6 +361,7 @@ export default function ContactSection({ settings }: ContactSectionProps) {
               </div>
             </form>
           </div>
+          </ScrollReveal>
 
         </div>
 

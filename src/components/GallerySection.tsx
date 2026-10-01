@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Galeri } from '@/lib/types';
 import { Camera, X, Calendar, ZoomIn } from 'lucide-react';
+import ScrollReveal from '@/components/ScrollReveal';
 
 interface GallerySectionProps {
   galeri: Galeri[];
@@ -16,7 +17,7 @@ export default function GallerySection({ galeri }: GallerySectionProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+        <ScrollReveal animation="up" className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 border border-rose-200/60 text-maroon-800 text-xs font-semibold uppercase tracking-wider mb-3">
             <Camera className="w-3.5 h-3.5" /> Dokumentasi Kegiatan
           </div>
@@ -27,39 +28,45 @@ export default function GallerySection({ galeri }: GallerySectionProps) {
           <p className="text-slate-600 text-sm sm:text-base">
             Potret komitmen kami di ruang sidang peradilan, mediasi warga, serta penyuluhan hukum lapangan.
           </p>
-        </div>
+        </ScrollReveal>
 
         {/* Gallery Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6">
-          {galeri.map((item) => (
-            <button
+          {galeri.map((item, idx) => (
+            <ScrollReveal
               key={item.id}
-              onClick={() => setSelectedPhoto(item)}
-              type="button"
-              className="group relative rounded-xl sm:rounded-2xl overflow-hidden aspect-4/3 bg-slate-100 border border-slate-200 shadow-2xs hover:shadow-md transition-all text-left focus:outline-none focus:ring-2 focus:ring-maroon-800"
+              animation="up"
+              delay={idx * 50}
+              className="flex"
             >
-              {/* Image */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={item.foto_url}
-                alt={item.judul}
-                loading="lazy"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
+              <button
+                onClick={() => setSelectedPhoto(item)}
+                type="button"
+                className="w-full group relative rounded-xl sm:rounded-2xl overflow-hidden aspect-4/3 bg-slate-100 border border-slate-200 shadow-2xs hover:shadow-md transition-all text-left focus:outline-none focus:ring-2 focus:ring-maroon-800"
+              >
+                {/* Image */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={item.foto_url}
+                  alt={item.judul}
+                  loading="lazy"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
 
-              {/* Overlay on hover / mobile touch */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-black/20 to-transparent opacity-80 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3 sm:p-4 text-white">
-                <div className="flex items-center justify-between text-[10px] sm:text-xs text-amber-300 font-semibold mb-1">
-                  <span className="flex items-center gap-1">
-                    <Calendar className="w-3 h-3" /> {item.tanggal}
-                  </span>
-                  <ZoomIn className="w-3.5 h-3.5 hidden sm:block" />
+                {/* Overlay on hover / mobile touch */}
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-black/20 to-transparent opacity-80 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3 sm:p-4 text-white">
+                  <div className="flex items-center justify-between text-[10px] sm:text-xs text-amber-300 font-semibold mb-1">
+                    <span className="flex items-center gap-1">
+                      <Calendar className="w-3 h-3" /> {item.tanggal}
+                    </span>
+                    <ZoomIn className="w-3.5 h-3.5 hidden sm:block" />
+                  </div>
+                  <h4 className="font-bold text-xs sm:text-sm leading-snug line-clamp-2">
+                    {item.judul}
+                  </h4>
                 </div>
-                <h4 className="font-bold text-xs sm:text-sm leading-snug line-clamp-2">
-                  {item.judul}
-                </h4>
-              </div>
-            </button>
+              </button>
+            </ScrollReveal>
           ))}
         </div>
 
