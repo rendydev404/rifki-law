@@ -8,7 +8,8 @@ import ImageUpload from '@/components/ImageUpload';
 import {
   Scale, Lock, LogOut, Save, Plus, Trash2, Edit3, ExternalLink,
   CheckCircle2, AlertCircle, Loader2, Home, BookOpen, Users,
-  Calendar, Camera, Phone, Mail, MessageSquare, Database, Copy, Check
+  Calendar, Camera, Phone, Mail, MessageSquare, Database, Copy, Check,
+  LayoutGrid, X, ChevronRight
 } from 'lucide-react';
 
 export default function AdminDashboard() {
@@ -24,6 +25,7 @@ export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState<'beranda' | 'tentang' | 'pengurus' | 'kegiatan' | 'galeri' | 'kontak' | 'pesan' | 'database'>('beranda');
   const [saving, setSaving] = useState(false);
   const [toastMessage, setToastMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
 
   // Form states for modals/edits
   const [editingPengurus, setEditingPengurus] = useState<Pengurus | null>(null);
@@ -389,7 +391,7 @@ export default function AdminDashboard() {
 
   // Logged in: Main Admin Dashboard
   return (
-    <div className="min-h-screen bg-slate-100 pb-20">
+    <div className="min-h-screen bg-slate-100 pb-28 sm:pb-20">
       
       {/* Toast Notification */}
       {toastMessage && (
@@ -458,11 +460,11 @@ export default function AdminDashboard() {
             </div>
           </div>
 
-          {/* Navigation Tabs (Mobile Horizontally Scrollable) */}
-          <div className="flex items-center gap-1 overflow-x-auto pb-2 pt-1 no-scrollbar border-t border-maroon-900/60">
+          {/* Navigation Tabs (Desktop only: md:flex) */}
+          <div className="hidden md:flex items-center gap-1.5 overflow-x-auto pb-2.5 pt-1.5 no-scrollbar border-t border-maroon-900/60">
             <button
               onClick={() => setActiveTab('beranda')}
-              className={`touch-target px-3.5 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${
+              className={`touch-target shrink-0 px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${
                 activeTab === 'beranda'
                   ? 'bg-maroon-800 text-white shadow-xs'
                   : 'text-rose-200/70 hover:text-white hover:bg-maroon-900'
@@ -473,7 +475,7 @@ export default function AdminDashboard() {
 
             <button
               onClick={() => setActiveTab('tentang')}
-              className={`touch-target px-3.5 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${
+              className={`touch-target shrink-0 px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${
                 activeTab === 'tentang'
                   ? 'bg-maroon-800 text-white shadow-xs'
                   : 'text-rose-200/70 hover:text-white hover:bg-maroon-900'
@@ -484,7 +486,7 @@ export default function AdminDashboard() {
 
             <button
               onClick={() => setActiveTab('pengurus')}
-              className={`touch-target px-3.5 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${
+              className={`touch-target shrink-0 px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${
                 activeTab === 'pengurus'
                   ? 'bg-maroon-800 text-white shadow-xs'
                   : 'text-rose-200/70 hover:text-white hover:bg-maroon-900'
@@ -495,7 +497,7 @@ export default function AdminDashboard() {
 
             <button
               onClick={() => setActiveTab('kegiatan')}
-              className={`touch-target px-3.5 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${
+              className={`touch-target shrink-0 px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${
                 activeTab === 'kegiatan'
                   ? 'bg-maroon-800 text-white shadow-xs'
                   : 'text-rose-200/70 hover:text-white hover:bg-maroon-900'
@@ -506,7 +508,7 @@ export default function AdminDashboard() {
 
             <button
               onClick={() => setActiveTab('galeri')}
-              className={`touch-target px-3.5 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${
+              className={`touch-target shrink-0 px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${
                 activeTab === 'galeri'
                   ? 'bg-maroon-800 text-white shadow-xs'
                   : 'text-rose-200/70 hover:text-white hover:bg-maroon-900'
@@ -517,7 +519,7 @@ export default function AdminDashboard() {
 
             <button
               onClick={() => setActiveTab('kontak')}
-              className={`touch-target px-3.5 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${
+              className={`touch-target shrink-0 px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${
                 activeTab === 'kontak'
                   ? 'bg-maroon-800 text-white shadow-xs'
                   : 'text-rose-200/70 hover:text-white hover:bg-maroon-900'
@@ -528,7 +530,7 @@ export default function AdminDashboard() {
 
             <button
               onClick={() => setActiveTab('pesan')}
-              className={`touch-target px-3.5 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${
+              className={`touch-target shrink-0 px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${
                 activeTab === 'pesan'
                   ? 'bg-maroon-800 text-white shadow-xs'
                   : 'text-rose-200/70 hover:text-white hover:bg-maroon-900'
@@ -539,7 +541,7 @@ export default function AdminDashboard() {
 
             <button
               onClick={() => setActiveTab('database')}
-              className={`touch-target px-3.5 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${
+              className={`touch-target shrink-0 px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-1.5 ${
                 activeTab === 'database'
                   ? 'bg-maroon-800 text-white shadow-xs'
                   : 'text-amber-300 hover:text-white hover:bg-maroon-900'
@@ -548,6 +550,32 @@ export default function AdminDashboard() {
               <Database className="w-3.5 h-3.5" /> Supabase SQL
             </button>
           </div>
+        </div>
+
+        {/* Mobile Current Active Tab Indicator Bar */}
+        <div className="md:hidden bg-maroon-900/90 px-4 py-2 flex items-center justify-between text-xs text-rose-100 border-t border-maroon-900/80">
+          <div className="flex items-center gap-2 truncate">
+            <span className="w-2 h-2 rounded-full bg-amber-400 shrink-0" />
+            <span className="font-medium text-rose-200/80">Menu:</span>
+            <span className="font-bold text-white uppercase tracking-wider text-[11px] truncate">
+              {activeTab === 'beranda' && 'Beranda & Slogan'}
+              {activeTab === 'tentang' && 'Sejarah & Visi Misi'}
+              {activeTab === 'pengurus' && 'Struktur Pengurus'}
+              {activeTab === 'kegiatan' && 'Kegiatan & Agenda'}
+              {activeTab === 'galeri' && 'Galeri Dokumentasi'}
+              {activeTab === 'kontak' && 'Kontak & Alamat'}
+              {activeTab === 'pesan' && 'Kotak Masuk Aduan'}
+              {activeTab === 'database' && 'Supabase Database'}
+            </span>
+          </div>
+          <button
+            onClick={() => setIsBottomSheetOpen(true)}
+            type="button"
+            className="touch-target text-[11px] bg-maroon-800/90 hover:bg-maroon-700 active:bg-maroon-700 px-3 py-1 rounded-lg font-bold text-amber-300 flex items-center gap-1 shrink-0 ml-2"
+          >
+            <span>Semua Menu</span>
+            <ChevronRight className="w-3.5 h-3.5" />
+          </button>
         </div>
       </header>
 
@@ -655,6 +683,94 @@ export default function AdminDashboard() {
                       })}
                       className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-maroon-800"
                     />
+                  </div>
+
+                  {/* CTA Buttons & Custom Links Management */}
+                  <div className="mt-8 pt-6 border-t border-slate-100">
+                    <h3 className="text-sm font-bold text-slate-900 mb-1">
+                      Kustomisasi Tombol Aksi & Link Beranda (CTA)
+                    </h3>
+                    <p className="text-xs text-slate-500 mb-4">
+                      Ubah label teks dan URL tautan tombol utama beranda sesuai keinginan Anda.
+                    </p>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                        <span className="text-xs font-bold text-maroon-800 uppercase tracking-wider block mb-3">
+                          Tombol Utama (Primary CTA)
+                        </span>
+                        <div className="space-y-3">
+                          <div>
+                            <label className="block text-[11px] font-semibold text-slate-600 mb-1">
+                              Teks Tombol Utama
+                            </label>
+                            <input
+                              type="text"
+                              value={data.settings.cta_primary_label || ''}
+                              onChange={(e) => setData({
+                                ...data,
+                                settings: { ...data.settings, cta_primary_label: e.target.value }
+                              })}
+                              placeholder="Ajukan Permohonan Bantuan"
+                              className="touch-target w-full px-3 py-2 rounded-lg border border-slate-300 bg-white text-xs focus:ring-2 focus:ring-maroon-800"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-[11px] font-semibold text-slate-600 mb-1">
+                              Link URL Tombol Utama
+                            </label>
+                            <input
+                              type="text"
+                              value={data.settings.cta_primary_url || ''}
+                              onChange={(e) => setData({
+                                ...data,
+                                settings: { ...data.settings, cta_primary_url: e.target.value }
+                              })}
+                              placeholder="Kosongkan untuk otomatis ke WhatsApp Hotline, atau isi URL lain"
+                              className="touch-target w-full px-3 py-2 rounded-lg border border-slate-300 bg-white text-xs font-mono focus:ring-2 focus:ring-maroon-800"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                        <span className="text-xs font-bold text-slate-700 uppercase tracking-wider block mb-3">
+                          Tombol Kedua (Secondary CTA)
+                        </span>
+                        <div className="space-y-3">
+                          <div>
+                            <label className="block text-[11px] font-semibold text-slate-600 mb-1">
+                              Teks Tombol Kedua
+                            </label>
+                            <input
+                              type="text"
+                              value={data.settings.cta_secondary_label || ''}
+                              onChange={(e) => setData({
+                                ...data,
+                                settings: { ...data.settings, cta_secondary_label: e.target.value }
+                              })}
+                              placeholder="Lihat Kegiatan Terbaru"
+                              className="touch-target w-full px-3 py-2 rounded-lg border border-slate-300 bg-white text-xs focus:ring-2 focus:ring-maroon-800"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-[11px] font-semibold text-slate-600 mb-1">
+                              Link URL Tombol Kedua
+                            </label>
+                            <input
+                              type="text"
+                              value={data.settings.cta_secondary_url || ''}
+                              onChange={(e) => setData({
+                                ...data,
+                                settings: { ...data.settings, cta_secondary_url: e.target.value }
+                              })}
+                              placeholder="#kegiatan"
+                              className="touch-target w-full px-3 py-2 rounded-lg border border-slate-300 bg-white text-xs font-mono focus:ring-2 focus:ring-maroon-800"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
                   {/* Image Uploaders */}
@@ -1930,6 +2046,318 @@ CREATE POLICY "Admin manage pesan_kontak" ON public.pesan_kontak FOR ALL TO auth
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* ========================================================
+          MOBILE BOTTOM NAVIGATION MENU (md:hidden)
+          Lightweight, ergonomis jempol, bebas tab tumpang tindih
+      ======================================================== */}
+      <nav
+        aria-label="Navigasi Menu Admin Mobile"
+        className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200/90 shadow-[0_-4px_25px_rgba(0,0,0,0.08)] px-2 pt-1 pb-[calc(0.5rem+env(safe-area-inset-bottom,0px))]"
+      >
+        <div className="grid grid-cols-5 items-center gap-1">
+          {/* 1. Beranda */}
+          <button
+            type="button"
+            onClick={() => {
+              setActiveTab('beranda');
+              setIsBottomSheetOpen(false);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className={`touch-target flex flex-col items-center justify-center py-1 px-1 rounded-xl transition-colors ${
+              activeTab === 'beranda'
+                ? 'text-maroon-800 font-bold'
+                : 'text-slate-500 hover:text-slate-800 font-medium'
+            }`}
+          >
+            <div className={`p-1 rounded-lg ${activeTab === 'beranda' ? 'bg-maroon-50' : ''}`}>
+              <Home className="w-5 h-5" />
+            </div>
+            <span className="text-[10px] tracking-tight mt-0.5 leading-none">Beranda</span>
+          </button>
+
+          {/* 2. Pengurus */}
+          <button
+            type="button"
+            onClick={() => {
+              setActiveTab('pengurus');
+              setIsBottomSheetOpen(false);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className={`touch-target flex flex-col items-center justify-center py-1 px-1 rounded-xl transition-colors relative ${
+              activeTab === 'pengurus'
+                ? 'text-maroon-800 font-bold'
+                : 'text-slate-500 hover:text-slate-800 font-medium'
+            }`}
+          >
+            <div className={`p-1 rounded-lg ${activeTab === 'pengurus' ? 'bg-maroon-50' : ''}`}>
+              <Users className="w-5 h-5" />
+            </div>
+            <span className="text-[10px] tracking-tight mt-0.5 leading-none">Pengurus</span>
+            {(data?.pengurus?.length ?? 0) > 0 && (
+              <span className="absolute top-1 right-2 w-4 h-4 bg-slate-200 text-slate-700 text-[9px] font-bold rounded-full flex items-center justify-center">
+                {data?.pengurus?.length}
+              </span>
+            )}
+          </button>
+
+          {/* 3. Kegiatan */}
+          <button
+            type="button"
+            onClick={() => {
+              setActiveTab('kegiatan');
+              setIsBottomSheetOpen(false);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className={`touch-target flex flex-col items-center justify-center py-1 px-1 rounded-xl transition-colors relative ${
+              activeTab === 'kegiatan'
+                ? 'text-maroon-800 font-bold'
+                : 'text-slate-500 hover:text-slate-800 font-medium'
+            }`}
+          >
+            <div className={`p-1 rounded-lg ${activeTab === 'kegiatan' ? 'bg-maroon-50' : ''}`}>
+              <Calendar className="w-5 h-5" />
+            </div>
+            <span className="text-[10px] tracking-tight mt-0.5 leading-none">Kegiatan</span>
+            {(data?.kegiatan?.length ?? 0) > 0 && (
+              <span className="absolute top-1 right-2 w-4 h-4 bg-slate-200 text-slate-700 text-[9px] font-bold rounded-full flex items-center justify-center">
+                {data?.kegiatan?.length}
+              </span>
+            )}
+          </button>
+
+          {/* 4. Pesan */}
+          <button
+            type="button"
+            onClick={() => {
+              setActiveTab('pesan');
+              setIsBottomSheetOpen(false);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className={`touch-target flex flex-col items-center justify-center py-1 px-1 rounded-xl transition-colors relative ${
+              activeTab === 'pesan'
+                ? 'text-maroon-800 font-bold'
+                : 'text-slate-500 hover:text-slate-800 font-medium'
+            }`}
+          >
+            <div className={`p-1 rounded-lg ${activeTab === 'pesan' ? 'bg-maroon-50' : ''}`}>
+              <MessageSquare className="w-5 h-5" />
+            </div>
+            <span className="text-[10px] tracking-tight mt-0.5 leading-none">Pesan</span>
+            {(data?.pesan?.filter(p => p.status === 'belum_dibaca').length ?? 0) > 0 && (
+              <span className="absolute top-1 right-2 w-4 h-4 bg-rose-600 text-white text-[9px] font-bold rounded-full flex items-center justify-center animate-pulse">
+                {data?.pesan?.filter(p => p.status === 'belum_dibaca').length}
+              </span>
+            )}
+          </button>
+
+          {/* 5. Lainnya (Buka Bottom Sheet) */}
+          <button
+            type="button"
+            onClick={() => setIsBottomSheetOpen(true)}
+            className={`touch-target flex flex-col items-center justify-center py-1 px-1 rounded-xl transition-colors relative ${
+              isBottomSheetOpen || ['tentang', 'galeri', 'kontak', 'database'].includes(activeTab)
+                ? 'text-maroon-800 font-bold'
+                : 'text-slate-500 hover:text-slate-800 font-medium'
+            }`}
+          >
+            <div className={`p-1 rounded-lg ${isBottomSheetOpen || ['tentang', 'galeri', 'kontak', 'database'].includes(activeTab) ? 'bg-maroon-50 text-maroon-800' : ''}`}>
+              <LayoutGrid className="w-5 h-5" />
+            </div>
+            <span className="text-[10px] tracking-tight mt-0.5 leading-none">Lainnya</span>
+            {['tentang', 'galeri', 'kontak', 'database'].includes(activeTab) && (
+              <span className="absolute top-1.5 right-2 w-2 h-2 bg-amber-500 rounded-full" />
+            )}
+          </button>
+        </div>
+      </nav>
+
+      {/* ========================================================
+          MOBILE BOTTOM SHEET DRAWER (md:hidden)
+          Menu popup komprehensif untuk semua modul admin
+      ======================================================== */}
+      {isBottomSheetOpen && (
+        <div className="md:hidden fixed inset-0 z-50 flex flex-col justify-end">
+          {/* Backdrop overlay */}
+          <div
+            className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity animate-in fade-in duration-200"
+            onClick={() => setIsBottomSheetOpen(false)}
+            aria-hidden="true"
+          />
+
+          {/* Sheet container */}
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Daftar Modul Admin"
+            className="relative z-10 bg-white rounded-t-3xl shadow-2xl border-t border-slate-200/90 max-h-[85vh] flex flex-col overflow-hidden animate-in slide-in-from-bottom duration-300"
+          >
+            {/* Grab handle indicator */}
+            <div className="pt-3 pb-1 flex justify-center cursor-grab shrink-0">
+              <div className="w-12 h-1.5 bg-slate-300 rounded-full" />
+            </div>
+
+            {/* Sheet header */}
+            <div className="px-5 py-3 border-b border-slate-100 flex items-center justify-between shrink-0">
+              <div>
+                <h3 className="text-base font-bold text-slate-900 leading-tight">
+                  Navigasi CMS & Modul
+                </h3>
+                <p className="text-xs text-slate-500">
+                  Kelola konten, foto, kontak, dan tautan website
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsBottomSheetOpen(false)}
+                className="touch-target p-2 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-700 transition-colors"
+                aria-label="Tutup Menu"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Sheet items body */}
+            <div className="p-4 space-y-2 overflow-y-auto max-h-[60vh]">
+              {[
+                {
+                  id: 'beranda' as const,
+                  label: 'Beranda & Slogan Organisasi',
+                  desc: 'Logo, nama, ucapan selamat datang, tombol & link CTA',
+                  icon: Home,
+                  badge: null,
+                },
+                {
+                  id: 'tentang' as const,
+                  label: 'Sejarah, Visi & Misi',
+                  desc: 'Sejarah berdiri, visi lembaga, dan butir misi organisasi',
+                  icon: BookOpen,
+                  badge: null,
+                },
+                {
+                  id: 'pengurus' as const,
+                  label: 'Struktur Kepengurusan',
+                  desc: 'Susunan advokat, dewan pembina, dan jajaran pengurus',
+                  icon: Users,
+                  badge: `${data?.pengurus?.length || 0} Pengurus`,
+                },
+                {
+                  id: 'kegiatan' as const,
+                  label: 'Kegiatan & Agenda Mendatang',
+                  desc: 'Program kerja, seminar, lokasi acara, link pendaftaran',
+                  icon: Calendar,
+                  badge: `${data?.kegiatan?.length || 0} Agenda`,
+                },
+                {
+                  id: 'galeri' as const,
+                  label: 'Galeri Foto Dokumentasi',
+                  desc: 'Dokumentasi sidang, penyuluhan, dan kegiatan advokasi',
+                  icon: Camera,
+                  badge: `${data?.galeri?.length || 0} Foto`,
+                },
+                {
+                  id: 'kontak' as const,
+                  label: 'Kontak, Alamat & Maps',
+                  desc: 'WhatsApp, akun Instagram, email resmi, lokasi sekretariat',
+                  icon: Phone,
+                  badge: null,
+                },
+                {
+                  id: 'pesan' as const,
+                  label: 'Kotak Pesan & Konsultasi',
+                  desc: 'Pesan permohonan bantuan hukum & aduan dari warga',
+                  icon: MessageSquare,
+                  badge: (data?.pesan?.filter(p => p.status === 'belum_dibaca').length || 0) > 0
+                    ? `${data?.pesan?.filter(p => p.status === 'belum_dibaca').length} Baru`
+                    : null,
+                  badgeAlert: true,
+                },
+                {
+                  id: 'database' as const,
+                  label: 'Supabase SQL & Status Sinkronisasi',
+                  desc: 'Skrip tabel SQL, panduan koneksi Supabase Cloud',
+                  icon: Database,
+                  badge: data?.isSupabaseConnected ? 'Cloud Aktif' : 'Local Fallback',
+                },
+              ].map((item) => {
+                const Icon = item.icon;
+                const isActive = activeTab === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => {
+                      setActiveTab(item.id);
+                      setIsBottomSheetOpen(false);
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                    className={`touch-target w-full flex items-center justify-between p-3 rounded-2xl text-left transition-all ${
+                      isActive
+                        ? 'bg-maroon-50 border border-maroon-200 shadow-xs'
+                        : 'hover:bg-slate-50 border border-transparent'
+                    }`}
+                  >
+                    <div className="flex items-center gap-3 min-w-0 pr-2">
+                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
+                        isActive
+                          ? 'bg-maroon-800 text-amber-300'
+                          : 'bg-slate-100 text-slate-600'
+                      }`}>
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-2">
+                          <p className={`text-sm font-bold truncate ${isActive ? 'text-maroon-900' : 'text-slate-800'}`}>
+                            {item.label}
+                          </p>
+                          {item.badge && (
+                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full shrink-0 ${
+                              item.badgeAlert
+                                ? 'bg-rose-600 text-white'
+                                : 'bg-slate-100 text-slate-600 border border-slate-200'
+                            }`}>
+                              {item.badge}
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-xs text-slate-500 truncate mt-0.5">
+                          {item.desc}
+                        </p>
+                      </div>
+                    </div>
+                    <ChevronRight className={`w-4 h-4 shrink-0 ${isActive ? 'text-maroon-800' : 'text-slate-300'}`} />
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Quick Actions Footer */}
+            <div className="p-4 border-t border-slate-100 bg-slate-50/70 flex items-center justify-between gap-3 shrink-0 pb-[calc(1rem+env(safe-area-inset-bottom,0px))]">
+              <Link
+                href="/"
+                target="_blank"
+                onClick={() => setIsBottomSheetOpen(false)}
+                className="touch-target flex-1 px-4 py-2.5 rounded-xl bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 text-xs font-bold flex items-center justify-center gap-2 shadow-2xs"
+              >
+                <ExternalLink className="w-3.5 h-3.5" />
+                <span>Lihat Landing Page</span>
+              </Link>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setIsBottomSheetOpen(false);
+                  handleLogout();
+                }}
+                className="touch-target px-4 py-2.5 rounded-xl bg-rose-50 border border-rose-200 hover:bg-rose-100 text-rose-700 text-xs font-bold flex items-center justify-center gap-2"
+              >
+                <LogOut className="w-3.5 h-3.5" />
+                <span>Keluar</span>
+              </button>
+            </div>
           </div>
         </div>
       )}

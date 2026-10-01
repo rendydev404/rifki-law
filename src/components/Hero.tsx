@@ -69,20 +69,20 @@ export default function Hero({ settings }: HeroProps) {
             <ScrollReveal animation="up" delay={250} className="w-full sm:w-auto mb-6 sm:mb-10">
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
                 <a
-                  href={waUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={settings.cta_primary_url || waUrl}
+                  target={settings.cta_primary_url?.startsWith('#') ? undefined : "_blank"}
+                  rel={settings.cta_primary_url?.startsWith('#') ? undefined : "noopener noreferrer"}
                   className="touch-target px-5 py-3 sm:px-7 sm:py-3.5 bg-gradient-to-r from-maroon-900 to-maroon-800 hover:from-maroon-800 hover:to-maroon-700 text-white rounded-full font-bold text-xs sm:text-base text-center shadow-md shadow-maroon-950/15 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 group"
                 >
-                  <span>Ajukan Permohonan Bantuan</span>
+                  <span>{settings.cta_primary_label || 'Ajukan Permohonan Bantuan'}</span>
                   <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </a>
                 
                 <a
-                  href="#kegiatan"
+                  href={settings.cta_secondary_url || '#kegiatan'}
                   className="touch-target px-5 py-3 sm:px-7 sm:py-3.5 bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 hover:text-slate-900 rounded-full font-semibold text-xs sm:text-base text-center transition-all flex items-center justify-center gap-2 shadow-2xs hover:shadow-xs"
                 >
-                  <span>Lihat Kegiatan Terbaru</span>
+                  <span>{settings.cta_secondary_label || 'Lihat Kegiatan Terbaru'}</span>
                 </a>
               </div>
             </ScrollReveal>

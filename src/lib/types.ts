@@ -7,6 +7,10 @@ export interface SiteSettings {
   logo_url: string;
   hero_badge: string;
   hero_image_url: string;
+  cta_primary_label?: string;
+  cta_primary_url?: string;
+  cta_secondary_label?: string;
+  cta_secondary_url?: string;
   sejarah: string;
   visi: string;
   misi: string[];
