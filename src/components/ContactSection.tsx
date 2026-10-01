@@ -87,14 +87,14 @@ export default function ContactSection({ settings }: ContactSectionProps) {
         {/* Section Header */}
         <ScrollReveal animation="up" className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-rose-50 text-maroon-800 text-xs font-semibold uppercase tracking-wider mb-2 sm:mb-3 border border-rose-200/80">
-            <Phone className="w-3.5 h-3.5" /> Kontak & Sekretariat
+            <Phone className="w-3.5 h-3.5" /> Ruang Aspirasi & Sekretariat
           </div>
           <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
-            Hubungi Posko Bantuan Hukum
+            Sampaikan Aspirasi & Hubungi Kami
           </h2>
           <div className="w-16 h-1 bg-maroon-800 mx-auto mt-3 sm:mt-4 mb-3 sm:mb-4 rounded-full" />
           <p className="text-slate-600 text-xs sm:text-base leading-relaxed">
-            Konsultasikan persoalan hukum Anda secara aman, rahasia, dan tanpa pungutan biaya bagi warga yang membutuhkan pendampingan.
+            Sampaikan aspirasi, aduan kesejahteraan mahasiswa, permohonan kajian isu hukum, atau kerjasama kegiatan bersama pengurus organisasi.
           </p>
         </ScrollReveal>
 
@@ -288,34 +288,33 @@ export default function ContactSection({ settings }: ContactSectionProps) {
 
                   <div>
                     <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                      Kategori Perkara
+                      Kategori Aspirasi / Keperluan
                     </label>
                     <select
                       value={formData.kategori_hukum}
                       onChange={(e) => setFormData({ ...formData, kategori_hukum: e.target.value })}
                       className="touch-target w-full px-4 py-3 rounded-2xl border border-slate-200 bg-slate-50/50 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-maroon-800 transition-all"
                     >
-                      <option value="Umum">Umum / Lainnya</option>
-                      <option value="Perkara Pidana">Perkara Pidana</option>
-                      <option value="Perkara Perdata">Perkara Perdata & Waris</option>
-                      <option value="Sengketa Agraria / Tanah">Sengketa Pertanahan / Agraria</option>
-                      <option value="Ketenagakerjaan / Buruh">Ketenagakerjaan & PHK</option>
-                      <option value="Perlindungan Perempuan & Anak">Perlindungan Perempuan & Anak</option>
-                      <option value="Konsumen & Pinjol">Konsumen & Pinjol Ilegal</option>
+                      <option value="Aspirasi & Kebijakan Kampus">Aspirasi & Kebijakan Kampus</option>
+                      <option value="Advokasi UKT & Kesejahteraan">Advokasi UKT & Kesejahteraan Mahasiswa</option>
+                      <option value="Kajian Isu Hukum & Diskusi">Kajian Isu Hukum & Diskusi Publik</option>
+                      <option value="Peradilan Semu & Lomba">Peradilan Semu (Moot Court) & Debat</option>
+                      <option value="Kerjasama & Sponsorship">Kerjasama & Sponsorship</option>
+                      <option value="Umum">Lainnya / Umum</option>
                     </select>
                   </div>
                 </div>
 
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                    Pokok Persoalan / Subjek <span className="text-rose-600">*</span>
+                    Pokok Aspirasi / Subjek <span className="text-rose-600">*</span>
                   </label>
                   <input
                     type="text"
                     required
                     value={formData.subjek}
                     onChange={(e) => setFormData({ ...formData, subjek: e.target.value })}
-                    placeholder="Contoh: Konsultasi Sengketa Tanah Warisan Keluarga"
+                    placeholder="Contoh: Advokasi Permohonan Banding UKT Semester Ganjil"
                     className="touch-target w-full px-4 py-3 rounded-2xl border border-slate-200 bg-slate-50/50 text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-maroon-800 transition-all"
                   />
                 </div>

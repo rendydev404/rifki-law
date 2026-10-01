@@ -13,6 +13,12 @@ export default function Navbar({ settings }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  const [logoError, setLogoError] = useState(false);
+
+  useEffect(() => {
+    setLogoError(false);
+  }, [settings.logo_url]);
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 15);
@@ -28,7 +34,7 @@ export default function Navbar({ settings }: NavbarProps) {
     { label: 'Kegiatan', href: '#kegiatan' },
     { label: 'Agenda', href: '#agenda' },
     { label: 'Galeri', href: '#galeri' },
-    { label: 'Kontak', href: '#kontak' },
+    { label: 'Aspirasi & Kontak', href: '#kontak' },
   ];
 
   const handleLinkClick = () => {
@@ -37,7 +43,7 @@ export default function Navbar({ settings }: NavbarProps) {
 
   const cleanWaNumber = settings.whatsapp ? settings.whatsapp.replace(/\D/g, '') : '';
   const waUrl = cleanWaNumber 
-    ? `https://wa.me/${cleanWaNumber}?text=Halo%20${encodeURIComponent(settings.org_name)},%20saya%20ingin%20berkonsultasi%20hukum.` 
+    ? `https://wa.me/${cleanWaNumber}?text=Halo%20Pengurus%20${encodeURIComponent(settings.org_name)},%20saya%20ingin%20menyampaikan%20aspirasi/pertanyaan.` 
     : '#kontak';
 
   return (
@@ -53,12 +59,13 @@ export default function Navbar({ settings }: NavbarProps) {
           
           {/* Logo & Brand Identity */}
           <Link href="#beranda" className="flex items-center gap-2.5 sm:gap-3.5 group min-w-0 flex-1 sm:flex-initial">
-            {settings.logo_url ? (
+            {settings.logo_url && !logoError ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={settings.logo_url}
                 alt={settings.org_name}
-                className="w-9 h-9 sm:w-10 sm:h-10 object-contain rounded-xl border border-rose-100 p-0.5 group-hover:scale-105 transition-transform shrink-0"
+                onError={() => setLogoError(true)}
+                className="w-9 h-9 sm:w-10 sm:h-10 object-contain rounded-xl border border-slate-200/80 bg-white p-1 shadow-2xs group-hover:scale-105 transition-transform shrink-0"
               />
             ) : (
               <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-maroon-800 to-maroon-950 flex items-center justify-center text-amber-300 shadow-sm border border-amber-400/20 group-hover:scale-105 transition-transform shrink-0">
@@ -71,7 +78,7 @@ export default function Navbar({ settings }: NavbarProps) {
               </span>
               <span className="text-[10px] sm:text-[11px] text-maroon-800/80 font-medium tracking-wide flex items-center gap-1">
                 <ShieldCheck className="w-3 h-3 text-amber-600 shrink-0 inline" /> 
-                <span className="truncate">Lembaga Advokasi & Bantuan Hukum</span>
+                <span className="truncate">Organisasi Mahasiswa Fakultas Hukum</span>
               </span>
             </div>
           </Link>
@@ -98,7 +105,7 @@ export default function Navbar({ settings }: NavbarProps) {
               className="touch-target px-4 py-2 bg-maroon-800 hover:bg-maroon-900 text-white rounded-full text-xs font-bold shadow-xs hover:shadow-md transition-all flex items-center gap-2 group"
             >
               <Phone className="w-3.5 h-3.5 text-amber-300 group-hover:scale-110 transition-transform" />
-              <span>Konsultasi WA</span>
+              <span>Aspirasi WA</span>
             </a>
             <Link
               href="/admin"
@@ -115,11 +122,11 @@ export default function Navbar({ settings }: NavbarProps) {
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Konsultasi WhatsApp"
+              aria-label="Aspirasi WhatsApp"
               className="touch-target hidden sm:inline-flex px-3.5 py-1.5 bg-maroon-800 text-white rounded-full text-xs font-bold items-center gap-1.5 shadow-xs"
             >
               <Phone className="w-3.5 h-3.5 text-amber-300" />
-              <span>Konsultasi</span>
+              <span>Aspirasi</span>
             </a>
 
             <button
@@ -159,7 +166,7 @@ export default function Navbar({ settings }: NavbarProps) {
                 className="touch-target w-full bg-maroon-800 text-white rounded-xl text-center font-bold text-xs shadow flex items-center justify-center gap-2 py-3"
               >
                 <Phone className="w-4 h-4 text-amber-300" />
-                Hubungi WhatsApp Sekretariat
+                WhatsApp Aspirasi & Sekretariat
               </a>
               <Link
                 href="/admin"

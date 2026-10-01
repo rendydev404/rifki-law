@@ -11,6 +11,11 @@ interface FooterProps {
 
 export default function Footer({ settings }: FooterProps) {
   const currentYear = new Date().getFullYear();
+  const [logoError, setLogoError] = React.useState(false);
+
+  React.useEffect(() => {
+    setLogoError(false);
+  }, [settings.logo_url]);
 
   return (
     <footer className="bg-slate-950 text-slate-400 pt-16 pb-24 sm:pb-16 border-t border-slate-900">
@@ -20,12 +25,13 @@ export default function Footer({ settings }: FooterProps) {
           {/* Col 1: Identity & Slogan */}
           <div className="lg:col-span-5">
             <div className="flex items-center gap-3 mb-4">
-              {settings.logo_url ? (
+              {settings.logo_url && !logoError ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={settings.logo_url}
                   alt={settings.org_name}
-                  className="w-10 h-10 object-contain rounded-lg bg-white p-1"
+                  onError={() => setLogoError(true)}
+                  className="w-10 h-10 object-contain rounded-xl bg-white p-1 border border-slate-700/60 shadow-xs"
                 />
               ) : (
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-maroon-800 to-maroon-950 flex items-center justify-center text-amber-300 shadow-md">
@@ -37,7 +43,7 @@ export default function Footer({ settings }: FooterProps) {
                   {settings.org_name}
                 </span>
                 <span className="text-[11px] text-rose-300 font-medium flex items-center gap-1">
-                  <ShieldCheck className="w-3 h-3 text-amber-400" /> Bantuan Hukum & Advokasi Independen
+                  <ShieldCheck className="w-3 h-3 text-amber-400" /> Organisasi Mahasiswa Fakultas Hukum
                 </span>
               </div>
             </div>
@@ -47,7 +53,7 @@ export default function Footer({ settings }: FooterProps) {
             </p>
 
             <p className="text-xs text-slate-500 leading-relaxed max-w-sm">
-              Mewujudkan kesetaraan akses terhadap keadilan substantif bagi seluruh lapisan masyarakat di Indonesia melalui jalur litigasi dan non-litigasi pro bono.
+              Wadah aspirasi intelektual, riset hukum progresif, pengembangan peradilan semu (moot court), serta pengabdian masyarakat demi kejayaan almamater dan keadilan bagi rakyat.
             </p>
           </div>
 

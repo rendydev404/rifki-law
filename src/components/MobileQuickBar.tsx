@@ -24,7 +24,7 @@ export default function MobileQuickBar({ whatsappNumber, orgName }: MobileQuickB
           className="touch-target flex-1 bg-emerald-600 active:bg-emerald-700 text-white rounded-xl py-2 px-2.5 text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm"
         >
           <Phone className="w-3.5 h-3.5 text-emerald-100 shrink-0" />
-          <span className="truncate">WhatsApp Aduan</span>
+          <span className="truncate">WA Aspirasi</span>
         </a>
 
         <a
@@ -32,7 +32,7 @@ export default function MobileQuickBar({ whatsappNumber, orgName }: MobileQuickB
           className="touch-target flex-1 bg-maroon-800 active:bg-maroon-900 text-white rounded-xl py-2 px-2.5 text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm"
         >
           <MessageSquare className="w-3.5 h-3.5 text-amber-300 shrink-0" />
-          <span className="truncate">Konsultasi</span>
+          <span className="truncate">Kotak Aspirasi</span>
         </a>
 
         <a

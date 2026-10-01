@@ -420,19 +420,21 @@ export default function AdminDashboard() {
                 <Scale className="w-5 h-5" />
               </div>
               <div>
-                <h1 className="text-sm sm:text-base font-bold leading-tight flex items-center gap-2">
-                  <span>CMS Portal Hukum</span>
+                <h1 className="text-sm sm:text-base font-bold leading-tight flex items-center gap-1.5 sm:gap-2">
+                  <span className="truncate">CMS Organisasi Mahasiswa</span>
                   {data?.isSupabaseConnected ? (
-                    <span className="text-[10px] bg-emerald-600/80 text-white px-2 py-0.5 rounded-full font-normal">
-                      Supabase Cloud Aktif
+                    <span className="text-[10px] bg-emerald-600/80 text-white px-2 py-0.5 rounded-full font-normal shrink-0">
+                      <span className="hidden xs:inline">Supabase Cloud</span>
+                      <span className="xs:hidden">Cloud</span>
                     </span>
                   ) : (
-                    <span className="text-[10px] bg-amber-500/80 text-amber-950 px-2 py-0.5 rounded-full font-bold">
-                      Local Sync Aktif
+                    <span className="text-[10px] bg-amber-500/80 text-amber-950 px-2 py-0.5 rounded-full font-bold shrink-0">
+                      <span className="hidden xs:inline">Local Sync</span>
+                      <span className="xs:hidden">Local</span>
                     </span>
                   )}
                 </h1>
-                <p className="text-[11px] text-rose-200/80 truncate max-w-xs sm:max-w-md">
+                <p className="text-[11px] text-rose-200/80 truncate max-w-[170px] xs:max-w-xs sm:max-w-md">
                   {session.email}
                 </p>
               </div>
@@ -601,14 +603,117 @@ export default function AdminDashboard() {
                       1. Beranda: Logo, Nama, Slogan & Sambutan
                     </h2>
                     <p className="text-xs text-slate-500 mt-0.5">
-                      Kelola identitas utama yang tampil pertama kali kepada pengunjung situs web.
+                      Kelola identitas utama organisasi mahasiswa yang tampil di header, footer, dan beranda.
                     </p>
+                  </div>
+
+                  {/* Dedicated Logo & Brand Visual Card */}
+                  <div className="p-4 sm:p-6 bg-gradient-to-br from-rose-50/70 to-slate-50 rounded-2xl border border-rose-200/80 mb-6">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                      <div>
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-maroon-800 bg-rose-100/80 px-2.5 py-0.5 rounded-full inline-block mb-1">
+                          Identitas Visual Utama
+                        </span>
+                        <h3 className="text-base font-bold text-slate-900">
+                          Logo Resmi Organisasi Mahasiswa
+                        </h3>
+                        <p className="text-xs text-slate-500">
+                          Tampil di Navbar atas, Footer, dan profil resmi organisasi.
+                        </p>
+                      </div>
+
+                      {/* Instant Save Button */}
+                      <button
+                        type="button"
+                        onClick={async () => {
+                          setSaving(true);
+                          try {
+                            const res = await fetch('/api/settings', {
+                              method: 'POST',
+                              headers: { 'Content-Type': 'application/json' },
+                              body: JSON.stringify(data.settings),
+                            });
+                            if (!res.ok) throw new Error('Gagal');
+                            showToast('success', 'Logo & Nama Organisasi berhasil disimpan ke website!');
+                          } catch (err) {
+                            showToast('error', 'Gagal menyimpan logo');
+                          } finally {
+                            setSaving(false);
+                          }
+                        }}
+                        disabled={saving}
+                        className="touch-target px-4 py-2 bg-maroon-800 hover:bg-maroon-900 active:bg-maroon-900 text-white rounded-xl text-xs font-bold shadow-xs flex items-center justify-center gap-1.5 shrink-0"
+                      >
+                        <Save className="w-3.5 h-3.5 text-amber-300" />
+                        <span>{saving ? 'Menyimpan...' : 'Simpan Logo Sekarang'}</span>
+                      </button>
+                    </div>
+
+                    {/* Live Navbar Mockup Preview */}
+                    <div className="mb-4 p-3 bg-white rounded-xl border border-slate-200/90 shadow-2xs">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-2">
+                        Pratinjau Tampilan Header Navbar:
+                      </span>
+                      <div className="flex items-center gap-3 p-2.5 bg-slate-50/80 rounded-xl border border-slate-100">
+                        {data.settings.logo_url ? (
+                          <div className="w-10 h-10 rounded-xl bg-white border border-slate-200 p-1 flex items-center justify-center shrink-0 shadow-2xs">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              src={data.settings.logo_url}
+                              alt="Pratinjau Logo"
+                              className="w-full h-full object-contain"
+                            />
+                          </div>
+                        ) : (
+                          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-maroon-800 to-maroon-950 flex items-center justify-center text-amber-300 shadow-sm shrink-0">
+                            <Scale className="w-5 h-5" />
+                          </div>
+                        )}
+                        <div className="min-w-0 flex-1">
+                          <p className="text-sm font-bold text-slate-900 truncate">
+                            {data.settings.org_name || 'Badan Eksekutif Mahasiswa Fakultas Hukum'}
+                          </p>
+                          <p className="text-[11px] text-maroon-800 font-medium truncate">
+                            Organisasi Mahasiswa Fakultas Hukum
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* ImageUpload with isLogo */}
+                    <ImageUpload
+                      label="Unggah / Ganti Logo (PNG Transparan / SVG / JPG)"
+                      value={data.settings.logo_url}
+                      onChange={(url) => setData({
+                        ...data,
+                        settings: { ...data.settings, logo_url: url }
+                      })}
+                      isLogo={true}
+                      helperText="Pilih file logo dari galeri HP atau komputer. Format PNG atau SVG transparan direkomendasikan."
+                    />
+
+                    {/* 1-Click Reset to Default Scale Emblem */}
+                    {data.settings.logo_url && (
+                      <div className="mt-3 flex justify-end">
+                        <button
+                          type="button"
+                          onClick={() => setData({
+                            ...data,
+                            settings: { ...data.settings, logo_url: '' }
+                          })}
+                          className="text-xs text-rose-700 hover:text-rose-900 font-semibold underline underline-offset-2 flex items-center gap-1"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                          <span>Hapus Logo (Gunakan Ikon Timbangan Default)</span>
+                        </button>
+                      </div>
+                    )}
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                        Nama Organisasi Hukum
+                        Nama Organisasi Mahasiswa
                       </label>
                       <input
                         type="text"
@@ -773,26 +878,16 @@ export default function AdminDashboard() {
                     </div>
                   </div>
 
-                  {/* Image Uploaders */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8 pt-6 border-t border-slate-100">
+                  {/* Foto Hero Banner Beranda */}
+                  <div className="mt-8 pt-6 border-t border-slate-100">
                     <ImageUpload
-                      label="Logo Resmi Organisasi"
-                      value={data.settings.logo_url}
-                      onChange={(url) => setData({
-                        ...data,
-                        settings: { ...data.settings, logo_url: url }
-                      })}
-                      helperText="Format PNG atau SVG transparan direkomendasikan."
-                    />
-
-                    <ImageUpload
-                      label="Foto Hero Banner Beranda"
+                      label="Foto Hero Banner Beranda (Latar Utama)"
                       value={data.settings.hero_image_url}
                       onChange={(url) => setData({
                         ...data,
                         settings: { ...data.settings, hero_image_url: url }
                       })}
-                      helperText="Foto aksi advokasi atau kegiatan lapangan resolusi tajam."
+                      helperText="Foto aksi mahasiswa, peradilan semu (moot court), atau kegiatan kampus resolusi tajam."
                     />
                   </div>
 
@@ -1259,7 +1354,7 @@ export default function AdminDashboard() {
                           ...data,
                           settings: { ...data.settings, instagram: e.target.value }
                         })}
-                        placeholder="Contoh: cakrakeadilan.law"
+                        placeholder="Contoh: bemfh_official atau demafh.univ"
                         className="touch-target w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-maroon-800"
                       />
                     </div>
@@ -1683,14 +1778,27 @@ CREATE POLICY "Admin manage pesan_kontak" ON public.pesan_kontak FOR ALL TO auth
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto"
+          className="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 overflow-y-auto"
         >
-          <div className="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 my-8">
-            <h3 className="text-lg font-bold text-slate-900 mb-4">
-              {editingPengurus.id ? 'Edit Data Pengurus' : 'Tambah Pengurus Baru'}
-            </h3>
+          <div className="bg-white rounded-2xl sm:rounded-3xl max-w-lg w-full max-h-[92vh] flex flex-col p-5 sm:p-7 shadow-2xl border border-slate-200 my-auto">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-4 shrink-0">
+              <div>
+                <h3 className="text-base sm:text-lg font-bold text-slate-900">
+                  {editingPengurus.id ? 'Edit Data Pengurus' : 'Tambah Pengurus Baru'}
+                </h3>
+                <p className="text-xs text-slate-500">Struktur BPH, departemen, dan kordinator organisasi</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setEditingPengurus(null)}
+                className="p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition-colors touch-target"
+                aria-label="Tutup modal"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
 
-            <form onSubmit={handleSavePengurus} className="space-y-4">
+            <form onSubmit={handleSavePengurus} className="space-y-4 overflow-y-auto pr-1">
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
@@ -1701,18 +1809,19 @@ CREATE POLICY "Admin manage pesan_kontak" ON public.pesan_kontak FOR ALL TO auth
                     required
                     value={editingPengurus.nama}
                     onChange={(e) => setEditingPengurus({ ...editingPengurus, nama: e.target.value })}
+                    placeholder="Nama lengkap"
                     className="touch-target w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-maroon-800"
                   />
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-                    Gelar Akademik
+                    Gelar / Jenjang
                   </label>
                   <input
                     type="text"
                     value={editingPengurus.gelar}
                     onChange={(e) => setEditingPengurus({ ...editingPengurus, gelar: e.target.value })}
-                    placeholder="S.H., M.H."
+                    placeholder="Kandidat S.H. / S.H."
                     className="touch-target w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-maroon-800"
                   />
                 </div>
@@ -1728,19 +1837,19 @@ CREATE POLICY "Admin manage pesan_kontak" ON public.pesan_kontak FOR ALL TO auth
                     required
                     value={editingPengurus.jabatan}
                     onChange={(e) => setEditingPengurus({ ...editingPengurus, jabatan: e.target.value })}
-                    placeholder="Contoh: Direktur Litigasi"
+                    placeholder="Contoh: Ketua Umum / Kadep"
                     className="touch-target w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-maroon-800"
                   />
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-                    Divisi
+                    Departemen / Divisi
                   </label>
                   <input
                     type="text"
                     value={editingPengurus.divisi}
                     onChange={(e) => setEditingPengurus({ ...editingPengurus, divisi: e.target.value })}
-                    placeholder="Pengurus Harian / Litigasi"
+                    placeholder="BPH / Kastrat / Adkesma"
                     className="touch-target w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-maroon-800"
                   />
                 </div>
@@ -1754,6 +1863,7 @@ CREATE POLICY "Admin manage pesan_kontak" ON public.pesan_kontak FOR ALL TO auth
                   rows={2}
                   value={editingPengurus.bio}
                   onChange={(e) => setEditingPengurus({ ...editingPengurus, bio: e.target.value })}
+                  placeholder="Mahasiswa FH angkatan 2022, aktif dalam kajian advokasi dan keorganisasian..."
                   className="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-maroon-800"
                 />
               </div>
@@ -1778,7 +1888,7 @@ CREATE POLICY "Admin manage pesan_kontak" ON public.pesan_kontak FOR ALL TO auth
                     type="email"
                     value={editingPengurus.kontak_email}
                     onChange={(e) => setEditingPengurus({ ...editingPengurus, kontak_email: e.target.value })}
-                    placeholder="advokat@cakrakeadilan.org"
+                    placeholder="pengurus@bemfh.org"
                     className="touch-target w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-maroon-800"
                   />
                 </div>
@@ -1788,10 +1898,10 @@ CREATE POLICY "Admin manage pesan_kontak" ON public.pesan_kontak FOR ALL TO auth
                 label="Foto Pengurus"
                 value={editingPengurus.foto_url}
                 onChange={(url) => setEditingPengurus({ ...editingPengurus, foto_url: url })}
-                helperText="Foto resmi dengan pakaian formal / toga advokat."
+                helperText="Foto almamater resmi atau pakaian formal berkerah."
               />
 
-              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100 shrink-0">
                 <button
                   type="button"
                   onClick={() => setEditingPengurus(null)}
@@ -1802,7 +1912,7 @@ CREATE POLICY "Admin manage pesan_kontak" ON public.pesan_kontak FOR ALL TO auth
                 <button
                   type="submit"
                   disabled={saving}
-                  className="touch-target px-5 py-2 bg-maroon-800 hover:bg-maroon-900 text-white rounded-xl text-xs font-bold"
+                  className="touch-target px-5 py-2 bg-maroon-800 hover:bg-maroon-900 text-white rounded-xl text-xs font-bold shadow-md shadow-maroon-900/10"
                 >
                   {saving ? 'Menyimpan...' : 'Simpan Pengurus'}
                 </button>
@@ -1819,14 +1929,27 @@ CREATE POLICY "Admin manage pesan_kontak" ON public.pesan_kontak FOR ALL TO auth
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto"
+          className="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 overflow-y-auto"
         >
-          <div className="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 my-8">
-            <h3 className="text-lg font-bold text-slate-900 mb-4">
-              {editingKegiatan.id ? 'Edit Kegiatan / Agenda' : 'Tambah Kegiatan / Agenda Baru'}
-            </h3>
+          <div className="bg-white rounded-2xl sm:rounded-3xl max-w-lg w-full max-h-[92vh] flex flex-col p-5 sm:p-7 shadow-2xl border border-slate-200 my-auto">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-4 shrink-0">
+              <div>
+                <h3 className="text-base sm:text-lg font-bold text-slate-900">
+                  {editingKegiatan.id ? 'Edit Kegiatan / Agenda' : 'Tambah Kegiatan / Agenda Baru'}
+                </h3>
+                <p className="text-xs text-slate-500">Program kerja, forum diskusi, kajian, dan agenda mahasiswa</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setEditingKegiatan(null)}
+                className="p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition-colors touch-target"
+                aria-label="Tutup modal"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
 
-            <form onSubmit={handleSaveKegiatan} className="space-y-4">
+            <form onSubmit={handleSaveKegiatan} className="space-y-4 overflow-y-auto pr-1">
               <div>
                 <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
                   Judul Kegiatan / Agenda <span className="text-rose-600">*</span>
@@ -1836,6 +1959,7 @@ CREATE POLICY "Admin manage pesan_kontak" ON public.pesan_kontak FOR ALL TO auth
                   required
                   value={editingKegiatan.judul}
                   onChange={(e) => setEditingKegiatan({ ...editingKegiatan, judul: e.target.value })}
+                  placeholder="Contoh: Diskusi Publik RUU Perampasan Aset"
                   className="touch-target w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-maroon-800"
                 />
               </div>
@@ -1863,11 +1987,12 @@ CREATE POLICY "Admin manage pesan_kontak" ON public.pesan_kontak FOR ALL TO auth
                     onChange={(e) => setEditingKegiatan({ ...editingKegiatan, kategori: e.target.value })}
                     className="touch-target w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-maroon-800 bg-white"
                   >
-                    <option value="Advokasi">Advokasi</option>
-                    <option value="Sosialisasi">Sosialisasi</option>
-                    <option value="Konsultasi">Konsultasi</option>
-                    <option value="Edukasi">Edukasi</option>
-                    <option value="Pelatihan">Pelatihan</option>
+                    <option value="Advokasi & Aspirasi">Advokasi & Aspirasi</option>
+                    <option value="Kajian & Diskusi Hukum">Kajian & Diskusi Hukum</option>
+                    <option value="Peradilan Semu (Moot Court)">Peradilan Semu (Moot Court)</option>
+                    <option value="Sekolah Legislatif & Kaderisasi">Sekolah Legislatif & Kaderisasi</option>
+                    <option value="Sosial & Pengabdian">Sosial & Pengabdian</option>
+                    <option value="Pelatihan & Workshop">Pelatihan & Workshop</option>
                   </select>
                 </div>
               </div>
@@ -1907,7 +2032,7 @@ CREATE POLICY "Admin manage pesan_kontak" ON public.pesan_kontak FOR ALL TO auth
                   type="text"
                   value={editingKegiatan.lokasi}
                   onChange={(e) => setEditingKegiatan({ ...editingKegiatan, lokasi: e.target.value })}
-                  placeholder="Nama gedung atau tempat"
+                  placeholder="Contoh: Auditorium FH Lt. 3 / Ruang Sidang Semu / Zoom"
                   className="touch-target w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-maroon-800"
                 />
               </div>
@@ -1920,6 +2045,7 @@ CREATE POLICY "Admin manage pesan_kontak" ON public.pesan_kontak FOR ALL TO auth
                   rows={3}
                   value={editingKegiatan.deskripsi}
                   onChange={(e) => setEditingKegiatan({ ...editingKegiatan, deskripsi: e.target.value })}
+                  placeholder="Uraian ringkas kegiatan, narasumber yang hadir, serta capaian program..."
                   className="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-maroon-800"
                 />
               </div>
@@ -1933,19 +2059,20 @@ CREATE POLICY "Admin manage pesan_kontak" ON public.pesan_kontak FOR ALL TO auth
                     type="url"
                     value={editingKegiatan.link_pendaftaran}
                     onChange={(e) => setEditingKegiatan({ ...editingKegiatan, link_pendaftaran: e.target.value })}
-                    placeholder="https://forms.gle/... atau link WhatsApp"
+                    placeholder="https://forms.gle/... atau tautan grup WhatsApp"
                     className="touch-target w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-maroon-800"
                   />
                 </div>
               )}
 
               <ImageUpload
-                label="Foto Dokumentasi Kegiatan"
+                label="Foto Dokumentasi / Poster Acara"
                 value={editingKegiatan.foto_url}
                 onChange={(url) => setEditingKegiatan({ ...editingKegiatan, foto_url: url })}
+                helperText="Format gambar JPG, PNG, atau WebP. Maksimal 5MB."
               />
 
-              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100 shrink-0">
                 <button
                   type="button"
                   onClick={() => setEditingKegiatan(null)}
@@ -1956,9 +2083,9 @@ CREATE POLICY "Admin manage pesan_kontak" ON public.pesan_kontak FOR ALL TO auth
                 <button
                   type="submit"
                   disabled={saving}
-                  className="touch-target px-5 py-2 bg-maroon-800 hover:bg-maroon-900 text-white rounded-xl text-xs font-bold"
+                  className="touch-target px-5 py-2 bg-maroon-800 hover:bg-maroon-900 text-white rounded-xl text-xs font-bold shadow-md shadow-maroon-900/10"
                 >
-                  {saving ? 'Menyimpan...' : 'Simpan'}
+                  {saving ? 'Menyimpan...' : 'Simpan Acara'}
                 </button>
               </div>
             </form>
@@ -1973,14 +2100,27 @@ CREATE POLICY "Admin manage pesan_kontak" ON public.pesan_kontak FOR ALL TO auth
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto"
+          className="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 overflow-y-auto"
         >
-          <div className="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 my-8">
-            <h3 className="text-lg font-bold text-slate-900 mb-4">
-              {editingGaleri.id ? 'Edit Foto Galeri' : 'Tambah Foto Dokumentasi'}
-            </h3>
+          <div className="bg-white rounded-2xl sm:rounded-3xl max-w-lg w-full max-h-[92vh] flex flex-col p-5 sm:p-7 shadow-2xl border border-slate-200 my-auto">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-4 shrink-0">
+              <div>
+                <h3 className="text-base sm:text-lg font-bold text-slate-900">
+                  {editingGaleri.id ? 'Edit Foto Galeri' : 'Tambah Foto Dokumentasi'}
+                </h3>
+                <p className="text-xs text-slate-500">Dokumentasi kegiatan, peradilan semu, kajian, & aksi</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setEditingGaleri(null)}
+                className="p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition-colors touch-target"
+                aria-label="Tutup modal"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
 
-            <form onSubmit={handleSaveGaleri} className="space-y-4">
+            <form onSubmit={handleSaveGaleri} className="space-y-4 overflow-y-auto pr-1">
               <div>
                 <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
                   Judul Foto <span className="text-rose-600">*</span>
@@ -1990,7 +2130,7 @@ CREATE POLICY "Admin manage pesan_kontak" ON public.pesan_kontak FOR ALL TO auth
                   required
                   value={editingGaleri.judul}
                   onChange={(e) => setEditingGaleri({ ...editingGaleri, judul: e.target.value })}
-                  placeholder="Contoh: Sidang Pembelaan Warga di PN"
+                  placeholder="Contoh: Delegasi NMCC Piala Mahkamah Agung / Aksi Damai"
                   className="touch-target w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-maroon-800"
                 />
               </div>
@@ -2003,6 +2143,7 @@ CREATE POLICY "Admin manage pesan_kontak" ON public.pesan_kontak FOR ALL TO auth
                   rows={2}
                   value={editingGaleri.deskripsi}
                   onChange={(e) => setEditingGaleri({ ...editingGaleri, deskripsi: e.target.value })}
+                  placeholder="Keterangan singkat momen foto dokumentasi..."
                   className="w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-maroon-800"
                 />
               </div>
@@ -2036,9 +2177,10 @@ CREATE POLICY "Admin manage pesan_kontak" ON public.pesan_kontak FOR ALL TO auth
                 label="Unggah Foto Dokumentasi"
                 value={editingGaleri.foto_url}
                 onChange={(url) => setEditingGaleri({ ...editingGaleri, foto_url: url })}
+                helperText="Format gambar JPG, PNG, atau WebP. Maksimal 5MB."
               />
 
-              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100 shrink-0">
                 <button
                   type="button"
                   onClick={() => setEditingGaleri(null)}
@@ -2049,7 +2191,7 @@ CREATE POLICY "Admin manage pesan_kontak" ON public.pesan_kontak FOR ALL TO auth
                 <button
                   type="submit"
                   disabled={saving}
-                  className="touch-target px-5 py-2 bg-maroon-800 hover:bg-maroon-900 text-white rounded-xl text-xs font-bold"
+                  className="touch-target px-5 py-2 bg-maroon-800 hover:bg-maroon-900 text-white rounded-xl text-xs font-bold shadow-md shadow-maroon-900/10"
                 >
                   {saving ? 'Menyimpan...' : 'Simpan Foto'}
                 </button>
@@ -2249,7 +2391,7 @@ CREATE POLICY "Admin manage pesan_kontak" ON public.pesan_kontak FOR ALL TO auth
                 {
                   id: 'pengurus' as const,
                   label: 'Struktur Kepengurusan',
-                  desc: 'Susunan advokat, dewan pembina, dan jajaran pengurus',
+                  desc: 'Susunan BPH, kordinator departemen, dan fungsionaris',
                   icon: Users,
                   badge: `${data?.pengurus?.length || 0} Pengurus`,
                 },
@@ -2263,7 +2405,7 @@ CREATE POLICY "Admin manage pesan_kontak" ON public.pesan_kontak FOR ALL TO auth
                 {
                   id: 'galeri' as const,
                   label: 'Galeri Foto Dokumentasi',
-                  desc: 'Dokumentasi sidang, penyuluhan, dan kegiatan advokasi',
+                  desc: 'Dokumentasi peradilan semu, kajian, aksi damai, & proker',
                   icon: Camera,
                   badge: `${data?.galeri?.length || 0} Foto`,
                 },

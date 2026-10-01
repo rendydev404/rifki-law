@@ -91,35 +91,35 @@ export default function Hero({ settings }: HeroProps) {
             <ScrollReveal animation="up" delay={300} className="w-full">
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4 p-2.5 sm:p-4 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200/80 shadow-xs">
                 <div className="p-2 sm:p-2 bg-slate-50/70 sm:bg-transparent rounded-xl border border-slate-100 sm:border-0 sm:border-r">
-                  <div className="flex items-center gap-1.5 text-maroon-900 font-extrabold text-lg sm:text-2xl font-serif">
+                  <div className="flex items-center gap-1.5 text-maroon-900 font-extrabold text-base sm:text-2xl font-serif">
                     <FileCheck className="w-4 h-4 text-maroon-700 shrink-0" />
-                    <span>900+</span>
+                    <span>1.200+</span>
                   </div>
-                  <div className="text-[10px] sm:text-[11px] text-slate-500 font-medium mt-0.5">Perkara Pro Bono</div>
+                  <div className="text-[10px] sm:text-[11px] text-slate-500 font-medium mt-0.5">Aspirasi Mahasiswa</div>
                 </div>
 
                 <div className="p-2 sm:p-2 bg-slate-50/70 sm:bg-transparent rounded-xl border border-slate-100 sm:border-0 sm:border-r">
-                  <div className="flex items-center gap-1.5 text-maroon-900 font-extrabold text-lg sm:text-2xl font-serif">
+                  <div className="flex items-center gap-1.5 text-maroon-900 font-extrabold text-base sm:text-2xl font-serif">
                     <Users className="w-4 h-4 text-maroon-700 shrink-0" />
                     <span>45+</span>
                   </div>
-                  <div className="text-[10px] sm:text-[11px] text-slate-500 font-medium mt-0.5">Advokat & Paralegal</div>
+                  <div className="text-[10px] sm:text-[11px] text-slate-500 font-medium mt-0.5">Pengurus & Kader</div>
                 </div>
 
                 <div className="p-2 sm:p-2 bg-slate-50/70 sm:bg-transparent rounded-xl border border-slate-100 sm:border-0 sm:border-r">
-                  <div className="flex items-center gap-1.5 text-maroon-900 font-extrabold text-lg sm:text-2xl font-serif">
+                  <div className="flex items-center gap-1.5 text-maroon-900 font-extrabold text-base sm:text-2xl font-serif">
                     <Award className="w-4 h-4 text-maroon-700 shrink-0" />
-                    <span>10+ Thn</span>
+                    <span>12+</span>
                   </div>
-                  <div className="text-[10px] sm:text-[11px] text-slate-500 font-medium mt-0.5">Pengabdian Publik</div>
+                  <div className="text-[10px] sm:text-[11px] text-slate-500 font-medium mt-0.5">Program Kerja/Thn</div>
                 </div>
 
                 <div className="p-2 sm:p-2 bg-slate-50/70 sm:bg-transparent rounded-xl border border-slate-100 sm:border-0">
-                  <div className="flex items-center gap-1.5 text-maroon-900 font-extrabold text-lg sm:text-2xl font-serif">
+                  <div className="flex items-center gap-1.5 text-maroon-900 font-extrabold text-base sm:text-2xl font-serif">
                     <ShieldCheck className="w-4 h-4 text-maroon-700 shrink-0" />
                     <span>100%</span>
                   </div>
-                  <div className="text-[10px] sm:text-[11px] text-slate-500 font-medium mt-0.5">Cuma-Cuma Bebas Biaya</div>
+                  <div className="text-[10px] sm:text-[11px] text-slate-500 font-medium mt-0.5">Independen & Progresif</div>
                 </div>
               </div>
             </ScrollReveal>
@@ -132,7 +132,7 @@ export default function Hero({ settings }: HeroProps) {
               <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-4 sm:border-8 border-white bg-slate-900 aspect-4/3 sm:aspect-16/11 lg:aspect-4/3 group">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={settings.hero_image_url || 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1200&q=80'}
+                  src={settings.hero_image_url || 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80'}
                   alt={settings.org_name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90"
                 />
@@ -143,20 +143,20 @@ export default function Hero({ settings }: HeroProps) {
                 {/* Floating Top Badge */}
                 <div className="absolute top-3.5 left-3.5 sm:top-4 sm:left-4 bg-white/90 backdrop-blur-md text-maroon-950 font-bold text-[10px] sm:text-[11px] px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full shadow-md flex items-center gap-1.5 border border-rose-100">
                   <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-500" />
-                  <span>Advokasi Independen</span>
+                  <span>Wadah Mahasiswa Hukum</span>
                 </div>
 
                 {/* Bottom Overlay Info */}
                 <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 text-white">
                   <span className="text-[10px] uppercase font-bold tracking-widest text-amber-300 block mb-1">
-                    Komitmen Konstitusional
+                    Gerakan Mahasiswa Progresif
                   </span>
                   <h3 className="font-serif italic font-bold text-base sm:text-xl text-rose-50 leading-snug">
-                    Perlindungan Hak Asasi & Keadilan Warga Negara
+                    Integritas Intelektual & Keadilan Warga
                   </h3>
                   <div className="mt-2 sm:mt-3 flex items-center gap-2 text-[11px] sm:text-xs text-rose-200">
                     <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                    <span>Pendampingan perkara litigasi dan non-litigasi</span>
+                    <span>Advokasi kampus, riset hukum & peradilan semu (moot court)</span>
                   </div>
                 </div>
               </div>
