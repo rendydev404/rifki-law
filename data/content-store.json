@@ -1,0 +1,250 @@
+{
+  "settings": {
+    "id": "general",
+    "org_name": "Lembaga Bantuan & Advokasi Hukum Cakra Keadilan",
+    "slogan": "Integritas Menegakkan Hukum, Ketulusan Membela Hak Rakyat",
+    "welcome_title": "Mendampingi Masyarakat, Menegakkan Keadilan Substantif",
+    "welcome_subtitle": "Kami adalah organisasi advokasi dan bantuan hukum independen yang berdedikasi memberikan pendampingan hukum cuma-cuma (pro bono), edukasi kesadaran konstitusional, serta pembelaan hak asasi warga.",
+    "logo_url": "",
+    "hero_badge": "Organisasi Advokasi & Bantuan Hukum Terpercaya",
+    "hero_image_url": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1600&q=80",
+    "sejarah": "Lembaga Bantuan & Advokasi Hukum Cakra Keadilan didirikan pada tahun 2014 oleh sekelompok advokat berintegritas, akademisi hukum, dan aktivis kemanusiaan di Jakarta. Berawal dari gerakan posko konsultasi hukum keliling untuk buruh, petani, dan kaum marjinal yang menghadapi kriminalisasi, lembaga ini bertransformasi menjadi pilar advokasi publik yang kokoh. Selama lebih dari satu dekade, kami telah menangani lebih dari 900 pendampingan perkara litigasi maupun non-litigasi secara pro bono serta melahirkan ratusan paralegal komunitas.",
+    "visi": "Terwujudnya tatanan hukum Indonesia yang adil, demokratis, berkepastian, serta menjamin perlindungan hak-hak fundamental setiap warga negara tanpa memandang latar belakang sosial dan ekonomi.",
+    "misi": [
+      "Menyediakan layanan bantuan hukum cuma-cuma (pro bono) yang berkualitas, terukur, dan bermartabat bagi masyarakat prasejahtera.",
+      "Melakukan advokasi kebijakan publik dan pemantauan peradilan demi mencegah penyalahgunaan kekuasaan (abuse of power).",
+      "Mengembangkan klinik hukum dan pendidikan paralegal berbasis komunitas guna memperkuat kesadaran hukum masyarakat akar rumput.",
+      "Menjaga standar etika profesi advokat dengan menolak segala bentuk kompromi yang mencederai rasa keadilan."
+    ],
+    "instagram": "cakrakeadilan.law",
+    "whatsapp": "6281234567890",
+    "email": "kontak@cakrakeadilan.org",
+    "alamat": "Gedung Graha Keadilan Lt. 3, Jl. Kramat Raya No. 48, Senen, Jakarta Pusat 10450",
+    "maps_url": "https://maps.google.com/?q=Jakarta+Pusat",
+    "jam_operasional": "Senin - Jumat: 08.30 - 17.00 WIB | Layanan Darurat Advokasi: 24 Jam",
+    "updated_at": "2026-10-01T02:48:22.128Z"
+  },
+  "pengurus": [
+    {
+      "id": "p-1",
+      "nama": "Prof. Dr. Hendra Suwandi",
+      "gelar": "S.H., M.H.",
+      "jabatan": "Ketua Dewan Pembina",
+      "divisi": "Dewan Pembina",
+      "foto_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
+      "urutan": 1,
+      "bio": "Guru Besar Hukum Tata Negara dengan dedikasi lebih dari 30 tahun dalam reformasi peradilan dan advokasi hak konstitusional.",
+      "kontak_email": "pembina@cakrakeadilan.org",
+      "is_active": true
+    },
+    {
+      "id": "p-2",
+      "nama": "Ahmad Fauzan Pratama",
+      "gelar": "S.H., LL.M.",
+      "jabatan": "Direktur Eksekutif / Ketua Umum",
+      "divisi": "Pengurus Harian",
+      "foto_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
+      "urutan": 2,
+      "bio": "Advokat spesialis litigasi publik dan peradilan pidana, telah memimpin berbagai gugatan judicial review strategis.",
+      "kontak_email": "direktur@cakrakeadilan.org",
+      "is_active": true
+    },
+    {
+      "id": "p-3",
+      "nama": "Nathania Kusuma Wardani",
+      "gelar": "S.H., M.Kn.",
+      "jabatan": "Sekretaris Jenderal",
+      "divisi": "Pengurus Harian",
+      "foto_url": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80",
+      "urutan": 3,
+      "bio": "Praktisi hukum perdata dan tata kelola kelembagaan, aktif mengoordinasikan jaringan kemitraan perbantuan hukum daerah.",
+      "kontak_email": "sekretariat@cakrakeadilan.org",
+      "is_active": true
+    },
+    {
+      "id": "p-4",
+      "nama": "Bambang Irawan",
+      "gelar": "S.E., Ak., CA.",
+      "jabatan": "Bendahara Umum",
+      "divisi": "Pengurus Harian",
+      "foto_url": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80",
+      "urutan": 4,
+      "bio": "Memastikan transparansi audit keuangan publik, akuntabilitas anggaran pro bono, serta kepatuhan donasi publik.",
+      "kontak_email": "keuangan@cakrakeadilan.org",
+      "is_active": true
+    },
+    {
+      "id": "p-5",
+      "nama": "Farida Nur Anggraini",
+      "gelar": "S.H.",
+      "jabatan": "Kepala Divisi Advokasi & Litigasi",
+      "divisi": "Divisi Litigasi",
+      "foto_url": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80",
+      "urutan": 5,
+      "bio": "Memimpin tim pendampingan persidangan untuk perempuan dan anak yang berhadapan dengan hukum serta buruh korban PHK sepihak.",
+      "kontak_email": "litigasi@cakrakeadilan.org",
+      "is_active": true
+    },
+    {
+      "id": "p-6",
+      "nama": "Rian Syahputra",
+      "gelar": "S.H.",
+      "jabatan": "Kepala Divisi Edukasi & Riset Hukum",
+      "divisi": "Divisi Riset",
+      "foto_url": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80",
+      "urutan": 6,
+      "bio": "Mengembangkan silabus sekolah paralegal rakyat, penyuluhan hukum keliling, serta penyusunan policy brief berkala.",
+      "kontak_email": "riset@cakrakeadilan.org",
+      "is_active": true
+    }
+  ],
+  "kegiatan": [
+    {
+      "id": "k-1",
+      "judul": "Pendampingan Hukum & Mediasi Sengketa Agraria Komunitas Petani",
+      "kategori": "Advokasi",
+      "tipe": "kegiatan",
+      "tanggal": "2026-09-18",
+      "waktu": "09:00 - 16:00 WIB",
+      "lokasi": "Balai Warga Desa Sukamulya, Subang",
+      "deskripsi": "Tim advokat Cakra Keadilan mendampingi perwakilan kelompok tani dalam proses klarifikasi batas lahan garapan adat dengan pihak korporasi, menghasilkan kesepakatan moratorium penggusuran secara damai dan berkekuatan hukum.",
+      "foto_url": "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=1000&q=80",
+      "is_featured": true
+    },
+    {
+      "id": "k-2",
+      "judul": "Penyuluhan Hukum Pekerja: Perlindungan Hak Normatif & K3",
+      "kategori": "Sosialisasi",
+      "tipe": "kegiatan",
+      "tanggal": "2026-09-05",
+      "waktu": "13:30 - 17:00 WIB",
+      "lokasi": "Aula Pertemuan Kantor Kecamatan Senen, Jakarta",
+      "deskripsi": "Diskusi interaktif bersama 140 perwakilan buruh kontrak mengenai hak atas pesangon, jaminan sosial ketenagakerjaan, serta langkah hukum menghadapi mutasi sepihak tanpa dasar.",
+      "foto_url": "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1000&q=80",
+      "is_featured": false
+    },
+    {
+      "id": "k-3",
+      "judul": "Pos Konsultasi Hukum Cuma-Cuma Car Free Day Jakarta",
+      "kategori": "Konsultasi",
+      "tipe": "kegiatan",
+      "tanggal": "2026-09-27",
+      "waktu": "06:30 - 10:30 WIB",
+      "lokasi": "Jalur Pedestrian Bundaran HI, Jakarta Pusat",
+      "deskripsi": "Membuka posko bantuan hukum kilat untuk 76 warga yang berkonsultasi seputar sengketa waris keluarga, pinjol ilegal, penipuan daring, dan legalitas izin usaha mikro.",
+      "foto_url": "https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&w=1000&q=80",
+      "is_featured": true
+    },
+    {
+      "id": "k-4",
+      "judul": "Seminar Nasional: Membedah Independensi Peradilan & Penegakan Etika 2026",
+      "kategori": "Edukasi",
+      "tipe": "agenda",
+      "tanggal": "2026-10-15",
+      "waktu": "08:30 - 15:00 WIB",
+      "lokasi": "Auditorium Graha Mahkamah & Zoom Webinar",
+      "deskripsi": "Menghadirkan hakim agung senior, praktisi hukum terkemuka, dan pengamat peradilan untuk menelaah tantangan integritas aparat penegak hukum dan perlindungan whistle blower.",
+      "foto_url": "https://images.unsplash.com/photo-1544531585-9847b68c8c86?auto=format&fit=crop&w=1000&q=80",
+      "is_featured": true,
+      "link_pendaftaran": "https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20ingin%20mendaftar%20Seminar%20Nasional%20Hukum"
+    },
+    {
+      "id": "k-5",
+      "judul": "Pendidikan Khusus Paralegal Komunitas: Penanganan Awal Aduan Pidana",
+      "kategori": "Pelatihan",
+      "tipe": "agenda",
+      "tanggal": "2026-10-24",
+      "waktu": "09:00 - 16:30 WIB",
+      "lokasi": "Pusat Pelatihan Advokasi Cakra Keadilan, Jakarta Pusat",
+      "deskripsi": "Program intensif 2 hari bagi relawan pemuda dan pengurus RT/RW mengenai mekanisme pelaporan ke kepolisian, pembuatan berita acara aduan, dan mediasi damai tingkat rukun warga.",
+      "foto_url": "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1000&q=80",
+      "is_featured": false,
+      "link_pendaftaran": "https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20ingin%20daftar%20Pendidikan%20Paralegal"
+    }
+  ],
+  "galeri": [
+    {
+      "id": "g-1",
+      "judul": "Sidang Pembelaan Hak Asasi di Pengadilan Negeri",
+      "deskripsi": "Advokat mendampingi warga yang dituduh tanpa bukti permulaan yang cukup hingga putusan bebas murni.",
+      "foto_url": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1000&q=80",
+      "tanggal": "2026-09-20",
+      "urutan": 1
+    },
+    {
+      "id": "g-2",
+      "judul": "Layanan Konsultasi Hukum Terbuka bagi Warga Rentan",
+      "deskripsi": "Sesi konsultasi personal dan rahasia guna mengurai persoalan hukum perdata keluarga warga.",
+      "foto_url": "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=1000&q=80",
+      "tanggal": "2026-09-15",
+      "urutan": 2
+    },
+    {
+      "id": "g-3",
+      "judul": "Penyuluhan Hak-Hak Perempuan dan Anak di Lingkungan Komunitas",
+      "deskripsi": "Edukasi pencegahan kekerasan dalam rumah tangga (KDRT) dan saluran perlindungan hukum darurat.",
+      "foto_url": "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1000&q=80",
+      "tanggal": "2026-08-30",
+      "urutan": 3
+    },
+    {
+      "id": "g-4",
+      "judul": "Audiensi Bersama Komisi Hukum DPRD Terkait Perda Bantuan Hukum",
+      "deskripsi": "Mendorong alokasi anggaran APBD yang adil untuk pemberian bantuan hukum cuma-cuma bagi warga miskin.",
+      "foto_url": "https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&w=1000&q=80",
+      "tanggal": "2026-08-18",
+      "urutan": 4
+    },
+    {
+      "id": "g-5",
+      "judul": "Pelantikan Paralegal Komunitas Angkatan IV",
+      "deskripsi": "Pelepasan 40 kader paralegal yang siap mengabdi mendampingi hak hukum masyarakat di lingkungannya.",
+      "foto_url": "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1000&q=80",
+      "tanggal": "2026-08-05",
+      "urutan": 5
+    },
+    {
+      "id": "g-6",
+      "judul": "Bedah Kasus & Diskusi Meja Bundar Advokat Pro Bono",
+      "deskripsi": "Kajian yuridis bersama para advokat senior untuk merumuskan memori banding perkara struktural.",
+      "foto_url": "https://images.unsplash.com/photo-1544531585-9847b68c8c86?auto=format&fit=crop&w=1000&q=80",
+      "tanggal": "2026-07-22",
+      "urutan": 6
+    }
+  ],
+  "pesan": [
+    {
+      "nama": "Budi Hartono",
+      "email": "budi.h@test.com",
+      "telepon": "08123456789",
+      "subjek": "Konsultasi Warisan Rumah",
+      "kategori_hukum": "Perkara Perdata",
+      "pesan": "Mohon bantuan konsultasi pembagian warisan rumah orang tua kami.",
+      "id": "m-1790822895882",
+      "status": "belum_dibaca",
+      "created_at": "2026-10-01T02:48:15.882Z"
+    },
+    {
+      "id": "m-1",
+      "nama": "Surya Wibowo",
+      "email": "surya.w@example.com",
+      "telepon": "081298765432",
+      "subjek": "Permohonan Bantuan Hukum Sengketa Batas Tanah Waris",
+      "kategori_hukum": "Perdata / Pertanahan",
+      "pesan": "Selamat siang tim Cakra Keadilan, tanah warisan orang tua kami di daerah pinggiran kota saat ini diakui sepihak oleh pihak pengembang tanpa pernah ada akta jual beli resmi. Kami mohon petunjuk apakah bisa berkonsultasi langsung?",
+      "status": "diproses",
+      "created_at": "2026-09-28T10:15:00Z"
+    },
+    {
+      "id": "m-2",
+      "nama": "Ibu Ratna Dewi",
+      "email": "ratnadewi99@example.com",
+      "telepon": "085712349876",
+      "subjek": "Pendampingan Kasus Pemotongan Upah Tanpa Kesepakatan",
+      "kategori_hukum": "Ketenagakerjaan",
+      "pesan": "Perusahaan tempat saya bekerja memotong gaji 40% selama 3 bulan tanpa persetujuan bipartit. Rekan-rekan saya ingin meminta arahan apakah bisa difasilitasi mediasi ke dinas tenaga kerja.",
+      "status": "belum_dibaca",
+      "created_at": "2026-09-30T14:20:00Z"
+    }
+  ]
+}
